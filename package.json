@@ -6,7 +6,6 @@
   "private": true,
   "scripts": {
     "dev": " concurrently \"cross-env NODE_ENV=development nodemon server/index.js --watch server\"   \"jest --detectOpenHandles\"",
-    
     "build": "nuxt build",
     "start": "cross-env NODE_ENV=production node server/index.js",
     "generate": "nuxt generate"
@@ -37,6 +36,7 @@
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^7.0.0",
     "vue-router": "^3.0.1",
+    "vue-server-renderer": "^2.5.17",
     "vue-template-compiler": "^2.5.17",
     "vuetify": "^1.2.4",
     "vuex": "^3.0.1",

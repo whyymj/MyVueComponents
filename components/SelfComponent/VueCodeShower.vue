@@ -20,12 +20,9 @@
     </div>
 </template>
 <script>
-  
-  
     export default {
-        props:['code'],
-        
-         mounted() { // 格式化代码
+        props: ['code'],
+        mounted() { // 格式化代码
             Array.prototype.map.call(document.getElementsByTagName('code'), (ele) => {
                 const hljs = 'hljs';
                 window[hljs].highlightBlock(ele);

@@ -34,6 +34,11 @@
                 },
             }
         },
+        watch:{
+            MenuTreeData(){
+                console.log('???????',this.MenuTreeData)
+            }
+        },
         methods: {
             select(item) {
                 const path = this.$route.matched[0].path;

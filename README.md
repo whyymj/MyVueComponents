@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # myComponentsSSR
 
 > My doozie Nuxt.js project
@@ -21,7 +20,3 @@ $ npm run generate
 ```
 
 For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
-=======
-# MyVueComponents
-SSR
->>>>>>> 33a0447485172c04f617c8bcdf1f749b7d2de23b

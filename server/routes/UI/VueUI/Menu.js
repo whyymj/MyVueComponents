@@ -33,6 +33,7 @@ class Menu extends mongodb_1.DBController {
                 let menu = yield this.getCollection(this.Collection_Name);
                 menu
                     .find()
+                    .sort({ "id": 1 })
                     .toArray((err, arr) => {
                     resolve(arr);
                 });

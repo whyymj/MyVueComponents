@@ -12,9 +12,9 @@
                     点此查看代码
                     <div slot="content">
                         <!-- <myCollapseAutoHeight :show='show' myName='show' :minHeight='100'>
-                                                                                                                        <iframe width="100%" slot='right' height="300" src="//jsfiddle.net/whyymj/ud435nbt/28/embedded/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
-                                                                                                                        <p slot='left'>1111</p>
-                                                                                                                    </myCollapseAutoHeight> -->
+                                                                                                                            <iframe width="100%" slot='right' height="300" src="//jsfiddle.net/whyymj/ud435nbt/28/embedded/" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+                                                                                                                            <p slot='left'>1111</p>
+                                                                                                                        </myCollapseAutoHeight> -->
                         <CodeShower :code='code'></CodeShower>
                     </div>
                 </Panel>
@@ -25,55 +25,30 @@
 
 
 
-<script lang='ts'>
-    import {
-        Component,
-        Prop,
-        Vue,
-        Watch,
-        Emit,
-        Inject,
-        Model,
-        Provide,
-    } from 'vue-property-decorator';
-    import {
-        mixins,
-        createDecorator,
-    } from 'vue-class-component';
-    import {
-        State,
-        Getter,
-        Action,
-        Mutation,
-        namespace,
-    } from 'vuex-class';
-    @Component({
+<script>
+    export default {
         components: {
             // myCollapseAutoHeight: () =>
             //     import ('../Layout/Collapse/MyCollapseAutoHeight.vue'),
             CodeShower: () =>
                 import ('./VueCodeShower.vue'),
         },
-    })
-    export default class ElementUI extends Vue {
-        @Prop({
-            type: Array,
-            default: [{
-                title: 'component',
-                template: ``,
-                style: ``,
-                script: ``,
-            }],
-        })
-        @Prop({
-            type: Array,
-            default: [],
-        })
-        public code: object[];
-        private show: boolean = true;
-        private value1 = 0;
-        private click() {
-            this.show = !this.show;
+        props: {
+            code: {
+                type: Array,
+                default: [],
+            }
+        },
+        data() {
+            return {
+                show: true,
+                value1: 0
+            }
+        },
+        methods: {
+            click() {
+                this.show = !this.show;
+            }
         }
     }
 </script>

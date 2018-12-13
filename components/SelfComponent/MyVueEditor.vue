@@ -12,100 +12,82 @@
     </div>
   </div>
 </template>
-<script lang='ts'>
-  import cssLoader from 'css-loader';
-  import {
-    Component,
-    Prop,
-    Vue,
-    Watch,
-    Emit,
-    Inject,
-    Model,
-    Provide,
-  } from 'vue-property-decorator';
-  import {
-    mixins,
-    createDecorator,
-  } from 'vue-class-component';
-  import {
-    State,
-    Getter,
-    Action,
-    Mutation,
-    namespace
-  } from 'vuex-class';
-  @Component({
+<script> 
+  export default {
     components: {
       myEditor: () =>
         import ('./MyEditor.vue')
-    }
-  })
-  export default class myVueEditor extends Vue {
-    private html: string = '';
-    private js: string = '';
-    private css: string = ``;
-    private coms = [];
-    private tips: string = '';
-    private coding(code, type, id): void { //将三个输入框内的代码存起来
-      this[type] = code;
-    }
-    private id: string = 'getComponentId';
-    private getComponentId(): string { // 更新id
-      let id = 'getComponentId';
-      window[id] = window[id] ? window[id] : 'getComponentId_0';
-      let tmp: string[] = window[id].split('_');
-      window[id] = tmp[0] + '_' + (Number(tmp[1]) + 1);
-      return window[id];
-    }
-    private createStyle() {
-      const that: object = this;
-      let nod: object = document.createElement('style');
-      let str: string = '.' + that.id + ' ' + this.css.replace(/}[\s]*;/g, '}').replace(/(?<=(}[\s]*))[a-z]/g, function(o, n) {
-        return '.' + that.id + ' ' + o;
-      });
-      nod.type = 'text/css';
-      nod.classList.add('nod');
-      if (nod.styleSheet) { // ie下  
-        nod.styleSheet.cssText = str;
-      } else {
-        nod.innerHTML = str; //或者写成 nod.appendChild(document.createTextNode(str))  
+    },
+    data() {
+      return {
+        html: '',
+        js: '',
+        css: '',
+        coms: [],
+        tips: '',
+        id: 'getComponentId'
       }
-      document.getElementsByTagName('head')[0].appendChild(nod);
-    }
-    private add(): void {
-      let that = this;
-      let obj: object = {
-        template: ''
-      };
-      const template: string = 'template';
-      try {
-        if (/^{[\s\S]*}$/.test(that.js.trim())) { //必须是对象    
-          obj = eval('(()=>{ return ' + that.js + '})()'); //转为对象
-          if (typeof obj == 'object') {
-            this.id = this.getComponentId(); //创建元素id
-            this.coms.push({
-              id: that.id,
-              html: that.html,
-              js: that.js,
-              css: that.css
-            });
-            obj[template] = '<div class=' + that.id + '>' + that.html + '</div>';
-            const Profile = Vue.extend(obj);
-            // 创建 Profile 实例，并挂载到一个元素上。
-            this.$nextTick(() => {
-              new Profile().$mount('#' + that.id);
-              this.createStyle()
-            });
-          }
+    },
+    methods: {
+      coding(code, type, id) { //将三个输入框内的代码存起来
+        this[type] = code;
+      },
+      getComponentId() { // 更新id
+        let id = 'getComponentId';
+        window[id] = window[id] ? window[id] : 'getComponentId_0';
+        let tmp= window[id].split('_');
+        window[id] = tmp[0] + '_' + (Number(tmp[1]) + 1);
+        return window[id];
+      },
+      createStyle() {
+        const that = this;
+        let nod = document.createElement('style');
+        let str = '.' + that.id + ' ' + this.css.replace(/}[\s]*;/g, '}').replace(/(?<=(}[\s]*))[a-z]/g, function(o, n) {
+          return '.' + that.id + ' ' + o;
+        });
+        nod.type = 'text/css';
+        nod.classList.add('nod');
+        if (nod.styleSheet) { // ie下  
+          nod.styleSheet.cssText = str;
         } else {
-          this.tips = '请输入正确的vue对象'
-          setTimeout(() => {
-            this.tips = ''
-          }, 2000)
+          nod.innerHTML = str; //或者写成 nod.appendChild(document.createTextNode(str))  
         }
-      } catch (e) {
-        console.error(e)
+        document.getElementsByTagName('head')[0].appendChild(nod);
+      },
+      add() {
+        let that = this;
+        let obj = {
+          template: ''
+        };
+        const template = 'template';
+        try {
+          if (/^{[\s\S]*}$/.test(that.js.trim())) { //必须是对象    
+            obj = eval('(()=>{ return ' + that.js + '})()'); //转为对象
+            if (typeof obj == 'object') {
+              this.id = this.getComponentId(); //创建元素id
+              this.coms.push({
+                id: that.id,
+                html: that.html,
+                js: that.js,
+                css: that.css
+              });
+              obj[template] = '<div class=' + that.id + '>' + that.html + '</div>';
+              const Profile = Vue.extend(obj);
+              // 创建 Profile 实例，并挂载到一个元素上。
+              this.$nextTick(() => {
+                new Profile().$mount('#' + that.id);
+                this.createStyle()
+              });
+            }
+          } else {
+            this.tips = '请输入正确的vue对象'
+            setTimeout(() => {
+              this.tips = ''
+            }, 2000)
+          }
+        } catch (e) {
+          console.error(e)
+        }
       }
     }
   }

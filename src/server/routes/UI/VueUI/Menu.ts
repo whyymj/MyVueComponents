@@ -17,6 +17,7 @@ class Menu extends DBController {
             let menu : any = await this.getCollection(this.Collection_Name);
             menu
                 .find()
+                .sort({"id": 1})
                 .toArray((err : any, arr : object[]) => {
                     resolve(arr)
                 })
@@ -25,7 +26,7 @@ class Menu extends DBController {
     }
 }
 
-let myMenu=new Menu('mongodb://localhost:27017', 'myVueDB', 'Menu');
+let myMenu = new Menu('mongodb://localhost:27017', 'myVueDB', 'Menu');
 router.get('/menu', async(req, res, next) => {
     res.send(await myMenu.getMenu())
     myMenu.close();

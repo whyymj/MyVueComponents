@@ -55,9 +55,9 @@
     "./src/**/*",
   ],
   "exclude": [ 
-    "mongodb",
-    "views",
-    "public",
-    "./**/*.test.ts"
+    // "mongodb",
+    // "views",
+    // "public",
+    // "./**/*.test.ts"
   ]
 }

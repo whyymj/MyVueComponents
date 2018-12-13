@@ -1,6 +1,6 @@
 <template>
     <!-- 用来在主页展示组件的展示组件 -->
-    <div class='UIComponentsShower' >
+    <div class='UIComponentsShower'>
         <article>
             <slot name='demons'></slot>
             <CodeEffect :code='code'>
@@ -9,49 +9,27 @@
         </article>
     </div>
 </template>
-<script lang='ts'>
-    import {
-        Component,
-        Prop,
-        Vue,
-        Watch,
-        Emit,
-        Inject,
-        Model,
-        Provide,
-    } from 'vue-property-decorator';
-    import {
-        mixins,
-        createDecorator,
-    } from 'vue-class-component';
-    import {
-        State,
-        Getter,
-        Action,
-        Mutation,
-        namespace,
-    } from 'vuex-class';
-    @Component({
+<script>
+    export default {
         components: {
             CodeEffect: () =>
                 import ('./EffectShower.vue'),
         },
-    })
-    export default class UIComponentsShower extends Vue {
-        @Prop({
-            type: Array,
-            default() {
-                return [];
-            },
-        })
-        public code: object[];
+        props: {
+            code: {
+                type: Array,
+                default () {
+                    return [];
+                },
+            }
+        }
     }
 </script>
 <style scoped lang='scss'>
     .UIComponentsShower {
         width: 100%;
         position: relative;
-        h1{
+        h1 {
             text-align: left;
             padding: 10px 20px;
         }

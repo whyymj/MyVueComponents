@@ -1,14 +1,16 @@
 <template>
     <div class="layout">
-       
-        44455
-      
+        <input type="file">
     </div>
 </template>
 
 <script>
     export default {
-        
+        beforeCreate(ctx) {
+           
+           
+        },
+        mounted() {  console.log('context>>>', window)}
     }
 </script>
 

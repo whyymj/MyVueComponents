@@ -1,7 +1,7 @@
 <template>
     <Submenu class='IviewSubMenu' :name="data.menuName">
         <template slot="title">
-                        <Icon :type="data.info.icon"></Icon>{{data.menuName}}
+                                <Icon :type="data.info.icon"></Icon>{{data.menuName}}
 </template>
         <MenuItem :name="'/'+data.kind+'/'+item.kind" v-for='(item,index) in data.children' :key='index'  >
             <Icon :type="item.info.icon"></Icon>
@@ -14,15 +14,15 @@
         props: {
             subId: {
                 type: Number
+            },
+            data: {
+                type: Object,
+                default: {
+                    name: '',
+                    subMenus: [],
+                },
             }
         },
-        data: {
-            type: Object,
-            default: {
-                name: '',
-                subMenus: [],
-            },
-        }
     }
 </script>
 <style scoped lang='scss'>

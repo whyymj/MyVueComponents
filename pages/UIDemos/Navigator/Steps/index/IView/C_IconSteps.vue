@@ -6,23 +6,11 @@
         <h5 class="demonsContent">包含各类用法的综合示例。
         </h5>
         <div class='buttonShower'>
-            <Card title="Options" icon="ios-options" :padding="0" shadow style="width: 300px;">
-                <CellGroup>
-                    <Cell title="Only show titles" />
-                    <Cell title="Display label content" label="label content" />
-                    <Cell title="Display right content" extra="details" />
-                    <Cell title="Link" extra="details" to="/components/button" />
-                    <Cell title="Open link in new window" to="/components/button" target="_blank" />
-                    <Cell title="Disabled" disabled />
-                    <Cell title="Selected" selected />
-                    <Cell title="With Badge" to="/components/badge">
-                        <Badge :count="10" slot="extra" />
-                    </Cell>
-                    <Cell title="With Switch">
-                        <Switch v-model="switchValue" slot="extra" />
-                    </Cell>
-                </CellGroup>
-            </Card>
+            <Steps :current="1">
+        <Step title="注册" icon="ios-person"></Step>
+        <Step title="上传头像" icon="ios-camera"></Step>
+        <Step title="验证邮箱" icon="ios-mail"></Step>
+    </Steps>
         </div>
         
     </div>

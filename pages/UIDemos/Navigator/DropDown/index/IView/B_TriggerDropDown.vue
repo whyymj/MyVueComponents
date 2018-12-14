@@ -8,9 +8,9 @@
         <div class='buttonShower'>
             <Dropdown>
                 <a href="javascript:void(0)">
-                        hover 触发
-                        <Icon type="ios-arrow-down"></Icon>
-                    </a>
+                            hover 触发
+                            <Icon type="ios-arrow-down"></Icon>
+                        </a>
                 <DropdownMenu slot="list">
                     <DropdownItem>驴打滚</DropdownItem>
                     <DropdownItem>炸酱面</DropdownItem>
@@ -21,9 +21,9 @@
             </Dropdown>
             <Dropdown trigger="click" style="margin-left: 20px">
                 <a href="javascript:void(0)">
-                        click 触发
-                        <Icon type="ios-arrow-down"></Icon>
-                    </a>
+                            click 触发
+                            <Icon type="ios-arrow-down"></Icon>
+                        </a>
                 <DropdownMenu slot="list">
                     <DropdownItem>驴打滚</DropdownItem>
                     <DropdownItem>炸酱面</DropdownItem>
@@ -34,9 +34,9 @@
             </Dropdown>
             <Dropdown trigger="contextMenu" style="margin-left: 20px">
                 <a href="javascript:void(0)">
-                        right click
-                        <Icon type="ios-arrow-down"></Icon>
-                    </a>
+                            right click
+                            <Icon type="ios-arrow-down"></Icon>
+                        </a>
                 <DropdownMenu slot="list">
                     <DropdownItem>返回</DropdownItem>
                     <DropdownItem style="color: #ed4014">删除</DropdownItem>
@@ -44,9 +44,9 @@
             </Dropdown>
             <Dropdown trigger="custom" :visible="visible" style="margin-left: 20px">
                 <a href="javascript:void(0)" @click="handleOpen">
-                        custom 触发
-                        <Icon type="ios-arrow-down"></Icon>
-                    </a>
+                            custom 触发
+                            <Icon type="ios-arrow-down"></Icon>
+                        </a>
                 <DropdownMenu slot="list">
                     <p>常用于各种自定义下拉内容的场景。</p>
                     <div style="text-align: right;margin:10px;">
@@ -57,44 +57,26 @@
         </div>
     </div>
 </template>
-<script lang='ts'>
-    import {
-        Component,
-        Prop,
-        Vue,
-        Watch,
-        Emit,
-        Inject,
-        Model,
-        Provide,
-    } from 'vue-property-decorator';
-    import {
-        mixins,
-        createDecorator,
-    } from 'vue-class-component';
-    import {
-        State,
-        Getter,
-        Action,
-        Mutation,
-        namespace,
-    } from 'vuex-class';
-    @Component({
-        name: 'BasicButton',
-    })
-    export default class BasicButton extends Vue {
-        private visible: boolean = false;
-        private handleOpen = (): void => {
-            this.visible = true;
-        };
-        private handleClose = (): void => {
-            this.visible = false;
-        };
+<script>
+    export default {
+        data() {
+            return {
+                visible: false
+            }
+        },
+        methods: {
+            handleOpen() {
+                this.visible = true;
+            },
+            handleClose() {
+                this.visible = false;
+            }
+        }
     }
 </script>
 <style scoped lang='scss'>
     .componentBox {
-        width: 50%;
+        width: 45%;
         .buttonShower {
             background: #eee;
             padding: 10px;
@@ -104,15 +86,21 @@
                 background: #fff;
                 display: inline-block;
                 line-height: 32px;
-              margin: 10px 0 10px 0;
+                margin: 10px 0 10px 0;
+               text-align: center;
             }
         }
-        position: relative;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
+       
         box-sizing: border-box;
         padding: 10px;
-        justify-content: flex-start;
+         .demons{
+            font-size: 14px;
+            font-weight: 100;
+        }
+        .demonsContent {
+             font-size: 13px;
+             text-indent: 2em;
+           font-weight: 100;
+        }
     }
 </style>

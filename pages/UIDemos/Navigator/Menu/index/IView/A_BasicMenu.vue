@@ -15,8 +15,8 @@
                 </MenuItem>
                 <Submenu name="3">
                     <template slot="title">
-                                <Icon type="ios-stats" />
-                                统计分析
+                                        <Icon type="ios-stats" />
+                                        统计分析
 </template>
             <MenuGroup title="使用">
                 <MenuItem name="3-1">新增和启动</MenuItem>
@@ -47,33 +47,13 @@
         
     </div>
 </template>
-<script lang='ts'>
-    import {
-        Component,
-        Prop,
-        Vue,
-        Watch,
-        Emit,
-        Inject,
-        Model,
-        Provide,
-    } from 'vue-property-decorator';
-    import {
-        mixins,
-        createDecorator,
-    } from 'vue-class-component';
-    import {
-        State,
-        Getter,
-        Action,
-        Mutation,
-        namespace,
-    } from 'vuex-class';
-    @Component({
-        name: 'BasicButton',
-    })
-    export default class BasicButton extends Vue {
-        private theme1: string = 'light'
+<script>
+    export default {
+        data() {
+            return {
+                theme1: 'light'
+            }
+        },
     }
 </script>
 <style scoped lang='scss'>
@@ -82,12 +62,16 @@
             background: #eee;
             padding: 10px;
         }
-        position: relative;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
         box-sizing: border-box;
         padding: 10px;
-        justify-content: flex-start;
+        .demons {
+            font-size: 14px;
+            font-weight: 100;
+        }
+        .demonsContent {
+            font-size: 13px;
+            text-indent: 2em;
+            font-weight: 100;
+        }
     }
 </style>

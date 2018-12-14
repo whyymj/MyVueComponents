@@ -31,7 +31,8 @@
 </script>
 <style scoped lang='scss'>
     .componentBox {
-        width: 50%;
+           width: 45%;
+        margin: 10px 2%;
         .buttonShower {
             background: #eee;
             padding: 10px;
@@ -39,12 +40,17 @@
                 background: #fff;
             }
         }
-        position: relative;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
+     
         box-sizing: border-box;
         padding: 10px;
-        justify-content: flex-start;
+          .demons{
+            font-size: 14px;
+            font-weight: 100;
+        }
+        .demonsContent {
+             font-size: 13px;
+             text-indent: 2em;
+           font-weight: 100;
+        }
     }
 </style>

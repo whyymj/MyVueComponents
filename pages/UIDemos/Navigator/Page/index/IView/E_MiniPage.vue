@@ -14,50 +14,36 @@
         </div>
     </div>
 </template>
-<script lang='ts'>
-    import {
-        Component,
-        Prop,
-        Vue,
-        Watch,
-        Emit,
-        Inject,
-        Model,
-        Provide,
-    } from 'vue-property-decorator';
-    import {
-        mixins,
-        createDecorator,
-    } from 'vue-class-component';
-    import {
-        State,
-        Getter,
-        Action,
-        Mutation,
-        namespace,
-    } from 'vuex-class';
-    @Component({
-        name: 'BasicButton',
-    })
-    export default class BasicButton extends Vue {}
+<script>
+    export default {}
 </script>
 <style scoped lang='scss'>
-    .componentBox {
-        width: 50%;
+  .componentBox {
+        width:45%;
         .buttonShower {
             background: #eee;
             padding: 10px;
-            /deep/ .ivu-page{
-                width:100%;
-                text-align: left;
+            a{
+                width:95px;
+                height:32px;
+                background: #fff;
+                display: inline-block;
+                line-height: 32px;
+                margin:10px;
+                 text-align: center;
             }
         }
-        position: relative;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
+        
         box-sizing: border-box;
         padding: 10px;
-        justify-content: flex-start;
+           .demons{
+            font-size: 14px;
+            font-weight: 100;
+        }
+        .demonsContent {
+             font-size: 13px;
+             text-indent: 2em;
+           font-weight: 100;
+        }
     }
 </style>

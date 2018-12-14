@@ -71,12 +71,12 @@
     }
     .componentsBox {
       display: flex;
-      justify-content: flex-start;
+      align-content: flex-start;
     
       flex-wrap: wrap;
       >>>.componentBox {
         box-shadow: 1px 1px 5px 0 #ccc;
-         margin:10px 1.6%;
+       
       }
       >>>.componentBox:hover {
         box-shadow: 1px 1px 10px 1px #ccc;

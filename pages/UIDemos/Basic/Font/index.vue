@@ -32,13 +32,22 @@
         font-size: 18px;
       }
     }
-    .addition{
+    .addition {
       font-size: 16px;
       font-weight: 100;
+      padding: 5px 30px;
+      box-sizing: border-box;
     }
-    .demons{
-          font-size: 14px;
+    .demons {
+      font-size: 14px;
       font-weight: 100;
+      padding: 0 20px;
+      box-sizing: border-box;
+      background: #eee;
+      width:95%;
+      margin:auto;
+      line-height: 60px;
+      border-radius:5px;
     }
   }
 </style>

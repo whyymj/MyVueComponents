@@ -3,8 +3,7 @@
         <!-- 下面为效果展示部分 -->
         <Divider><span style='color:#2d8cf0;font-size:11px;font-weight:100;'>IView Layout - Col Padding</span></Divider>
         <h6 class="demons">Col间隔</h6>
-        <h5 class="demonsContent">通过给 row 添加 gutter 属性，可以给下属的 col 添加间距，推荐使用 (16+8n)px 作为栅格间隔。</span>
-        </h5>
+        <h5 class="demonsContent">通过给 row 添加 gutter 属性，可以给下属的 col 添加间距，推荐使用 (16+8n)px 作为栅格间隔。</h5>
         <!-- 下面为效果 -->
         <div class='buttonShower'>
             <Row :gutter="16">
@@ -29,31 +28,29 @@
     export default {}
 </script>
 <style scoped lang='scss'>
-    .componentBox {
-        position: relative;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
+   .componentBox {
+        width:30%;
         box-sizing: border-box;
         padding: 10px;
-        justify-content: flex-start;
         /deep/ .ivu-row {
             width: 100%;
+            background: #ccc;
             box-sizing: border-box;
-            background: #fff;
-            margin: 5px 0;
+            margin: 5px 0!important;
+           
             .ivu-col {
+                text-align: center;
                 border: 1px solid #aaa;
-                div {
-                    background: #ccc;
-                }
             }
         }
+        .demons{
+            font-size: 14px;
+            font-weight: 100;
+        }
         .demonsContent {
-            span {
-                display: block;
-                text-indent: 3em;
-            }
+             font-size: 13px;
+             text-indent: 2em;
+           font-weight: 100;
         }
     }
 </style>

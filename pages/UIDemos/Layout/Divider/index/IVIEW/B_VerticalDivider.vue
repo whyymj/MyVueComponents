@@ -21,13 +21,18 @@
 <style scoped lang='scss'>
     .componentBox {
         border: 1px dashed #eee;
-        position: relative;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
         box-sizing: border-box;
         padding: 10px;
-        justify-content: flex-start;
-        width: 50%;
+        width: 30%;
+         .demons{
+            font-size: 14px;
+            font-weight: 100;
+        }
+        .demonsContent {
+             font-size: 13px;
+             text-indent: 2em;
+           font-weight: 100;
+             margin-bottom: 10px;
+        }
     }
 </style>

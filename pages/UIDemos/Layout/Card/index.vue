@@ -131,15 +131,14 @@
     }
     .componentsBox {
       display: flex;
-      justify-content: space-around;
+      justify-content: flex-start;
       flex-wrap: wrap;
       >>>.componentBox {
         box-shadow: 1px 1px 5px 0 #ccc;
-        margin: 10px 0;
+        margin: 10px 2.4%;
       }
       >>>.componentBox:hover {
         box-shadow: 1px 1px 10px 1px #ccc;
-        margin: 10px 0;
       }
     }
   }

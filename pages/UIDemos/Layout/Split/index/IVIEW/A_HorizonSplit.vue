@@ -29,20 +29,26 @@
 </script>
 <style scoped lang='scss'>
     .componentBox {
-        position: relative;
-        display: flex;
-        width:50%;
-        flex-direction: row;
-        flex-wrap: wrap;
+       
+        width:30%;
+      
         box-sizing: border-box;
         padding: 10px;
-        justify-content: flex-start;
         .buttonShower {
             height: 200px;
             border: 1px solid #dcdee2;
             .demo-split-pane {
                 padding: 10px;
             }
+        }
+        .demons{
+            font-size: 14px;
+            font-weight: 100;
+        }
+        .demonsContent {
+             font-size: 13px;
+             text-indent: 2em;
+           font-weight: 100;
         }
     }
 </style>

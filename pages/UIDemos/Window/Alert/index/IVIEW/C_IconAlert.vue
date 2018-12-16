@@ -1,0 +1,66 @@
+<template>
+    <div class='componentBox'>
+        <!-- 下面为效果展示部分 -->
+        <Divider><span style='color:#2d8cf0;font-size:11px;font-weight:100;'>IView Button - Basic Button</span></Divider>
+        <h6 class="demons">基本用法</h6>
+        <h5 class="demonsContent">按钮类型有：默认按钮、主按钮、虚线按钮、文字按钮以及四种颜色按钮。 通过设置 type 为 primary、dashed、text、info、success、warning、error 创建不同样式的按钮，不设置为默认样式。
+        </h5>
+        <div class='buttonShower'>
+            <Alert show-icon>An info prompt</Alert>
+    <Alert type="success" show-icon>A success prompt</Alert>
+    <Alert type="warning" show-icon>A warning prompt</Alert>
+    <Alert type="error" show-icon>An error prompt</Alert>
+    <Alert show-icon>
+        An info prompt
+        <template slot="desc">Content of prompt. Content of prompt. Content of prompt. Content of prompt. </template>
+    </Alert>
+    <Alert type="success" show-icon>
+        A success prompt
+        <span slot="desc">Content of prompt. Content of prompt. Content of prompt. Content of prompt. </span>
+    </Alert>
+    <Alert type="warning" show-icon>
+        A warning prompt
+        <template slot="desc">
+        Content of prompt. Content of prompt. Content of prompt.
+    </template>
+    </Alert>
+    <Alert type="error" show-icon>
+        An error prompt
+        <span slot="desc">
+            Custom error description copywriting.
+        </span>
+    </Alert>
+    <Alert show-icon>
+        Custom icon
+        <Icon type="ios-bulb-outline" slot="icon"></Icon>
+        <template slot="desc">Custom icon copywriting. Custom icon copywriting. Custom icon copywriting. </template>
+    </Alert>
+        </div>
+    </div>
+</template>
+<script>
+    export default {
+         
+    }
+</script>
+<style scoped lang='scss'>
+    .componentBox {
+      width:45%;
+        box-sizing: border-box;
+        padding: 10px;
+      
+        .buttonShower {
+            p {
+                text-align: left;
+            }
+            li {
+                list-style: none;
+                text-align: left;
+                span {
+                    float: right;
+                    color: #ff9900;
+                }
+            }
+        }
+    }
+</style>

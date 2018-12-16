@@ -6,47 +6,43 @@
         <h5 class="demonsContent">包含各类用法的综合示例。
         </h5>
         <div class='buttonShower'>
-           <Steps :current="1" status="error">
-        <Step title="已完成" content="这里是该步骤的描述信息"></Step>
-        <Step title="进行中" content="这里是该步骤的描述信息"></Step>
-        <Step title="待进行" content="这里是该步骤的描述信息"></Step>
-        <Step title="待进行" content="这里是该步骤的描述信息"></Step>
-    </Steps>
+            <Steps :current="1" status="error">
+                <Step title="已完成" content="这里是该步骤的描述信息"></Step>
+                <Step title="进行中" content="这里是该步骤的描述信息"></Step>
+                <Step title="待进行" content="这里是该步骤的描述信息"></Step>
+                <Step title="待进行" content="这里是该步骤的描述信息"></Step>
+            </Steps>
         </div>
-        
     </div>
 </template>
 <script>
-   
-    export default{}
+    export default {}
 </script>
 <style scoped lang='scss'>
-   .componentBox {
-        width:45%;
+    .componentBox {
+        width: 45%;
         .buttonShower {
-            background: #eee;
             padding: 10px;
-            a{
-                width:95px;
-                height:32px;
+            a {
+                width: 95px;
+                height: 32px;
                 background: #fff;
                 display: inline-block;
                 line-height: 32px;
-                margin:10px;
-                 text-align: center;
+                margin: 10px;
+                text-align: center;
             }
         }
-        
         box-sizing: border-box;
         padding: 10px;
-           .demons{
+        .demons {
             font-size: 14px;
             font-weight: 100;
         }
         .demonsContent {
-             font-size: 13px;
-             text-indent: 2em;
-           font-weight: 100;
+            font-size: 13px;
+            text-indent: 2em;
+            font-weight: 100;
         }
     }
 </style>

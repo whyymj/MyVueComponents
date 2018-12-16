@@ -23,8 +23,7 @@
 <style scoped lang='scss'>
    .componentBox {
         width:45%;
-        .buttonShower {
-            background: #eee;
+        .buttonShower { 
             padding: 10px;
             a{
                 width:95px;

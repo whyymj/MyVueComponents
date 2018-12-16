@@ -6,20 +6,8 @@
         <h5 class="demonsContent">按钮类型有：默认按钮、主按钮、虚线按钮、文字按钮以及四种颜色按钮。 通过设置 type 为 primary、dashed、text、info、success、warning、error 创建不同样式的按钮，不设置为默认样式。
         </h5>
         <div class='buttonShower'>
-            <div>
-                Props：
-                <Input prefix="ios-contact" placeholder="Enter name" style="width: auto" />
-                <Input suffix="ios-search" placeholder="Enter text" style="width: auto" />
-            </div>
-            <div style="margin-top: 6px">
-                Slots：
-                <Input placeholder="Enter name" style="width: auto">
-                <Icon type="ios-contact" slot="prefix" />
-                </Input>
-                <Input placeholder="Enter text" style="width: auto">
-                <Icon type="ios-search" slot="suffix" />
-                </Input>
-            </div>
+         
+         ...................
         </div>
     </div>
 </template>
@@ -102,7 +90,8 @@
                 }
                 this.randomMovieList = getArrayItems(this.movieList, 5);
             }
-        },
+        }
+        ,
         mounted() {
             this.changeLimit();
         }
@@ -110,9 +99,10 @@
 </script>
 <style scoped lang='scss'>
     .componentBox {
-        width: 45%;
+      width:45%;
         box-sizing: border-box;
         padding: 10px;
+      
         .buttonShower {
             p {
                 text-align: left;

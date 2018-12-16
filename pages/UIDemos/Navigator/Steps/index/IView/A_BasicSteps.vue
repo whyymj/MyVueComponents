@@ -22,7 +22,6 @@
     .componentBox {
         width: 45%;
         .buttonShower {
-            background: #eee;
             padding: 10px;
             a {
                 width: 95px;
@@ -32,6 +31,9 @@
                 line-height: 32px;
                 margin: 10px;
                 text-align: center;
+            }
+            >>>.ivu-steps .ivu-steps-head-inner>.ivu-steps-icon.ivu-icon {
+                line-height: 10px;    
             }
         }
         box-sizing: border-box;

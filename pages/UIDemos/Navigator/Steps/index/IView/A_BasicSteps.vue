@@ -21,9 +21,14 @@
 <style scoped lang='scss'>
   @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
     .componentBox {
-        width: 45%;
+        width: 48%;
+          
         .buttonShower {
-            
+            >>>.ivu-steps {
+                 ::before {
+                    float: left;
+                }
+            }
             >>>.ivu-steps .ivu-steps-head-inner>.ivu-steps-icon.ivu-icon {
                 line-height: 10px;    
             }

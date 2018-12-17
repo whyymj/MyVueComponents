@@ -116,7 +116,7 @@
 <style scoped lang='scss'>
     @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
     .componentBox {
-        width: 45%;
+        width:32%; 
         .buttonShower {
             .ivu-table .demo-table-info-row td {
                 background-color: #2db7f5;

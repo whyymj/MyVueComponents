@@ -29,9 +29,8 @@
                 </Menu>
             </Header>
             <Layout :style="{left: '250px',right:0,position:'fixed',top:'64px',bottom:0}">
-                <Sider hide-trigger :style="{position: 'fixed', height: '100vh', left: 0, overflow: 'auto',width:'250px',maxWidth:'300px'}">
+                <Sider hide-trigger :style="{position: 'fixed', height: '100vh', left: 0, overflow: 'auto',width:'280px',maxWidth:'350px'}">
                     <LeftMenu :MenuTreeData="MenuTreeData"></LeftMenu>
-                    
                 </Sider>
                 <Layout :style="{padding: '0 240px 24px 24px'}">
                     <Breadcrumb :style="{margin: '24px 0'}">
@@ -50,8 +49,9 @@
 
 <script>
     export default {
-        components:{
-            LeftMenu:()=>import('../components/SelfComponent/IviewMenu/IviewMenu.vue')
+        components: {
+            LeftMenu: () =>
+                import ('../components/SelfComponent/IviewMenu/IviewMenu.vue')
         },
         data() {
             return {
@@ -60,10 +60,9 @@
             }
         },
         beforeMount() {
-            
             this.$axios.get('http://localhost:8080/UIindex/UIMenu/menu').then(res => {
-               this.MenuTreeData=res.data;
-            }) 
+                this.MenuTreeData = res.data;
+            })
         },
         methods: {
             // @Emit('enterToView')

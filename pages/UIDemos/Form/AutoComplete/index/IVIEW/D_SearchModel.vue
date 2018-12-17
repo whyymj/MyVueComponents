@@ -66,7 +66,7 @@
 <style scoped lang='scss'>
     @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
     .componentBox {
-        width: 45%; 
+         width:24%; 
         .buttonShower {
             .demo-auto-complete-item {
                 padding: 4px 0;

@@ -6,33 +6,30 @@
         <h5 class="demonsContent">包含各类用法的综合示例。
         </h5>
         <div class='buttonShower'>
-           <Button @click="start">Start</Button>
-    <Button @click="finish">Finish</Button>
-    <Button @click="error">Error</Button>
+            <Button @click="start">Start</Button>
+            <Button @click="finish">Finish</Button>
+            <Button @click="error">Error</Button>
         </div>
-        
     </div>
 </template>
 <script>
-   
     export default {
-         methods: {
-            start () {
+        methods: {
+            start() {
                 this.$Loading.start();
             },
-            finish () {
+            finish() {
                 this.$Loading.finish();
             },
-            error () {
+            error() {
                 this.$Loading.error();
             }
         }
     }
 </script>
 <style scoped lang='scss'>
-  @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
-   .componentBox {
-        width:45%;
-      
+    @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
+    .componentBox {
+        width: 45%;
     }
 </style>

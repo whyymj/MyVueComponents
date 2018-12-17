@@ -7,23 +7,27 @@
         </h5>
         <div class='buttonShower'>
             <Steps :current="2" size="small">
-        <Step title="已完成"></Step>
-        <Step title="进行中"></Step>
-        <Step title="待进行"></Step>
-        <Step title="待进行"></Step>
-    </Steps>
+                <Step title="已完成"></Step>
+                <Step title="进行中"></Step>
+                <Step title="待进行"></Step>
+                <Step title="待进行"></Step>
+            </Steps>
         </div>
-        
     </div>
 </template>
 <script>
-   
-    export default{}
+    export default {}
 </script>
 <style scoped lang='scss'>
-  @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
-   .componentBox {
-        width:45%;
-        
+    @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
+    .componentBox {
+        width: 48%;
+        .buttonShower {
+            >>>.ivu-steps {
+                 ::before {
+                    float: left;
+                }
+            }
+        }
     }
 </style>

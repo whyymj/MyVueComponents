@@ -6,16 +6,15 @@
         <h5 class="demonsContent">按钮类型有：默认按钮、主按钮、虚线按钮、文字按钮以及四种颜色按钮。 通过设置 type 为 primary、dashed、text、info、success、warning、error 创建不同样式的按钮，不设置为默认样式。
         </h5>
         <div class='buttonShower'>
-             <Table border :columns="columns6" :data="data5"></Table>
+            <Table border :columns="columns6" :data="data5"></Table>
         </div>
     </div>
 </template>
 <script>
     export default {
-      data () {
+        data() {
             return {
-                columns6: [
-                    {
+                columns6: [{
                         title: 'Date',
                         key: 'date'
                     },
@@ -26,8 +25,7 @@
                     {
                         title: 'Age',
                         key: 'age',
-                        filters: [
-                            {
+                        filters: [{
                                 label: 'Greater than 25',
                                 value: 1
                             },
@@ -37,7 +35,7 @@
                             }
                         ],
                         filterMultiple: false,
-                        filterMethod (value, row) {
+                        filterMethod(value, row) {
                             if (value === 1) {
                                 return row.age > 25;
                             } else if (value === 2) {
@@ -48,8 +46,7 @@
                     {
                         title: 'Address',
                         key: 'address',
-                        filters: [
-                            {
+                        filters: [{
                                 label: 'New York',
                                 value: 'New York'
                             },
@@ -62,13 +59,12 @@
                                 value: 'Sydney'
                             }
                         ],
-                        filterMethod (value, row) {
+                        filterMethod(value, row) {
                             return row.address.indexOf(value) > -1;
                         }
                     }
                 ],
-                data5: [
-                    {
+                data5: [{
                         name: 'John Brown',
                         age: 18,
                         address: 'New York No. 1 Lake Park',
@@ -98,23 +94,8 @@
     }
 </script>
 <style scoped lang='scss'>
-    .componentBox {
-      width:45%;
-        box-sizing: border-box;
-        padding: 10px;
-      
-        .buttonShower {
-            p {
-                text-align: left;
-            }
-            li {
-                list-style: none;
-                text-align: left;
-                span {
-                    float: right;
-                    color: #ff9900;
-                }
-            }
-        }
-    }
+      @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
+      .componentBox {
+          width: 45%;
+      }
 </style>

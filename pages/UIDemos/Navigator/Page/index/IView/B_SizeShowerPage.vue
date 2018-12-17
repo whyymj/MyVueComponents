@@ -16,32 +16,9 @@
     export default{}
 </script>
 <style scoped lang='scss'>
+  @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
     .componentBox {
         width:45%;
-        .buttonShower {
-            background: #eee;
-            padding: 10px;
-            a{
-                width:95px;
-                height:32px;
-                background: #fff;
-                display: inline-block;
-                line-height: 32px;
-                margin:10px;
-                 text-align: center;
-            }
-        }
-        
-        box-sizing: border-box;
-        padding: 10px;
-           .demons{
-            font-size: 14px;
-            font-weight: 100;
-        }
-        .demonsContent {
-             font-size: 13px;
-             text-indent: 2em;
-           font-weight: 100;
-        }
+       
     }
 </style>

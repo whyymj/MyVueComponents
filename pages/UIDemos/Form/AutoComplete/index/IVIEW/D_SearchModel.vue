@@ -24,49 +24,39 @@
 </template>
 <script>
     export default {
-       data () {
+        data() {
             return {
                 value4: '',
-                data4: [
-                    {
+                data4: [{
                         title: '话题',
-                        children: [
-                            {
+                        children: [{
                                 title: 'iView',
                                 count: 10000,
-
                             },
                             {
                                 title: 'iView UI',
                                 count: 10600,
-
                             }
                         ]
                     },
                     {
                         title: '问题',
-                        children: [
-                            {
+                        children: [{
                                 title: 'iView UI 有多好',
                                 count: 60100,
-
                             },
                             {
                                 title: 'iView 是啥',
                                 count: 30010,
-
                             }
                         ]
                     },
                     {
                         title: '文章',
-                        children: [
-                            {
-                                title: 'iView 是一个设计语言',
-                                count: 100000,
-
-                            }
-                        ]
+                        children: [{
+                            title: 'iView 是一个设计语言',
+                            count: 100000,
+                        }]
                     }
                 ]
             }
@@ -74,48 +64,36 @@
     }
 </script>
 <style scoped lang='scss'>
+    @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
     .componentBox {
-        width: 45%;
-        box-sizing: border-box;
-        padding: 10px;
+        width: 45%; 
         .buttonShower {
-            p {
-                text-align: left;
+            .demo-auto-complete-item {
+                padding: 4px 0;
+                border-bottom: 1px solid #F6F6F6;
             }
-            li {
-                list-style: none;
-                text-align: left;
-                span {
-                    float: right;
-                    color: #ff9900;
-                }
+            .demo-auto-complete-group {
+                font-size: 12px;
+                padding: 4px 6px;
             }
-              .demo-auto-complete-item{
-        padding: 4px 0;
-        border-bottom: 1px solid #F6F6F6;
-    }
-    .demo-auto-complete-group{
-        font-size: 12px;
-        padding: 4px 6px;
-    }
-    .demo-auto-complete-group span{
-        color: #666;
-        font-weight: bold;
-    }
-    .demo-auto-complete-group a{
-        float: right;
-    }
-    .demo-auto-complete-count{
-        float: right;
-        color: #999;
-    }
-    .demo-auto-complete-more{
-        display: block;
-        margin: 0 auto;
-        padding: 4px;
-        text-align: center;
-        font-size: 12px;
-    }
+            .demo-auto-complete-group span {
+                color: #666;
+                font-weight: bold;
+            }
+            .demo-auto-complete-group a {
+                float: right;
+            }
+            .demo-auto-complete-count {
+                float: right;
+                color: #999;
+            }
+            .demo-auto-complete-more {
+                display: block;
+                margin: 0 auto;
+                padding: 4px;
+                text-align: center;
+                font-size: 12px;
+            }
         }
     }
 </style>

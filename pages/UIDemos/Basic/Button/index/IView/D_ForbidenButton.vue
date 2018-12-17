@@ -15,25 +15,13 @@
     export default {}
 </script>
 <style scoped lang='scss'>
+
+    @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
     .componentBox {
         position: relative;
         width: 30%;
-        box-sizing: border-box;
-        padding: 10px;
         max-height: 500px;
         overflow: auto;
-        .demons {
-            font-size: 18px;
-            font-weight: 100;
-            margin: 10px 0;
-        }
-        .demonsContent {
-            font-size: 14px;
-            font-weight: 100;
-            line-height: 20px;
-            margin: 10px 0;
-            text-indent: 2em;
-        }
         .buttonShower {
             margin: 20px 0;
             /deep/button {

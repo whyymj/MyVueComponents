@@ -30,27 +30,9 @@
     }
 </script>
 <style scoped lang='scss'>
+  @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
     .componentBox {
          width: 45%;
-        margin: 10px 2%;
-        .buttonShower {
-            background: #eee;
-            padding: 10px;
-            /deep/ .ivu-tabs {
-                background: #fff;
-            }
-        }
-       
-        box-sizing: border-box;
-        padding: 10px;
-          .demons{
-            font-size: 14px;
-            font-weight: 100;
-        }
-        .demonsContent {
-             font-size: 13px;
-             text-indent: 2em;
-           font-weight: 100;
-        }
+        margin: 10px 2%; 
     }
 </style>

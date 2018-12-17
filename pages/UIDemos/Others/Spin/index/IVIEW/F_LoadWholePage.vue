@@ -6,23 +6,23 @@
         <h5 class="demonsContent">按钮类型有：默认按钮、主按钮、虚线按钮、文字按钮以及四种颜色按钮。 通过设置 type 为 primary、dashed、text、info、success、warning、error 创建不同样式的按钮，不设置为默认样式。
         </h5>
         <div class='buttonShower'>
-             <div>
-        <Button type="primary" @click="handleSpinShow">整页显示，3秒后关闭</Button>
-        <Button type="primary" @click="handleSpinCustom">自定义显示内容</Button>
-    </div>
+            <div>
+                <Button type="primary" @click="handleSpinShow">整页显示，3秒后关闭</Button>
+                <Button type="primary" @click="handleSpinCustom">自定义显示内容</Button>
+            </div>
         </div>
     </div>
 </template>
 <script>
     export default {
         methods: {
-            handleSpinShow () {
+            handleSpinShow() {
                 this.$Spin.show();
                 setTimeout(() => {
                     this.$Spin.hide();
                 }, 3000);
             },
-            handleSpinCustom () {
+            handleSpinCustom() {
                 this.$Spin.show({
                     render: (h) => {
                         return h('div', [
@@ -45,25 +45,14 @@
     }
 </script>
 <style scoped lang='scss'>
+    @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
     .componentBox {
-      width:45%;
-        box-sizing: border-box;
-        padding: 10px;
-      
+        width: 45%; 
         .buttonShower {
-            p {
-                text-align: left;
+            
+            .demo-spin-icon-load {
+                animation: ani-demo-spin 1s linear infinite;
             }
-            li {
-                list-style: none;
-                text-align: left;
-                span {
-                    float: right;
-                    color: #ff9900;
-                }
-            }  .demo-spin-icon-load{
-        animation: ani-demo-spin 1s linear infinite;
-    }
         }
     }
 </style>

@@ -29,16 +29,6 @@
 @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
    .componentBox {
         width:30%; 
-        /deep/ .ivu-row {
-            width: 100%;
-            background: #ccc;
-            box-sizing: border-box;
-            margin: 5px 0;
-           
-            .ivu-col {
-                text-align: center;
-                border: 1px solid #aaa;
-            }
-        } 
+        
     }
 </style>

@@ -15,25 +15,7 @@
   export default {}
 </script>
 <style scoped lang='scss'>
-  .iconIndex {
-     h1 {
-      text-align: center;
-      color: #3F51B5;
-      margin: 20px 0 20px 0;
-    }
-    h2 {
-      text-align: left;
-      padding: 0 20px 0 20px;
-      margin: 0 0 10px 0;
-      box-sizing: border-box;
-      a {
-        font-size: 18px;
-      }
-    }
-    .demons {
-      background: #ccc;
-      padding: 30px 20px;
-      margin: 0 auto 20px;
-    }
-  }
+
+  @import '@/assets/globalCss/basic.scss';
+  @import '@/assets/style/UIDemos/pages/pagesGlobalStyle.scss';
 </style>

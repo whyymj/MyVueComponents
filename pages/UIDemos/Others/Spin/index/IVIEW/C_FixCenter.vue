@@ -7,41 +7,28 @@
         </h5>
         <div class='buttonShower'>
             <div class="demo-spin-container">
-        <Spin fix></Spin>
-    </div>
+                <Spin fix></Spin>
+            </div>
         </div>
     </div>
 </template>
 <script>
     export default {
-       
     }
 </script>
 <style scoped lang='scss'>
+  @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
     .componentBox {
-      width:45%;
-        box-sizing: border-box;
-        padding: 10px;
-      
+        width: 45%;
         .buttonShower {
-            p {
-                text-align: left;
+          
+            .demo-spin-container {
+                display: inline-block;
+                width: 200px;
+                height: 100px;
+                position: relative;
+                border: 1px solid #eee;
             }
-            li {
-                list-style: none;
-                text-align: left;
-                span {
-                    float: right;
-                    color: #ff9900;
-                }
-            } .demo-spin-container{
-    	display: inline-block;
-        width: 200px;
-        height: 100px;
-        position: relative;
-        border: 1px solid #eee;
-    }
-
         }
     }
 </style>

@@ -43,22 +43,10 @@
 </script>
 
 <style lang='scss' scoped>
+
+    @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
     .componentBox {
-        width: 96%;
-        box-sizing: border-box;
-        padding: 10px;
-        .demons {
-            font-size: 18px;
-            font-weight: 100;
-            margin: 10px 0;
-        }
-        .demonsContent {
-            font-size: 14px;
-            font-weight: 100;
-            line-height: 20px;
-            margin: 10px 0;
-            text-indent: 2em;
-        }
+        width: 96%;  
         .colorBoxContainer {
             display: flex;
             flex-wrap: wrap;

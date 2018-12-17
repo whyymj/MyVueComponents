@@ -92,22 +92,11 @@
     }
 </script>
 <style scoped lang='scss'>
+  @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
     .componentBox {
-        width: 45%;
-        box-sizing: border-box;
-        padding: 10px;
+        width: 45%; 
         .buttonShower {
-            p {
-                text-align: left;
-            }
-            li {
-                list-style: none;
-                text-align: left;
-                span {
-                    float: right;
-                    color: #ff9900;
-                }
-            }
+          
             .expand-row {
                 margin-bottom: 16px;
             }

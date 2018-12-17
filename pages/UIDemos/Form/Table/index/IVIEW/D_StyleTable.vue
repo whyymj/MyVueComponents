@@ -7,20 +7,19 @@
         </h5>
         <div class='buttonShower'>
             <p>Custom row styles:</p>
-    <Table :row-class-name="rowClassName" :columns="columns1" :data="data1"></Table>
-    <p>Custom column styles:</p>
-    <Table :columns="columns9" :data="data1"></Table>
-    <p>Custom arbitrary cell styles:</p>
-    <Table :columns="columns1" :data="data8"></Table>
+            <Table :row-class-name="rowClassName" :columns="columns1" :data="data1"></Table>
+            <p>Custom column styles:</p>
+            <Table :columns="columns9" :data="data1"></Table>
+            <p>Custom arbitrary cell styles:</p>
+            <Table :columns="columns1" :data="data8"></Table>
         </div>
     </div>
 </template>
 <script>
     export default {
-    data () {
+        data() {
             return {
-                columns1: [
-                    {
+                columns1: [{
                         title: 'Name',
                         key: 'name'
                     },
@@ -33,8 +32,7 @@
                         key: 'address'
                     }
                 ],
-                columns9: [
-                    {
+                columns9: [{
                         title: 'Name',
                         key: 'name'
                     },
@@ -48,8 +46,7 @@
                         key: 'address'
                     }
                 ],
-                data1: [
-                    {
+                data1: [{
                         name: 'John Brown',
                         age: 18,
                         address: 'New York No. 1 Lake Park',
@@ -74,8 +71,7 @@
                         date: '2016-10-04'
                     }
                 ],
-                data8: [
-                    {
+                data8: [{
                         name: 'John Brown',
                         age: 18,
                         address: 'New York No. 1 Lake Park'
@@ -106,7 +102,7 @@
             }
         },
         methods: {
-            rowClassName (row, index) {
+            rowClassName(row, index) {
                 if (index === 1) {
                     return 'demo-table-info-row';
                 } else if (index === 3) {
@@ -118,47 +114,34 @@
     }
 </script>
 <style scoped lang='scss'>
+    @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
     .componentBox {
-      width:45%;
-        box-sizing: border-box;
-        padding: 10px;
-      
+        width: 45%;
         .buttonShower {
-            p {
-                text-align: left;
+            .ivu-table .demo-table-info-row td {
+                background-color: #2db7f5;
+                color: #fff;
             }
-            li {
-                list-style: none;
-                text-align: left;
-                span {
-                    float: right;
-                    color: #ff9900;
-                }
+            .ivu-table .demo-table-error-row td {
+                background-color: #ff6600;
+                color: #fff;
             }
-             .ivu-table .demo-table-info-row td{
-        background-color: #2db7f5;
-        color: #fff;
-    }
-    .ivu-table .demo-table-error-row td{
-        background-color: #ff6600;
-        color: #fff;
-    }
-    .ivu-table td.demo-table-info-column{
-        background-color: #2db7f5;
-        color: #fff;
-    }
-    .ivu-table .demo-table-info-cell-name {
-        background-color: #2db7f5;
-        color: #fff;
-    }
-    .ivu-table .demo-table-info-cell-age {
-        background-color: #ff6600;
-        color: #fff;
-    }
-    .ivu-table .demo-table-info-cell-address {
-        background-color: #187;
-        color: #fff;
-    }
+            .ivu-table td.demo-table-info-column {
+                background-color: #2db7f5;
+                color: #fff;
+            }
+            .ivu-table .demo-table-info-cell-name {
+                background-color: #2db7f5;
+                color: #fff;
+            }
+            .ivu-table .demo-table-info-cell-age {
+                background-color: #ff6600;
+                color: #fff;
+            }
+            .ivu-table .demo-table-info-cell-address {
+                background-color: #187;
+                color: #fff;
+            }
         }
     }
 </style>

@@ -35,31 +35,9 @@
     }
 </script>
 <style scoped lang='scss'>
+  @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
     .componentBox {
-       
-        box-sizing: border-box;
-        padding: 10px;
-     
-        width: 30%;
-        .buttonShower {
-            height: 200px;
-            border: 1px solid #dcdee2;
-            .demo-split-pane {
-                padding: 10px;
-            }
-            .demo-split-pane.no-padding {
-                height: 200px;
-                padding: 0;
-            }
-        }
-        .demons{
-            font-size: 14px;
-            font-weight: 100;
-        }
-        .demonsContent {
-             font-size: 13px;
-             text-indent: 2em;
-           font-weight: 100;
-        }
+        
+        width: 30%; 
     }
 </style>

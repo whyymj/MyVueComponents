@@ -5,11 +5,10 @@
         <h6 class="demons" slot='components'>中性色</h6>
         <h5 class="demonsContent" slot='components'>中性色常用于文本、背景、边框、阴影等，可以体现出页面的层次结构。</h5>
         <div class="colorBoxContainer">
-              <div class='colorBox' slot='components' v-for='(item) in colorArr3 ' :key='item' :style='{width:Math.floor(100/colorArr3.length)+"%",minWidth:"220px"}'>
-            <colorShower :info='item'></colorShower>
+            <div class='colorBox' slot='components' v-for='(item) in colorArr3 ' :key='item' :style='{width:Math.floor(100/colorArr3.length)+"%",minWidth:"220px"}'>
+                <colorShower :info='item'></colorShower>
+            </div>
         </div>
-        </div>
-      
     </div>
 </template>
 
@@ -55,27 +54,14 @@
     }
 </script>
 
-<style scoped  lang='scss'>
-.componentBox{
-    width: 96%;
-      box-sizing: border-box;
-        padding: 10px;
-         .demons {
-            font-size: 18px;
-            font-weight: 100;
-            margin: 10px 0;
-        }
-        .demonsContent {
-            font-size: 14px;
-            font-weight: 100;
-            line-height: 20px;
-            margin: 10px 0;
-            text-indent: 2em;
-        }
-             .colorBoxContainer{
-              display: flex;
+<style scoped lang='scss'>
+    @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
+    .componentBox {
+        width: 96%;
+        .colorBoxContainer {
+            display: flex;
             flex-wrap: wrap;
-             justify-content: flex-start;
+            justify-content: flex-start;
         }
-}
+    }
 </style>

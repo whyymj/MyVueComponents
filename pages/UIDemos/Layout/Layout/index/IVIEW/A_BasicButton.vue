@@ -17,13 +17,7 @@
     export default  {}
 </script>
 <style scoped lang='scss'>
-    .componentBox {
-        position: relative;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        box-sizing: border-box;
-        padding: 10px;
-        justify-content: flex-start;
+  @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
+    .componentBox { 
     }
 </style>

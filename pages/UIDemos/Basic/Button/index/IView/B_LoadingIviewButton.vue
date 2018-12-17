@@ -9,13 +9,13 @@
             <div class='loadingIviewButton'>
                 <Button type="primary" loading>Loading...</Button>
                 <Button type="primary" :loading="loading" @click="toLoading">
-                                <span v-if="!loading">Click me!</span>
-                                <span v-else>Loading...</span>
-                            </Button>
+                                        <span v-if="!loading">Click me!</span>
+                                        <span v-else>Loading...</span>
+                                    </Button>
                 <Button type="primary" :loading="loading2" icon="ios-power" @click="toLoading2">
-                                <span v-if="!loading2">Click me!</span>
-                                <span v-else>Loading...</span>
-                            </Button>
+                                        <span v-if="!loading2">Click me!</span>
+                                        <span v-else>Loading...</span>
+                                    </Button>
                 <Button loading shape="circle"></Button>
                 <Button loading shape="circle" type="primary"></Button>
             </div>
@@ -41,31 +41,16 @@
     }
 </script>
 <style scoped lang='scss'>
- .componentBox {
-        position: relative;
+    @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
+    .componentBox {
         width: 30%;
-        box-sizing: border-box;
-        padding: 10px;
-        .demons {
-            font-size: 18px;
-            font-weight: 100;
-            margin: 10px 0;
-        }
-        .demonsContent {
-            font-size: 14px;
-            font-weight: 100;
-            line-height: 20px;
-            margin: 10px 0;
-            text-indent: 2em;
-        }
-        .buttonShower{
-            margin:20px 0;
-            /deep/button{
-                margin:5px;
+        .buttonShower {
+            margin: 20px 0;
+            /deep/button {
+                margin: 5px;
             }
         }
     }
-
     .loadingIviewButton {
         width: 100%;
         display: flex;

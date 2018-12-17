@@ -16,13 +16,13 @@
     export default {}
 </script>
 <style scoped lang='scss'>
+
+    @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
     .componentBox {
         position: relative;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        box-sizing: border-box;
-        padding: 10px;
          width:30%;
         justify-content: flex-start;
     }

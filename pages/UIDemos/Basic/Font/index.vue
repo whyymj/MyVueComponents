@@ -17,37 +17,7 @@
   export default {}
 </script>
 <style scoped lang='scss'>
-  .fontIndex {
-    h1 {
-      text-align: center;
-      color: #3F51B5;
-      margin: 20px 0 20px 0;
-    }
-    h2 {
-      text-align: left;
-      padding: 0 20px 0 20px;
-      margin: 0 0 10px 0;
-      box-sizing: border-box;
-      a {
-        font-size: 18px;
-      }
-    }
-    .addition {
-      font-size: 16px;
-      font-weight: 100;
-      padding: 5px 30px;
-      box-sizing: border-box;
-    }
-    .demons {
-      font-size: 14px;
-      font-weight: 100;
-      padding: 0 20px;
-      box-sizing: border-box;
-      background: #eee;
-      width:95%;
-      margin:auto;
-      line-height: 60px;
-      border-radius:5px;
-    }
-  }
+  
+  @import '@/assets/globalCss/basic.scss';
+  @import '@/assets/style/UIDemos/pages/pagesGlobalStyle.scss';
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class='iconIndex'>
+  <div class='pageIndex'>
     <h1>Icon 图标</h1>
     <!-- slot注入分为两部分。一部分是说明部分，另一部分是效果展示部分 -->
     <div>

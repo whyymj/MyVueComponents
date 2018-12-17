@@ -1,5 +1,5 @@
 <template>
-  <div class='colorIndex'>
+  <div class='pageIndex'>
     <h1>Grid 栅格</h1>
     <!-- slot注入分为两部分。一部分是说明部分，另一部分是效果展示部分 -->
     <div class="componentsShower" v-for='(item,index) in frames' :key='index'>
@@ -38,50 +38,7 @@
   }
 </script>
 <style scoped lang='scss'>
-  @import url('@/assets/globalCss/basic.scss');
-  .colorIndex {
-    h1 {
-      text-align: center;
-      color: #3F51B5;
-      margin: 20px 0 20px 0;
-    }
-    h2 {
-      text-align: left;
-      padding: 0 20px 0 20px;
-      margin: 0 0 10px 0;
-      box-sizing: border-box;
-      a {
-        font-size: 18px;
-      }
-    }
-    .button {
-      display: inline;
-      color: hotpink;
-      float: right;
-      margin: 5px 10px 0 0;
-      font-size: 11px;
-      font-weight: 100;
-      cursor: pointer;
-      padding: 0 5px;
-      &:hover {
-        color: gold;
-        border: 1px solid gold;
-        box-shadow: 1px 1px 0 gold
-      }
-    }
-    .componentsBox {
-      display: flex;
-      justify-content: flex-start;
-    
-      flex-wrap: wrap;
-      >>>.componentBox {
-        box-shadow: 1px 1px 5px 0 #ccc;
-         margin:10px 1.6%;
-      }
-      >>>.componentBox:hover {
-        box-shadow: 1px 1px 10px 1px #ccc;
-        
-      }
-    }
-  }
+  
+  @import '@/assets/globalCss/basic.scss';
+  @import '@/assets/style/UIDemos/pages/pagesGlobalStyle.scss';
 </style>

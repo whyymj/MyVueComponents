@@ -1,5 +1,5 @@
 <template>
-  <div class='fontIndex'>
+  <div class='pageIndex'>
     <h1>Font 字体</h1>
     <!-- slot注入分为两部分。一部分是说明部分，另一部分是效果展示部分 -->
     <div slot='demons'>

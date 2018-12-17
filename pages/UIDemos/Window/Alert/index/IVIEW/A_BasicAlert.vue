@@ -6,24 +6,22 @@
         <h5 class="demonsContent">按钮类型有：默认按钮、主按钮、虚线按钮、文字按钮以及四种颜色按钮。 通过设置 type 为 primary、dashed、text、info、success、warning、error 创建不同样式的按钮，不设置为默认样式。
         </h5>
         <div class='buttonShower'>
-           <Alert>An info prompt</Alert>
-    <Alert type="success">A success prompt</Alert>
-    <Alert type="warning">A warning prompt</Alert>
-    <Alert type="error">An error prompt</Alert>
+            <Alert>An info prompt</Alert>
+            <Alert type="success">A success prompt</Alert>
+            <Alert type="warning">A warning prompt</Alert>
+            <Alert type="error">An error prompt</Alert>
         </div>
     </div>
 </template>
 <script>
     export default {
-       
     }
 </script>
 <style scoped lang='scss'>
     .componentBox {
-      width:45%;
+        width: 45%;
         box-sizing: border-box;
         padding: 10px;
-      
         .buttonShower {
             p {
                 text-align: left;

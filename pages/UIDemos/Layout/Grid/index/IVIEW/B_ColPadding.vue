@@ -28,10 +28,9 @@
     export default {}
 </script>
 <style scoped lang='scss'>
+ @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
    .componentBox {
         width:30%;
-        box-sizing: border-box;
-        padding: 10px;
         /deep/ .ivu-row {
             width: 100%;
             background: #ccc;
@@ -42,15 +41,6 @@
                 text-align: center;
                 border: 1px solid #aaa;
             }
-        }
-        .demons{
-            font-size: 14px;
-            font-weight: 100;
-        }
-        .demonsContent {
-             font-size: 13px;
-             text-indent: 2em;
-           font-weight: 100;
         }
     }
 </style>

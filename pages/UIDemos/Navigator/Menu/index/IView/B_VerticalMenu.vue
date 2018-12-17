@@ -145,7 +145,7 @@
 <style scoped lang='scss'>
   @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
     .componentBox {
-        
+         width:96%;
         h6 {
             height: 30px;
         }

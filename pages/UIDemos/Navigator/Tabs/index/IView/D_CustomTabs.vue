@@ -32,7 +32,7 @@
 <style scoped lang='scss'>
   @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
     .componentBox {
-         width: 45%;
+          width: 32%;
         margin: 10px 2%; 
     }
 </style>

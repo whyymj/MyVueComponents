@@ -6,7 +6,7 @@
         <h5 class="demonsContent">value 与 TabPane 的 name 对应，用于标识当前激活的是哪一项，name 值默认从 0 开始，默认激活第一项。可以使用 v-model 双向绑定数据。
         </h5>
         <div class='buttonShower'>
-            <Anchor show-ink>
+            <Anchor :affix="false" show-ink>
                 <AnchorLink href="#basic_usage" title="Basic Usage" />
                 <AnchorLink href="#static_position" title="Static Position" />
                 <AnchorLink href="#API" title="API">
@@ -20,7 +20,6 @@
 </template>
 <script>
     export default {
-       
     }
 </script>
 <style scoped lang='scss'>

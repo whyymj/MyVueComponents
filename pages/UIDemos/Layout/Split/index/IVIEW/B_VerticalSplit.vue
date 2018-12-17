@@ -32,5 +32,16 @@
     .componentBox {
        
         width: 30%; 
+        .buttonShower {
+             border:1px solid #eee;
+            height:150px;
+            .demo-split {
+                height: 200px;
+                border: 1px solid #dcdee2;
+            }
+            .demo-split-pane {
+                padding: 10px;
+            }
+        }
     }
 </style>

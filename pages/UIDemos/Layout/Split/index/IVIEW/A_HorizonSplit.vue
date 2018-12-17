@@ -18,20 +18,28 @@
     </div>
 </template>
 <script>
-   
-    export default  {
+    export default {
         data() {
             return {
                 split1: 0.5
             }
-        }, 
+        },
     }
 </script>
 <style scoped lang='scss'>
-  @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
+    @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
     .componentBox {
-       
-        width:30%;
-       
+        width: 30%;
+        .buttonShower {
+             border:1px solid #eee;
+            height:150px;
+            .demo-split {
+                height: 200px;
+                border: 1px solid #dcdee2;
+            }
+            .demo-split-pane {
+                padding: 10px;
+            }
+        }
     }
 </style>

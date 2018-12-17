@@ -1,11 +1,12 @@
 <template>
-    <Submenu class='IviewSubMenu' :name="data.menuName">
+    <Submenu class='IviewSubMenu' :name="''+subId">
         <template slot="title">
-                                <Icon :type="data.info.icon"></Icon>{{data.menuName}}
+                                        <Icon :type="data.info.icon"></Icon>{{data.menuName}}
 </template>
         <MenuItem :name="'/'+data.kind+'/'+item.kind" v-for='(item,index) in data.children' :key='index'  >
             <Icon :type="item.info.icon"></Icon>
-            {{item.menuName}}
+            {{item.menuName}} 
+            
         </MenuItem>
     </Submenu>
 </template>

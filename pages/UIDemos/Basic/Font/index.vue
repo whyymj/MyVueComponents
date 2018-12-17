@@ -20,4 +20,13 @@
   
   @import '@/assets/globalCss/basic.scss';
   @import '@/assets/style/UIDemos/pages/pagesGlobalStyle.scss';
+  .demons{
+    width:95%;
+    height:60px;
+    margin:auto;
+    background: #eee;
+    line-height: 60px;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
 </style>

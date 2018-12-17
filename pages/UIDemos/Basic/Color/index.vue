@@ -29,7 +29,7 @@
     },
     data() {
       return {
-        showIviewModel: false,
+        showIviewModel: true,
         compNames: compoNames, //全部组件名
         frames: framesNames
       }

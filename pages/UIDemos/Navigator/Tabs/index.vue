@@ -34,11 +34,9 @@
         frames: framesNames
       }
     },
-  
   }
 </script>
 <style scoped lang='scss'>
- 
   @import '@/assets/globalCss/basic.scss';
   @import '@/assets/style/UIDemos/pages/pagesGlobalStyle.scss';
 </style>

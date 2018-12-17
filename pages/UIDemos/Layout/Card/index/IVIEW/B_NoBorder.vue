@@ -6,19 +6,23 @@
         <h5 class="demonsContent">按钮类型有：默认按钮、主按钮、虚线按钮、文字按钮以及四种颜色按钮。 通过设置 type 为 primary、dashed、text、info、success、warning、error 创建不同样式的按钮，不设置为默认样式。
         </h5>
         <div class='buttonShower'>
-            <i-circle :percent="80" dashboard>
-                <span class="demo-circle-inner" style="font-size:24px">80%</span>
-            </i-circle>
+            <div style="background:#eee;padding: 20px">
+                <Card :bordered="false">
+                    <p slot="title">No border title</p>
+                    <p>Content of no border type. Content of no border type. Content of no border type. Content of no border type. </p>
+                </Card>
+            </div>
         </div>
     </div>
 </template>
 <script>
     export default {
+      
     }
 </script>
 <style scoped lang='scss'>
     @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
     .componentBox {
-        width: 31%;
+        width: 47%;
     }
 </style>

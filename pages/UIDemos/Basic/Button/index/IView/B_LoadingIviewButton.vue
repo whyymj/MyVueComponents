@@ -9,13 +9,13 @@
             <div class='loadingIviewButton'>
                 <Button type="primary" loading>Loading...</Button>
                 <Button type="primary" :loading="loading" @click="toLoading">
-                                        <span v-if="!loading">Click me!</span>
-                                        <span v-else>Loading...</span>
-                                    </Button>
+                                            <span v-if="!loading">Click me!</span>
+                                            <span v-else>Loading...</span>
+                                        </Button>
                 <Button type="primary" :loading="loading2" icon="ios-power" @click="toLoading2">
-                                        <span v-if="!loading2">Click me!</span>
-                                        <span v-else>Loading...</span>
-                                    </Button>
+                                            <span v-if="!loading2">Click me!</span>
+                                            <span v-else>Loading...</span>
+                                        </Button>
                 <Button loading shape="circle"></Button>
                 <Button loading shape="circle" type="primary"></Button>
             </div>

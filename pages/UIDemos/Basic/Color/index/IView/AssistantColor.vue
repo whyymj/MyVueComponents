@@ -1,11 +1,11 @@
 <template>
     <div class='componentBox'>
-        <Divider><span style='color:#2d8cf0;font-size:11px;font-weight:100;'>Iview Color</span></Divider>
+        <Divider><span style='color:#2d8cf0;font-size:11px;font-weight:100;'>Auxiliary Color</span></Divider>
         <!-- 下面为效果展示部分 -->
         <h6 class="demons">辅助色</h6>
         <h5 class="demonsContent"> 常用于信息提示，比如成功、警告和失败。</h5>
         <div class="colorBoxContainer">
-            <div class='colorBox' v-for='(item) in colorArr2 ' :key='item' :style='{width:Math.floor(100/colorArr2.length)+"%",minWidth:"220px"}'>
+            <div class='colorBox' v-for='(item,index) in colorArr2 ' :key='index' :style='{width:Math.floor(100/colorArr2.length)+"%",minWidth:"220px"}'>
                 <colorShower :info='item'></colorShower>
             </div>
         </div>

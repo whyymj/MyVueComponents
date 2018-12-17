@@ -37,8 +37,7 @@
         compNames: compoNames, //全部组件名
         frames: framesNames
       }
-    },
-    mounted() {}
+    }
   }
 </script>
 <style scoped lang='scss'>

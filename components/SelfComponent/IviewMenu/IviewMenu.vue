@@ -1,7 +1,7 @@
 <template>
     <!-- 用于主页的菜单栏 -->
-    <div class='IviewMenu'>
-        <Menu :active-name="activeName" :theme="theme" width="auto" :open-names="openNames" @on-select='select'>
+    <div class='IviewMenu' v-if='MenuTreeData'>
+        <Menu active-name="/Basic/Color" :theme="theme" width="auto" :open-names="['0']" @on-select='select'>
             <IviewSubMenu v-for="(item,index) in MenuTreeData" :data="item" :key='index' :subId='index'></IviewSubMenu>
         </Menu>
     </div>
@@ -12,6 +12,7 @@
             IviewSubMenu: () =>
                 import ('./IviewMenuSubMenu.vue'),
         },
+        mounted() {},
         props: {
             MenuTreeData: {
                 type: Array,
@@ -21,23 +22,12 @@
             },
             activeName: {
                 type: String,
-                default: '1',
+                default: '基础',
             },
             theme: {
                 type: String,
                 default: 'light',
             },
-            openNames: {
-                type: Array,
-                default () {
-                    return ['1'];
-                },
-            }
-        },
-        watch:{
-            MenuTreeData(){
-                console.log('???????',this.MenuTreeData)
-            }
         },
         methods: {
             select(item) {

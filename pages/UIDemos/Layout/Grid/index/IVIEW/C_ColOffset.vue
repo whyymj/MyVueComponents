@@ -29,6 +29,13 @@
 @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
    .componentBox {
         width:30%; 
-        
+         .buttonShower {
+            >>>.ivu-row {
+                >>>.ivu-col {
+                    border: 1px solid #ccc;
+                    text-align: center;
+                }
+            }
+        }
     }
 </style>

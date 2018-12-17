@@ -21,7 +21,7 @@
 <style scoped lang='scss'>
   @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
     .componentBox {
-        width: 30%;
+        width: 20%;
         .buttonShower {
             background: #eee;
             padding: 10px;

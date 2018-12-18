@@ -36,7 +36,7 @@
 <style scoped lang='scss'>
     @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
     .componentBox {
-        width: 45%; 
+        width:32%; 
         .buttonShower {
            
             .demo-spin-icon-load {

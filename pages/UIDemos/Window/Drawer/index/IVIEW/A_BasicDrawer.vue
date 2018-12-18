@@ -7,17 +7,17 @@
         </h5>
         <div class='buttonShower'>
             <Button @click="value2 = true" type="primary">Open</Button>
-    <Drawer title="Basic Drawer" placement="left" :closable="false" v-model="value2">
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-    </Drawer>
+            <Drawer title="Basic Drawer" placement="left" :closable="false" v-model="value2">
+                <p>Some contents...</p>
+                <p>Some contents...</p>
+                <p>Some contents...</p>
+            </Drawer>
         </div>
     </div>
 </template>
 <script>
     export default {
-        data () {
+        data() {
             return {
                 value1: false
             }
@@ -25,8 +25,8 @@
     }
 </script>
 <style scoped lang='scss'>
-  @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
+    @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
     .componentBox {
-      width:45%; 
+        width: 19%;
     }
 </style>

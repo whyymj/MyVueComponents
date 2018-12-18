@@ -28,7 +28,7 @@
                     </div>
                 </Menu>
             </Header>
-            <Layout :style="{left: '250px',right:0,position:'fixed',top:'64px',bottom:0}">
+            <Layout :style="{left: '280px',right:0,position:'fixed',top:'64px',bottom:0}">
                 <Sider hide-trigger :style="{position: 'fixed', height: '100vh', left: 0, overflow: 'auto',width:'280px',maxWidth:'350px'}">
                     <LeftMenu :MenuTreeData="MenuTreeData"></LeftMenu>
                 </Sider>
@@ -38,7 +38,7 @@
                         <BreadcrumbItem>Components</BreadcrumbItem>
                         <BreadcrumbItem>Layout</BreadcrumbItem>
                     </Breadcrumb>
-                    <Content :style="{padding: '0',background: '#fff',position:'fixed',top:'130px',bottom:'24px',left:'274px',right:'224px',overflow:'auto',boxSizing:'border-box'}" @scroll.native='scrollPosition'>
+                    <Content :style="{padding: '0',background: '#fff',position:'fixed',top:'130px',bottom:'24px',left:'294px',right:'224px',overflow:'auto',boxSizing:'border-box'}" @scroll.native='scrollPosition'>
                         <nuxt-child/>
                     </Content>
                 </Layout>

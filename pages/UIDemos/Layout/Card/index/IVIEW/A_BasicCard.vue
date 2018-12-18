@@ -1,35 +1,35 @@
 <template>
     <div class='componentBox'>
         <!-- 下面为效果展示部分 -->
-        <Divider><span style='color:#2d8cf0;font-size:11px;font-weight:100;'>IView Button - Basic Button</span></Divider>
-        <h6 class="demons">基本用法</h6>
-        <h5 class="demonsContent">按钮类型有：默认按钮、主按钮、虚线按钮、文字按钮以及四种颜色按钮。 通过设置 type 为 primary、dashed、text、info、success、warning、error 创建不同样式的按钮，不设置为默认样式。
-        </h5>
-        <div class='buttonShower'>
-            <Card style="width:350px">
-                <p slot="title">
-                    <Icon type="ios-film-outline"></Icon>
-                    Classic film
-                </p>
-                <a href="#" slot="extra" @click.prevent="changeLimit">
-                    <Icon type="ios-loop-strong"></Icon>
-                    Change
-                </a>
-                <ul>
-                    <li v-for="(item,index) in randomMovieList" :key='index'>
-                        <a :href="item.url" target="_blank">{{ item.name }}</a>
-                        <span>
-                            <Icon type="ios-star" v-for="n in 4" :key="n"></Icon><Icon type="ios-star" v-if="item.rate >= 9.5"></Icon><Icon type="ios-star-half" v-else></Icon>
-                            {{ item.rate }}
-                        </span>
-                    </li>
-                </ul>
-            </Card>
-        </div>
+        <componentShower>
+            <div class='buttonShower'>
+                <Card style="width:350px">
+                    <p slot="title">
+                        <Icon type="ios-film-outline"></Icon>
+                        Classic film
+                    </p>
+                    <a href="#" slot="extra" @click.prevent="changeLimit">
+                        <Icon type="ios-loop-strong"></Icon>
+                        Change
+                    </a>
+                    <ul>
+                        <li v-for="(item,index) in randomMovieList" :key='index'>
+                            <a :href="item.url" target="_blank">{{ item.name }}</a>
+                            <span>
+                                <Icon type="ios-star" v-for="n in 4" :key="n"></Icon><Icon type="ios-star" v-if="item.rate >= 9.5"></Icon><Icon type="ios-star-half" v-else></Icon>
+                                {{ item.rate }}
+                            </span>
+                        </li>
+                    </ul>
+                </Card>
+            </div>
+        </componentShower>
     </div>
 </template>
 <script>
+    import componentShower from '@/components/SelfComponent/UIDemos/componentMixinTemplate.vue'
     export default {
+        mixins: [componentShower],
         data() {
             return {
                 movieList: [{
@@ -107,24 +107,23 @@
                 }
                 this.randomMovieList = getArrayItems(this.movieList, 5);
             }
-        }
-        ,
+        },
         mounted() {
             this.changeLimit();
         }
     }
 </script>
 <style scoped lang='scss'>
-  @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
+    @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
     .componentBox {
-      width:47%; 
-      .buttonShower{
-          li{
-              list-style: none;
-              >>>span{
-                  color:#ffac2d;
-              }
-          }
-      }
+        width: 47%;
+        .buttonShower {
+            li {
+                list-style: none;
+                >>>span {
+                    color: #ffac2d;
+                }
+            }
+        }
     }
 </style>

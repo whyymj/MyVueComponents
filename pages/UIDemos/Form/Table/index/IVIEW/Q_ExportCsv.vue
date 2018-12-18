@@ -1,25 +1,24 @@
 <template>
     <div class='componentBox'>
         <!-- 下面为效果展示部分 -->
-        <Divider><span style='color:#2d8cf0;font-size:11px;font-weight:100;'>IView Button - Basic Button</span></Divider>
-        <h6 class="demons">基本用法</h6>
-        <h5 class="demonsContent">按钮类型有：默认按钮、主按钮、虚线按钮、文字按钮以及四种颜色按钮。 通过设置 type 为 primary、dashed、text、info、success、warning、error 创建不同样式的按钮，不设置为默认样式。
-        </h5>
-        <div class='buttonShower'>
-           <Table :columns="columns8" :data="data7" size="small" ref="table"></Table>
-    <br>
-    <Button type="primary" size="large" @click="exportData(1)"><Icon type="ios-download-outline"></Icon> Export source data</Button>
-    <Button type="primary" size="large" @click="exportData(2)"><Icon type="ios-download-outline"></Icon> Export sorting and filtered data</Button>
-    <Button type="primary" size="large" @click="exportData(3)"><Icon type="ios-download-outline"></Icon> Export custom data</Button>
-        </div>
+        <componentShower>
+            <div class='buttonShower'>
+                <Table :columns="columns8" :data="data7" size="small" ref="table"></Table>
+                <br>
+                <Button type="primary" size="large" @click="exportData(1)"><Icon type="ios-download-outline"></Icon> Export source data</Button>
+                <Button type="primary" size="large" @click="exportData(2)"><Icon type="ios-download-outline"></Icon> Export sorting and filtered data</Button>
+                <Button type="primary" size="large" @click="exportData(3)"><Icon type="ios-download-outline"></Icon> Export custom data</Button>
+            </div>
+        </componentShower>
     </div>
 </template>
 <script>
+    import componentShower from '@/components/SelfComponent/UIDemos/componentMixinTemplate.vue'
     export default {
-      data () {
+        mixins: [componentShower],
+        data() {
             return {
-                columns8: [
-                    {
+                columns8: [{
                         "title": "Name",
                         "key": "name",
                         "fixed": "left",
@@ -30,8 +29,7 @@
                         "key": "show",
                         "width": 150,
                         "sortable": true,
-                        filters: [
-                            {
+                        filters: [{
                                 label: 'Greater than 4000',
                                 value: 1
                             },
@@ -41,7 +39,7 @@
                             }
                         ],
                         filterMultiple: false,
-                        filterMethod (value, row) {
+                        filterMethod(value, row) {
                             if (value === 1) {
                                 return row.show > 4000;
                             } else if (value === 2) {
@@ -110,8 +108,7 @@
                         "sortable": true
                     }
                 ],
-                data7: [
-                    {
+                data7: [{
                         "name": "Name1",
                         "fav": 0,
                         "show": 7302,
@@ -265,7 +262,7 @@
             }
         },
         methods: {
-            exportData (type) {
+            exportData(type) {
                 if (type === 1) {
                     this.$refs.table.exportCsv({
                         filename: 'The original data'
@@ -282,13 +279,13 @@
                         data: this.data7.filter((data, index) => index < 4)
                     });
                 }
-            }      
+            }
         }
     }
 </script>
 <style scoped lang='scss'>
-  @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
+    @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
     .componentBox {
-      width:98%; 
+        width: 98%;
     }
 </style>

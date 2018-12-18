@@ -1,31 +1,30 @@
 <template>
     <div class='componentBox'>
         <!-- 下面为效果展示部分 -->
-        <Divider><span style='color:#2d8cf0;font-size:11px;font-weight:100;'>IView Button - Basic Button</span></Divider>
-        <h6 class="demons">基本用法</h6>
-        <h5 class="demonsContent">按钮类型有：默认按钮、主按钮、虚线按钮、文字按钮以及四种颜色按钮。 通过设置 type 为 primary、dashed、text、info、success、warning、error 创建不同样式的按钮，不设置为默认样式。
-        </h5>
-        <div class='buttonShower'>
-            <Row>
-        <Col span="12">
-            <DatePicker type="date" :options="options1" placeholder="Select date" style="width: 200px"></DatePicker>
-        </Col>
-        <Col span="12">
-            <DatePicker type="daterange" :options="options2" placement="bottom-end" placeholder="Select date" style="width: 200px"></DatePicker>
-        </Col>
-    </Row>
-        </div>
+        <componentShower>
+            <div class='buttonShower'>
+                <Row>
+                    <Col span="12">
+                    <DatePicker type="date" :options="options1" placeholder="Select date" style="width: 200px"></DatePicker>
+                    </Col>
+                    <Col span="12">
+                    <DatePicker type="daterange" :options="options2" placement="bottom-end" placeholder="Select date" style="width: 200px"></DatePicker>
+                    </Col>
+                </Row>
+            </div>
+        </componentShower>
     </div>
 </template>
 <script>
+    import componentShower from '@/components/SelfComponent/UIDemos/componentMixinTemplate.vue'
     export default {
-         data () {
+        mixins: [componentShower],
+        data() {
             return {
                 options1: {
-                    shortcuts: [
-                        {
+                    shortcuts: [{
                             text: 'Today',
-                            value () {
+                            value() {
                                 return new Date();
                             },
                             onClick: (picker) => {
@@ -34,7 +33,7 @@
                         },
                         {
                             text: 'Yesterday',
-                            value () {
+                            value() {
                                 const date = new Date();
                                 date.setTime(date.getTime() - 3600 * 1000 * 24);
                                 return date;
@@ -45,7 +44,7 @@
                         },
                         {
                             text: 'One week',
-                            value () {
+                            value() {
                                 const date = new Date();
                                 date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
                                 return date;
@@ -57,10 +56,9 @@
                     ]
                 },
                 options2: {
-                    shortcuts: [
-                        {
+                    shortcuts: [{
                             text: '1 week',
-                            value () {
+                            value() {
                                 const end = new Date();
                                 const start = new Date();
                                 start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
@@ -69,7 +67,7 @@
                         },
                         {
                             text: '1 month',
-                            value () {
+                            value() {
                                 const end = new Date();
                                 const start = new Date();
                                 start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
@@ -78,7 +76,7 @@
                         },
                         {
                             text: '3 months',
-                            value () {
+                            value() {
                                 const end = new Date();
                                 const start = new Date();
                                 start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
@@ -92,9 +90,8 @@
     }
 </script>
 <style scoped lang='scss'>
-
     @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
     .componentBox {
-      width:45%; 
+        width: 45%;
     }
 </style>

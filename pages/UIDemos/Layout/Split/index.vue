@@ -1,17 +1,13 @@
 <template>
-  <div class='pageIndex'>
-    <h1>Split 面板分割</h1>
-    <!-- slot注入分为两部分。一部分是说明部分，另一部分是效果展示部分 -->
-    <div class="componentsShower" v-for='(item,index) in frames' :key='index'>
-      <div class="pageAnchor">
-        <h2 class='title'><a target='_blank' href="https://www.iviewui.com/components/color" class='linkOrigin'>IView Color</a>
-          <Icon type="ios-link" /><span class="closeModel button" @click='showIviewModel=!showIviewModel'>{{showIviewModel?'close model':'show model'}}</span>
-        </h2>
+  <div class="pageIndex">
+    <!-- 框架组件展示 -->
+    <h1>Button 按钮</h1>
+    <!-- 这是全部示例组件的展示区 -->
+    <componentsShower v-for='(item,index) in frames' :key='index' componentsFrameName='IView Button'>
+      <div class="componentsBox" slot='components'>
+        <component :is="item" v-for="(item) in compNames" :key="item"></component>
       </div>
-    </div>
-    <div class="componentsBox">
-      <component :is="item" v-for="(item) in compNames" :key="item" v-show="showIviewModel"></component>
-    </div>
+    </componentsShower>
   </div>
 </template>
 <script>
@@ -23,21 +19,22 @@
   composPaths.forEach((item, index) => {
     allCompos[compoNames[index]] = require('./index' + item).default;
   })
+  import mixinTemplate from '@/components/SelfComponent/UIDemos/pageMixinTemplate.vue';
   export default {
+    mixins: [mixinTemplate],
     components: {
       ...allCompos
     },
     data() {
       return {
-        showIviewModel: true,
         compNames: compoNames, //全部组件名
         frames: framesNames
       }
     },
+    mounted() {}
   }
 </script>
 <style scoped lang='scss'>
- 
   @import '@/assets/globalCss/basic.scss';
-  @import '@/assets/style/UIDemos/pages/pagesGlobalStyle.scss'
+  @import '@/assets/style/UIDemos/pages/pagesGlobalStyle.scss';
 </style>

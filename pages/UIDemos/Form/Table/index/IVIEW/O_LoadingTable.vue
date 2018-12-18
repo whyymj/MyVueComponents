@@ -1,26 +1,25 @@
 <template>
     <div class='componentBox'>
         <!-- 下面为效果展示部分 -->
-        <Divider><span style='color:#2d8cf0;font-size:11px;font-weight:100;'>IView Button - Basic Button</span></Divider>
-        <h6 class="demons">基本用法</h6>
-        <h5 class="demonsContent">按钮类型有：默认按钮、主按钮、虚线按钮、文字按钮以及四种颜色按钮。 通过设置 type 为 primary、dashed、text、info、success、warning、error 创建不同样式的按钮，不设置为默认样式。
-        </h5>
-        <div class='buttonShower'>
-            <div>
-        <Table :loading="loading" :columns="columns1" :data="data1"></Table>
-        <br>
-        Change Loading Status <Switch v-model="loading"></Switch>
-    </div>
-        </div>
+        <componentShower>
+            <div class='buttonShower'>
+                <div>
+                    <Table :loading="loading" :columns="columns1" :data="data1"></Table>
+                    <br> Change Loading Status
+                    <Switch v-model="loading"></Switch>
+                </div>
+            </div>
+        </componentShower>
     </div>
 </template>
 <script>
+    import componentShower from '@/components/SelfComponent/UIDemos/componentMixinTemplate.vue'
     export default {
-      data () {
+        mixins: [componentShower],
+        data() {
             return {
                 loading: true,
-                columns1: [
-                    {
+                columns1: [{
                         title: 'Name',
                         key: 'name'
                     },
@@ -33,8 +32,7 @@
                         key: 'address'
                     }
                 ],
-                data1: [
-                    {
+                data1: [{
                         name: 'John Brown',
                         age: 18,
                         address: 'New York No. 1 Lake Park',
@@ -64,8 +62,8 @@
     }
 </script>
 <style scoped lang='scss'>
-  @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
+    @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
     .componentBox {
-       width:32%; 
+        width: 32%;
     }
 </style>

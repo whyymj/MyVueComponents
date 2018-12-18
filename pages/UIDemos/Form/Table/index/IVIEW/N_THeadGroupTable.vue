@@ -1,28 +1,26 @@
 <template>
     <div class='componentBox'>
         <!-- 下面为效果展示部分 -->
-        <Divider><span style='color:#2d8cf0;font-size:11px;font-weight:100;'>IView Button - Basic Button</span></Divider>
-        <h6 class="demons">基本用法</h6>
-        <h5 class="demonsContent">按钮类型有：默认按钮、主按钮、虚线按钮、文字按钮以及四种颜色按钮。 通过设置 type 为 primary、dashed、text、info、success、warning、error 创建不同样式的按钮，不设置为默认样式。
-        </h5>
-        <div class='buttonShower'>
-            <Table :columns="columns11" :data="data10" border height="500"></Table>
-        </div>
+        <componentShower>
+            <div class='buttonShower'>
+                <Table :columns="columns11" :data="data10" border height="500"></Table>
+            </div>
+        </componentShower>
     </div>
 </template>
 <script>
+    import componentShower from '@/components/SelfComponent/UIDemos/componentMixinTemplate.vue'
     export default {
-       data () {
+        mixins: [componentShower],
+        data() {
             return {
-                columns11: [
-                    {
+                columns11: [{
                         title: 'Name',
                         key: 'name',
                         align: 'center',
                         width: 200,
                         fixed: 'left',
-                        filters: [
-                            {
+                        filters: [{
                                 label: 'Joe',
                                 value: 1
                             },
@@ -32,7 +30,7 @@
                             }
                         ],
                         filterMultiple: false,
-                        filterMethod (value, row) {
+                        filterMethod(value, row) {
                             if (value === 1) {
                                 return row.name === 'Joe';
                             } else if (value === 2) {
@@ -43,8 +41,7 @@
                     {
                         title: 'Other',
                         align: 'center',
-                        children: [
-                            {
+                        children: [{
                                 title: 'Age',
                                 key: 'age',
                                 align: 'center',
@@ -54,8 +51,7 @@
                             {
                                 title: 'Address',
                                 align: 'center',
-                                children: [
-                                    {
+                                children: [{
                                         title: 'Street',
                                         key: 'street',
                                         align: 'center',
@@ -64,8 +60,7 @@
                                     {
                                         title: 'Block',
                                         align: 'center',
-                                        children: [
-                                            {
+                                        children: [{
                                                 title: 'Building',
                                                 key: 'building',
                                                 align: 'center',
@@ -87,8 +82,7 @@
                     {
                         title: 'Company',
                         align: 'center',
-                        children: [
-                            {
+                        children: [{
                                 title: 'Company Address',
                                 key: 'caddress',
                                 align: 'center',
@@ -113,7 +107,7 @@
                 data10: []
             }
         },
-        mounted () {
+        mounted() {
             const data = [];
             for (let i = 0; i < 20; i++) {
                 data.push({
@@ -133,8 +127,8 @@
     }
 </script>
 <style scoped lang='scss'>
-  @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
+    @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
     .componentBox {
-       width:98%; 
+        width: 98%;
     }
 </style>

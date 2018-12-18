@@ -1,31 +1,31 @@
 <template>
     <div class='componentBox'>
         <!-- 下面为效果展示部分 -->
-        <Divider><span style='color:#2d8cf0;font-size:11px;font-weight:100;'>IView Button - Icon Breadcrumb</span></Divider>
-        <h6 class="demons">带图标的 </h6>
-        <h5 class="demonsContent">可自定义每项的内容，比如带有一个图标。
-        </h5>
-        <div class='buttonShower'>
-            <Breadcrumb separator=">">
-                <BreadcrumbItem to="/">Home</BreadcrumbItem>
-                <BreadcrumbItem to="/components/breadcrumb">Components</BreadcrumbItem>
-                <BreadcrumbItem>Breadcrumb</BreadcrumbItem>
-            </Breadcrumb>
-            <Breadcrumb separator="<b class='demo-breadcrumb-separator'>=></b>">
-                <BreadcrumbItem to="/">Home</BreadcrumbItem>
-                <BreadcrumbItem to="/components/breadcrumb">Components</BreadcrumbItem>
-                <BreadcrumbItem>Breadcrumb</BreadcrumbItem>
-            </Breadcrumb>
-        </div>
+        <componentShower>
+            <div class='buttonShower'>
+                <Breadcrumb separator=">">
+                    <BreadcrumbItem to="/">Home</BreadcrumbItem>
+                    <BreadcrumbItem to="/components/breadcrumb">Components</BreadcrumbItem>
+                    <BreadcrumbItem>Breadcrumb</BreadcrumbItem>
+                </Breadcrumb>
+                <Breadcrumb separator="<b class='demo-breadcrumb-separator'>=></b>">
+                    <BreadcrumbItem to="/">Home</BreadcrumbItem>
+                    <BreadcrumbItem to="/components/breadcrumb">Components</BreadcrumbItem>
+                    <BreadcrumbItem>Breadcrumb</BreadcrumbItem>
+                </Breadcrumb>
+            </div>
+        </componentShower>
     </div>
 </template>
 <script>
-   
-    export default {}
+    import componentShower from '@/components/SelfComponent/UIDemos/componentMixinTemplate.vue'
+    export default {
+        mixins: [componentShower],
+    }
 </script>
 <style scoped lang='scss'>
-  @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
-   .componentBox {
-        width:32%;
+    @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
+    .componentBox {
+        width: 32%;
     }
 </style>

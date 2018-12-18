@@ -1,29 +1,29 @@
 <template>
     <div class='componentBox'>
         <!-- 下面为效果展示部分 -->
-        <Divider><span style='color:#2d8cf0;font-size:11px;font-weight:100;'>IView Button - Basic Button</span></Divider>
-        <h6 class="demons">基本用法</h6>
-        <h5 class="demonsContent">按钮类型有：默认按钮、主按钮、虚线按钮、文字按钮以及四种颜色按钮。 通过设置 type 为 primary、dashed、text、info、success、warning、error 创建不同样式的按钮，不设置为默认样式。
-        </h5>
-        <div class='buttonShower'>
-            <AutoComplete v-model="value4" icon="ios-search" placeholder="input here" style="width:300px">
-                <div class="demo-auto-complete-item" v-for="item in data4" :key='item'>
-                    <div class="demo-auto-complete-group">
-                        <span>{{ item.title }}</span>
-                        <a href="https://www.google.com/search?q=iView" target="_blank">更多</a>
+        <componentShower>
+            <div class='buttonShower'>
+                <AutoComplete v-model="value4" icon="ios-search" placeholder="input here" style="width:300px">
+                    <div class="demo-auto-complete-item" v-for="item in data4" :key='item'>
+                        <div class="demo-auto-complete-group">
+                            <span>{{ item.title }}</span>
+                            <a href="https://www.google.com/search?q=iView" target="_blank">更多</a>
+                        </div>
+                        <Option v-for="option in item.children" :value="option.title" :key="option.title">
+                            <span class="demo-auto-complete-title">{{ option.title }}</span>
+                            <span class="demo-auto-complete-count">{{ option.count }} 人关注</span>
+                        </Option>
                     </div>
-                    <Option v-for="option in item.children" :value="option.title" :key="option.title">
-                        <span class="demo-auto-complete-title">{{ option.title }}</span>
-                        <span class="demo-auto-complete-count">{{ option.count }} 人关注</span>
-                    </Option>
-                </div>
-                <a href="https://www.google.com/search?q=iView" target="_blank" class="demo-auto-complete-more">查看所有结果</a>
-            </AutoComplete>
-        </div>
+                    <a href="https://www.google.com/search?q=iView" target="_blank" class="demo-auto-complete-more">查看所有结果</a>
+                </AutoComplete>
+            </div>
+        </componentShower>
     </div>
 </template>
 <script>
+    import componentShower from '@/components/SelfComponent/UIDemos/componentMixinTemplate.vue'
     export default {
+        mixins: [componentShower],
         data() {
             return {
                 value4: '',
@@ -66,7 +66,7 @@
 <style scoped lang='scss'>
     @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
     .componentBox {
-         width:24%; 
+        width: 24%;
         .buttonShower {
             .demo-auto-complete-item {
                 padding: 4px 0;

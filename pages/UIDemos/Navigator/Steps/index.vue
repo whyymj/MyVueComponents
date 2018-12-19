@@ -5,7 +5,7 @@
     <!-- 这是全部示例组件的展示区 -->
     <componentsShower v-for='(item,index) in frames' :key='index' componentsFrameName='IView Button'>
       <div class="componentsBox" slot='components'>
-        <component :is="item" v-for="(item) in compNames" :key="item"></component>
+        <component :is="item"  v-for="(item,index) in compNames" :componentId='"UIDemos/"+item+composPaths[index].replace(".vue","")' :key="item" ></component>
       </div>
     </componentsShower>
   </div>
@@ -17,7 +17,7 @@
   const framesNames = Array.from(new Set(composPaths.map(item => item.split('/')[1])))
   let allCompos = {}; //组件实例
   composPaths.forEach((item, index) => {
-    allCompos[compoNames[index]] = require('./index' + item).default;
+    allCompos[compoNames[index]] = resolve => require(['./index' + item], resolve);
   })
   import mixinTemplate from '@/components/SelfComponent/UIDemos/pageMixinTemplate.vue';
   export default {
@@ -28,10 +28,10 @@
     data() {
       return {
         compNames: compoNames, //全部组件名
-        frames: framesNames
+        frames: framesNames, //组件所属框架名称
+        composPaths, //组件的引用路径 
       }
     },
-    mounted() {}
   }
 </script>
 <style scoped lang='scss'>

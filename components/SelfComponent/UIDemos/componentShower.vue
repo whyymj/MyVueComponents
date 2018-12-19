@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div @click='ClickComponent'>
         <!-- 下面为效果展示部分 -->
         <Divider><span style='color:#2d8cf0;font-size:11px;font-weight:100;'>IView Button - Basic Button</span></Divider>
         <h6 class="demons">基本用法</h6>
@@ -10,9 +10,25 @@
 </template>
 
 <script>
-    export default {}
+    import {
+        mapMutations
+    } from 'vuex'
+    export default {
+        methods: {
+            ...mapMutations('UIDemos', {
+                addComponents: 'addSelectedComponents'
+            }),
+            ClickComponent() {//点击后将选中的组件存入vuex
+                let that = this;
+                this.addComponents({
+                    componentId: this.$parent.$props.componentId
+                })
+                
+            }
+        },
+    }
 </script>
 
 <style scoped>
- @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
+    @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
 </style>

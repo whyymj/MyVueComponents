@@ -1,5 +1,5 @@
 <template>
-    <div class="layout">
+    <div class="layout" @click='clickRightClickMenuItem'>
         <div class='anchor'>
         </div>
         <Layout>
@@ -44,6 +44,12 @@
                 </Layout>
             </Layout>
         </Layout>
+        <!-- 组件右单击菜单》记录组件   -->
+        <Drawer title="Basic Drawer" placement="left" :closable="false" v-model="componentDrawer">
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+        </Drawer>
     </div>
 </template>
 
@@ -57,6 +63,7 @@
             return {
                 offset: 10,
                 MenuTreeData: [],
+                componentDrawer: false
             }
         },
         beforeMount() {
@@ -65,7 +72,17 @@
             })
         },
         methods: {
-            // @Emit('enterToView')
+            clickRightClickMenuItem(e) { //监听点击自定义的右键菜单事件，菜单组件位于components/selfComponent/UIDemos/compsRightClickMenu.vue
+                
+                if (e.target.className == 'rightClickMenuItem') {//如果点击的是右键菜单的选项
+                    if (e.target.dataset.menuitemid == 'recordComponent') { //右键菜单>记录组件
+                        this.componentDrawer = true;
+                    }else if(e.target.dataset.menuitemid=='tipComponent'){
+
+                    }
+                }
+            },
+            
             scrollPosition(e) { //滚动
                 //    var top= e.target.scrollTop
                 //     Array.prototype.forEach.call(document.getElementsByClassName('UIComponentsShower'), function(e) {

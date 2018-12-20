@@ -19,7 +19,7 @@ export class DBController {
     getDB(dbname : string) {
         const that = this;
         return new Promise((resolve, reject) => {
-            mongodb.connect(that.DB_Url, (err : any, client : any) => {
+            mongodb.connect(that.DB_Url, { useNewUrlParser: true },(err : any, client : any) => {
                 if (err) {
                     reject(err)
                 }

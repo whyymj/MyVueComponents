@@ -9,7 +9,9 @@
         components: {
             componentsShower
         },
-        
+        beforeMount(){
+      
+        }
     }
 </script>
 

@@ -1,19 +1,19 @@
 <template>
     <div class='componentBox'>
-        <Divider slot='components'><span style='color:#2d8cf0;font-size:11px;font-weight:100;'>Dominant Color</span></Divider>
-        <!-- 下面为效果展示部分 -->
-        <h6 class="demons" slot='components'>主色</h6>
-        <h5 class="demonsContent" slot='components'> Light Primary 常用于 hover，Dark Primary 常用于 active。</h5>
-        <div class="colorBoxContainer">
-            <div class='colorBox' slot='components' v-for='(item,index) in colorArr1 ' :key='index' :style='{width:Math.floor(100/colorArr1.length)+"%",minWidth:"220px"}'>
-                <colorShower :info='item'></colorShower>
+        <componentShower>
+            <div class="colorBoxContainer">
+                <div class='colorBox' slot='components' v-for='(item,index) in colorArr1 ' :key='index' :style='{width:Math.floor(100/colorArr1.length)+"%",minWidth:"220px"}'>
+                    <colorShower :info='item'></colorShower>
+                </div>
             </div>
-        </div>
+        </componentShower>
     </div>
 </template>
 
 <script>
+    import componentShower from '@/components/SelfComponent/UIDemos/componentMixinTemplate.vue'
     export default {
+        mixins: [componentShower],
         components: {
             colorShower: () =>
                 import ("@/components/SelfComponent/ColorShower/colorShower.vue")
@@ -39,12 +39,11 @@
 </script>
 
 <style scoped lang='scss'>
-
     @import '@/assets/style/UIDemos/components/componentsGlobalStyle.scss';
     .componentBox {
-        width: 96%; 
-        .colorBoxContainer{
-              display: flex;
+        width: 96%;
+        .colorBoxContainer {
+            display: flex;
             flex-wrap: wrap;
             justify-content: flex-start;
         }

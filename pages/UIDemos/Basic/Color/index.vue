@@ -25,10 +25,10 @@
       ...allCompos
     },
     data() {
-      return {
-        showIviewModel: true,
+      return { 
         compNames: compoNames, //全部组件名
-        frames: framesNames
+        frames: framesNames,
+        composPaths
       }
     },
     created() {

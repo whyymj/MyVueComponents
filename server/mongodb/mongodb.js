@@ -16,7 +16,7 @@ class DBController {
     getDB(dbname) {
         const that = this;
         return new Promise((resolve, reject) => {
-            mongodb.connect(that.DB_Url, (err, client) => {
+            mongodb.connect(that.DB_Url, { useNewUrlParser: true }, (err, client) => {
                 if (err) {
                     reject(err);
                 }
@@ -36,6 +36,9 @@ class DBController {
             this.Collection = this
                 .DB
                 .collection(collectionname);
+        }
+        else {
+            return new Error('请先调用getDB方法');
         }
         return new Promise(resolve => {
             resolve(that.Collection);

@@ -5,7 +5,7 @@
     <!-- 这是全部示例组件的展示区 -->
     <componentsShower v-for='(item,index) in frames' :key='index' componentsFrameName='IView Button'>
       <div class="componentsBox" slot='components'>
-        <component :is="item"  v-for="(item,index) in compNames" :componentId='"UIDemos/"+item+composPaths[index].replace(".vue","")' :key="item" ></component>
+        <component :is="item"  v-for="(item,index) in compNames" :componentId='"/UIDemos/"+item+composPaths[index].replace(".vue","")' :key="item" ></component>
       </div>
     </componentsShower>
   </div>

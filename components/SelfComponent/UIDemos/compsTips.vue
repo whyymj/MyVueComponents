@@ -1,16 +1,54 @@
 <template>
-    <div class='componentsTips' :style='{top:tipsItem.Y,left:tipsItem.X}'>
-        <!-- 组件tips -->
-        <Poptip trigger="hover" title="Title" content="content">
-            <p :style='{background:tipsItem.bgcolor||"rgba(45,183,245,0.8)"}'></p>
-            <div class="tipBody" slot='content' v-html='tipsItem.tipBody'></div>
-        </Poptip>
+    <div class='componentsTips' draggable="true" @dragend='dragTip' @dragstart="dragTip" :style='{top:Y,left:X}'>
+        <Dropdown trigger="custom" placement='top-start'>
+            <!-- 组件tips -->
+            <Poptip trigger="hover" title="Title" content="content">
+                <p class='componentsTip' :data-tipId='tipsItem.tipId' :style='{background:tipsItem.bgcolor||"rgba(45,183,245,0.8)"}'></p>
+                <div class="tipBody" slot='content' v-html='tipsItem.tipBody'></div>
+            </Poptip>
+        </Dropdown>
     </div>
 </template>
 
 <script>
     export default {
-        props: ['tipsItem']
+        props: ['tipsItem'],
+        watch: {
+            tipsItem() {
+                this.X = (this.tipsItem && this.tipsItem.X) || 0;
+                this.Y = (this.tipsItem && this.tipsItem.Y) || 0;
+            }
+        },
+        data() {
+            return {
+                dragX: 0,
+                dragY: 0,
+                startX: 0,
+                startY: 0,
+                X: 0,
+                Y: 0
+            }
+        },
+        mounted() {
+            this.X = (this.tipsItem && this.tipsItem.X) || 0;
+            this.Y = (this.tipsItem && this.tipsItem.Y) || 0;
+        },
+        methods: {
+            dragTip(e) { //拖拽tip
+                if (e.type == 'dragstart') {
+                    this.startX = e.pageX;
+                    this.startY = e.pageY;
+                } else if (e.type == 'dragend') {
+                    this.dragX = e.pageX - this.startX;
+                    this.dragY = e.pageY - this.startY;
+                    this.X = parseInt(this.X) + this.dragX + 'px';
+                    this.Y = parseInt(this.Y) + this.dragY + 'px';
+                    this.tipsItem.X = this.X;
+                    this.tipsItem.Y = this.Y;
+                    this.$parent.dragTip(this.tipsItem);//父组件中的方法，用来修改坐标数据
+                }
+            },
+        }
     }
 </script>
 
@@ -20,11 +58,12 @@
         width: 10px;
         height: 10px;
         top: 10px;
+        cursor: pointer;
         left: 10px;
         p {
-            width:15px;
-            height:15px;  
-            box-shadow: 0 0  5px 0 rgba(0,0,0,0.7);
+            width: 15px;
+            height: 15px;
+            box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.7);
             border-radius: 50%;
         }
     }

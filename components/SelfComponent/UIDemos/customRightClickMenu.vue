@@ -1,7 +1,7 @@
 <template>
     <DropdownMenu>
         <Dropdown style='width:100%;' placement="right-start" v-for='(item,index) in menuItems' :key='index' v-if='item.children&&item.children.length'>
-            <DropdownItem class='rightClickMenuItem'>
+            <DropdownItem  class='rightClickMenuItem' :data-menuItemId='item.value'>
                 {{item.label}}
                 <Icon type="ios-arrow-forward"></Icon>
             </DropdownItem>
@@ -9,7 +9,7 @@
                 <customRightClickMenu :menuItems='item.children' v-if='item.children&&item.children.length'></customRightClickMenu>
             </DropdownMenu>
         </Dropdown>
-        <DropdownItem  class='rightClickMenuItem' v-for='(item,index) in menuItems' :key='index' v-if='!item.children||!item.children.length'>
+        <DropdownItem :data-menuItemId='item.value' class='rightClickMenuItem' v-for='(item,index) in menuItems' :key='index' v-if='!item.children||!item.children.length'>
             {{item.label}}
         </DropdownItem>
     </DropdownMenu>

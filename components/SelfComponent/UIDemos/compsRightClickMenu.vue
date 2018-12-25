@@ -1,6 +1,6 @@
 <template>
     <!-- 菜单的点击事件是在page/UIDemos页面clickRightClickMenuItem事件统一监听的 -->
-    <Card :padding='0'>
+    <Card :padding='0' v-if='menuList.length'>
         <p slot="title">组件记录</p>
         <rightClickMenu :menuItems='menuList'></rightClickMenu>
     </Card>

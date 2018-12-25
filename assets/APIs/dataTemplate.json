@@ -1,0 +1,40 @@
+[
+  {
+    "UserId": "whyymj",
+    "Tel": "15288987083",
+    "QQ": "454413790@qq.com",
+    "PassWord": "1987623",
+    "Role": {
+      "Grade": 0,
+      "Type": ""
+    },
+    "Records": {
+      "Pages": {
+        "UIDemos": {
+          "Components": [
+            {
+              "Id": "",
+              "Src": "",
+              "Records": {},
+              "Tips": [
+                {
+                  "X": "100px",
+                  "Y": "100px",
+                  "TipTitle": "tipTitle",
+                  "TipBody": "tipBody",
+                  "TipId": "UIDemos/C_ColOffset/IVIEW/C_ColOffset/tip1",
+                  "Type": "0"
+                }
+              ],
+              "Show": true,
+              "HadCollected": false
+            }
+          ],
+          "Records": {}
+        },
+        "Others": ""
+      },
+      "Others": ""
+    }
+  }
+]

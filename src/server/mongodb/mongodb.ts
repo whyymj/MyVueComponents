@@ -40,6 +40,8 @@ export class DBController {
             this.Collection = this
                 .DB
                 .collection(collectionname);
+        }else{
+            return new Error('请先调用getDB方法');
         }
 
         return new Promise(resolve => {

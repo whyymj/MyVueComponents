@@ -1,5 +1,5 @@
 <template>
-    <div class="layout" @click='clickRightClickMenuItem'>
+    <div class="layout">
         <div class='anchor'>
         </div>
         <Layout>
@@ -44,16 +44,11 @@
                 </Layout>
             </Layout>
         </Layout>
-        <!-- 组件右单击菜单》记录组件   -->
-        <Drawer title="Basic Drawer" placement="left" :closable="false" v-model="componentDrawer">
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-        </Drawer>
     </div>
 </template>
 
 <script>
+   
     export default {
         components: {
             LeftMenu: () =>
@@ -63,26 +58,17 @@
             return {
                 offset: 10,
                 MenuTreeData: [],
-                componentDrawer: false
             }
         },
-        beforeMount() {
-            this.$axios.get('http://localhost:8080/UIindex/UIMenu/menu').then(res => {
+        beforeMount() { 
+            this.$axios.get('http://localhost:8080/UIindex/UIDemosMenu/menu').then(res => {
                 this.MenuTreeData = res.data;
+            })
+            this.$axios.get('http://localhost:8080/UIindex/UIDemosRecords/UIDemos/getComponentTips').then(res => {
+                console.log('get compos>>', res.data)
             })
         },
         methods: {
-            clickRightClickMenuItem(e) { //监听点击自定义的右键菜单事件，菜单组件位于components/selfComponent/UIDemos/compsRightClickMenu.vue
-                
-                if (e.target.className == 'rightClickMenuItem') {//如果点击的是右键菜单的选项
-                    if (e.target.dataset.menuitemid == 'recordComponent') { //右键菜单>记录组件
-                        this.componentDrawer = true;
-                    }else if(e.target.dataset.menuitemid=='tipComponent'){
-
-                    }
-                }
-            },
-            
             scrollPosition(e) { //滚动
                 //    var top= e.target.scrollTop
                 //     Array.prototype.forEach.call(document.getElementsByClassName('UIComponentsShower'), function(e) {

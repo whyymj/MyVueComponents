@@ -13,8 +13,8 @@ const { Nuxt, Builder } = require('nuxt');
 const app = express();
 const host = process.env.HOST || 'localhost';
 const port = process.env.PORT || 8080;
-const indexRoutes = require('./routes/UI/index');
-const userRoutes = require('./routes/UI/users');
+const indexRoutes = require('./routes/UIDemos/index');
+const userRoutes = require('./routes/UIDemos/users');
 app.set('port', port);
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js');
@@ -31,10 +31,6 @@ function start() {
         // Give nuxt middleware to express
         app.use('/UIindex', indexRoutes);
         app.use('/UIusers', userRoutes);
-        app.get('/test', (req, res, next) => {
-            res.send('wwww');
-            next();
-        });
         app.use(nuxt.render);
         // Listen the server
         app.listen(port, host);

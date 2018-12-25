@@ -4,7 +4,7 @@
     <!-- slot注入分为两部分。一部分是说明部分，另一部分是效果展示部分 -->
     <componentsShower v-for='(item,index) in frames' :key='index' componentsFrameName='IView Button'>
       <div class="componentsBox" slot='components'>
-        <component :is="item" v-for="(item,index) in compNames" :componentId='"UIDemos/"+item+composPaths[index].replace(".vue","")' :key="item"></component>
+        <component :is="item" v-for="(item,index) in compNames" :componentId='"/UIDemos/"+item+composPaths[index].replace(".vue","")' :key="item"></component>
       </div>
     </componentsShower>
   </div>

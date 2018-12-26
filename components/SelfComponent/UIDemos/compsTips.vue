@@ -3,7 +3,7 @@
         <Dropdown trigger="custom" placement='top-start'>
             <!-- 组件tips -->
             <Poptip trigger="hover" title="Title" content="content">
-                <p class='componentsTip' :data-tipId='tipsItem.tipId' :style='{background:tipsItem.bgcolor||"rgba(45,183,245,0.8)"}'></p>
+                <p class='componentsTip' :data-tipId='tipsItem.tipId' :style='{background:bgColor}'></p>
                 <div class="tipBody" slot='content' v-html='tipsItem.tipBody'></div>
             </Poptip>
         </Dropdown>
@@ -13,6 +13,21 @@
 <script>
     export default {
         props: ['tipsItem'],
+        computed: {
+            bgColor() {
+                let color = '';
+                let bg = {
+                    info: 'rgba(45,183,245,0.8)',
+                    success: 'rgba(25,190,107,0.8)',
+                    warn: "rgba(255,153,0,0.8)",
+                    error: "rgba(237,64,20,0.8)"
+                }
+                if (this.tipsItem.type) {
+                    color = bg[this.tipsItem.type]
+                }
+                return color||'rgba(45,183,245,0.8)';
+            }
+        },
         watch: {
             tipsItem() {
                 this.X = (this.tipsItem && this.tipsItem.X) || 0;
@@ -43,9 +58,10 @@
                     this.dragY = e.pageY - this.startY;
                     this.X = parseInt(this.X) + this.dragX + 'px';
                     this.Y = parseInt(this.Y) + this.dragY + 'px';
-                    this.tipsItem.X = this.X;
-                    this.tipsItem.Y = this.Y;
-                    this.$parent.dragTip(this.tipsItem);//父组件中的方法，用来修改坐标数据
+                    this.$parent.dragTip(this.tipsItem, {
+                        X: this.X,
+                        Y: this.Y
+                    }); //父组件中的方法，用来修改坐标数据
                 }
             },
         }

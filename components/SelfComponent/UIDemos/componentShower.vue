@@ -1,5 +1,5 @@
 <template>
-    <div @click.right="RClickComponent" ref="dropmenu" style="position:relative;height:100%;" class="componentShowerContext">
+    <div @click.right="RClickComponent" @dblclick='dblClick' ref="dropmenu" style="position:relative;height:100%;" class="componentShowerContext">
         <!-- 下面为效果展示部分 -->
         <Dropdown trigger="custom" placement="top-start" style="height:100%;">
             <Checkbox v-model="selectHideCheckbox">hide</Checkbox>
@@ -33,33 +33,31 @@
             return {
                 selectHideCheckbox: true,
                 tipsList: [], //接口请求来的tips的数据
-                newAddTips: [], //新增的tips 
             }
         },
         computed: {
             ...mapState('UIDemos', {
                 tipsdata: 'componentTips'
             }),
-            allTips() {//已有的tips+新增的tips
-                if (this.tipsdata[this.$parent.$props.componentId]) {
-                    this.tipsList = this.tipsdata[this.$parent.$props.componentId];
-                }
-                return this.tipsList.concat(this.newAddTips);
+            allTips() { //监控全部tips
+                return this.tipsdata[this.$parent.$props.componentId] ? this.tipsdata[this.$parent.$props.componentId] : [];
             }
         },
         methods: {
             ...mapMutations('UIDemos', {
-                hideContextMenu: 'hideContextMenu',
-                rightClick: 'rightClickComponentId',
-                showContextMenu: 'showContextMenu'
+                hideContextMenu: 'hideContextMenu', //显示右键菜单
+                rightClick: 'rightClickComponentId', //记录右键点击的组件
+                showContextMenu: 'showContextMenu', //隐藏右键菜单
+                updateTip: 'updateComponentTips', //更新tip
             }),
             dragTip(data, newXY) {
                 //拖拽tip时，修改数据;由子组件tips，dragOver事件触发
                 //这里应该接口更新tip坐标
-                console.log('drage tip>>', data, newXY)
+                this.updateTip(Object.assign({}, data, newXY))
             },
             RClickComponent(e) {
                 //右键单击事件
+                console.log('target:::', );
                 if (e.target.className !== 'componentsTip') {
                     this.$store.commit('UIDemos/dropDownContextMenu', 'componentShower') //右键菜单的内容
                     this.rightClick(this.$parent.$props.componentId) //记录右键单击的组件
@@ -71,11 +69,21 @@
                 /**
                  * 下面这一部分代码控制右键菜单的位置与显示
                  */
+                let position = this.$refs.dropmenu.getBoundingClientRect();
                 this.showContextMenu({
                     X: e.pageX + 'px',
-                    Y: e.pageY + 'px'
+                    Y: e.pageY + 'px',
+                    relX: (e.pageX - position.left) / position.width * 100 + '%', //相对组件容器的位置
+                    relY: (e.pageY - position.top) / position.height * 100 + '%', //相对组件容器的位置
                 }) //右键菜单的位置
-            }
+            },
+            dblClick(e) {//简化右键修改tip
+                if (e.target.dataset.tipid) {
+                  
+                    this.$store.commit('UIDemos/dropDownContextMenu', 'componentTip') //右键菜单的内容
+                    this.rightClick(e.target.dataset.tipid) //记录右键单击的组件
+                }
+            },
         }
     }
 </script>

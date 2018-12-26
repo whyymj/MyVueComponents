@@ -1,38 +1,30 @@
-import { classifyTipsData } from '@/middleware/UIDemos/storeUpdateComponentTips.js'
+import {
+  classifyTipsData
+} from '@/middleware/UIDemos/storeUpdateComponentTips.js'
 
 export const state = () => ({
   cacheSelectedComponents: {}, // 组件的操作记录
   rightClickComponentId: '', // 右键单击组件的id
   leftClickComponentId: '', // 左键单击的组件的id
+  updateComponentId: "", //要更新的组建的tipId 
   rightClickMenu: [], // 右键菜单contextMenu的内容
-  contextMenuXY: { X: 0, Y: 0 }, // 右键菜单坐标
+  contextMenuXY: {
+    X: 0,
+    Y: 0,
+    relX: 0,
+    relY: 0
+  }, // 右键菜单坐标
   visibleDropMenu: false, // 是否显示右键菜单
   componentDrawer: false, // 是否显示抽屉组件
   cacheAllTips: [], // 暂存全部tips
-  componentTips: {
-    // 各个组件内部的tips,key为页面的id
-    '/UIDemos/C_ColOffset/IVIEW/C_ColOffset': [
-      {
-        // 组件内的tips数据结构
-        X: '100px', // 坐标
-        Y: '100px', // 坐标
-        tipTitle: 'tipTitle', // title
-        tipBody: 'tipBody', // body
-        tipId: '/UIDemos/C_ColOffset/IVIEW/C_ColOffset/tip1', // tip的id，等于页面id/tip的index
-        index: 'tip1', // 组件内部的标识
-        pageId: '/UIDemos/C_ColOffset/IVIEW/C_ColOffset',
-        type: 'success' // type分为info，success，warn,error四种背景色
-      }
-    ]
-  },
+  componentTips: {},
 
   componentsBoxDropDownMenu: [
     // 右键单击componentsBox组件模块弹出的菜单列表内容
     {
       value: 'tipComponent',
       label: '新建Tip',
-      children: [
-        {
+      children: [{
           value: 'infoTip',
           label: `info`,
           color: '#2db7f5'
@@ -72,32 +64,47 @@ export const state = () => ({
     {
       value: 'deleteTip',
       label: '删除该气泡'
-    }
+    },
+    {
+      value: 'updateTip',
+      label: '修改该气泡'
+    },
   ]
 })
 export const mutations = {
-  setComponentTips (state, data) {
+  setComponentTips(state, data) {
     // 对请求到的tips数据数组进行预处理,仅供初始化使用
     state.componentTips = classifyTipsData(data);
     state.cacheAllTips = data;
   },
-  newAddComponentTips (state, item) {
+  newAddComponentTips(state, item) { //新建 tip
     // 新增
+    item.X = state.contextMenuXY.relX || '5%';
+    item.Y = state.contextMenuXY.relY || '5%';
     state.cacheAllTips.push(item);
+
     state.componentTips = classifyTipsData(state.cacheAllTips);
   },
-  updateComponentTips (state, val) {
+  updateComponentTips(state, val) { //更新tip
+
     state.cacheAllTips = state.cacheAllTips.map(item => {
       if (item.tipId == val.tipId) {
-        return val;
+        return Object.assign(item, val);
       }
       return item;
     })
     state.componentTips = classifyTipsData(state.cacheAllTips);
   },
-  deleteComponentTips (state, val) {
+  willUpdateComponentId(state) { //记录将要修改的tip的tipId，防止修改中右键单击其他组件出bug
+    state.updateComponentId = state.rightClickComponentId;
+  },
+  
+  deleteComponentTips(state) { //删除tip
+
     state.cacheAllTips = state.cacheAllTips.filter(item => {
-      if (item.tipId == val.tipId) {
+
+      if (item.tipId == state.rightClickComponentId) {
+        console.log(item.tipId, '======', state.rightClickComponentId)
         return false;
       }
       return true;
@@ -105,21 +112,21 @@ export const mutations = {
     state.componentTips = classifyTipsData(state.cacheAllTips);
   },
 
-  setCompDrawer (state, bool) {
+  setCompDrawer(state, bool) {
     this.componentDrawer = bool;
   },
-  hideContextMenu (state) {
+  hideContextMenu(state) {
     // 隐藏右键菜单
     state.visibleDropMenu = false;
   },
-  showContextMenu (state, XY) {
+  showContextMenu(state, XY) {
     // 显示右键菜单
     state.visibleDropMenu = true;
     if (XY) {
       state.contextMenuXY = XY;
     }
   },
-  dropDownContextMenu (state, name) {
+  dropDownContextMenu(state, name) {
     // 根据右键单击的组件id来判断自定义右键菜单的内容
     if (name == 'componentShower') {
       state.rightClickMenu = state.componentsBoxDropDownMenu;
@@ -129,16 +136,16 @@ export const mutations = {
       state.rightClickMenu = [];
     }
   },
-  rightClickComponentId (state, id) {
+  rightClickComponentId(state, id) {
     console.log('::::id', id);
     // 记录右单击的组件id
     state.rightClickComponentId = id;
   },
-  leftClickComponentId (state, id) {
+  leftClickComponentId(state, id) {
     // 记录左键单击的组件id
     state.leftClickComponentId = id;
   },
-  addSelectedComponents (state, param) {
+  addSelectedComponents(state, param) {
     // 记录操作组件信息
     if (param.componentId) {
       let obj = Object.assign({}, state.cacheSelectedComponents);
@@ -146,7 +153,7 @@ export const mutations = {
       state.cacheSelectedComponents = obj;
     }
   },
-  removeSelectedComponents (state, id) {
+  removeSelectedComponents(state, id) {
     // 移除操作组件信息
     if (id) {
       delete state.cacheSelectedComponents[id];

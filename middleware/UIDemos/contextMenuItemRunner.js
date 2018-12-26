@@ -9,19 +9,20 @@ function createNewTip(data, type) {
   // :创建淡蓝色气泡
   this.addTip({
     // 组件内的tips数据结构
-    X: '100px', // 坐标
-    Y: '150px', // 坐标
-    tipTitle: 'tipTitle', // title
+
+    tipTitle: '标题', // title
+    tipSummary: '双击查看',
     tipBody: 'tipBody', // body
-    tipId: '/UIDemos/AssistantColor/IView/AssistantColor/tip' + createTipId, // tip的id，等于页面id/tip的index
+    tipId: this.$store.state.UIDemos.rightClickComponentId + '/tip' + createTipId, // tip的id，等于页面id/tip的index
     index: 'tip' + createTipId, // 组件内部的标识
-    pageId: '/UIDemos/AssistantColor/IView/AssistantColor',
+    pageId: this.$store.state.UIDemos.rightClickComponentId,
     type: type
   })
 }
 commandObj.recordComponent = function (itemId) {
   // recordComponent:开关抽屉组件
-  this.componentDrawer = true
+  this.componentDrawer = true;
+
 }
 commandObj.dealComponents = function (itemId) {
   // dealComponents:批量处理
@@ -33,7 +34,12 @@ commandObj.hideComponent = function (itemId) {
 }
 commandObj.deleteTip = function (itemId) {
   // deleteTip:删除当前气泡
-  this.componentDrawer = true
+  this.deleteTip();
+}
+commandObj.updateTip = function (itemId) { //更新tip
+  this.willUpdateComponentId();//记录将要修改的tip的tipId
+  this.componentDrawer=true;//打开抽组件
+  this.drawerChild="updateTipContent";//抽屉中的子组件名
 }
 commandObj.infoTip = function (itemId, data) {
   createNewTip.call(this, data, 'info')
@@ -51,7 +57,7 @@ commandObj.errorTip = function (itemId, data) {
   createNewTip.call(this, data, 'error')
 }
 export default function (itemId, ...data) {
-  console.log('command>>>>', itemId)
+
   if (itemId && commandObj[itemId]) {
     commandObj[itemId].call(this, itemId, data)
   }

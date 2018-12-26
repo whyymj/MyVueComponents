@@ -1,6 +1,6 @@
 <template>
   <!-- 这是全部示例组件的展示区 ,Dropdown阻止原生contextmenu-->
-  <div class="componentsShower" @click.left="leftClickPage">
+  <div class="componentsShower" @dblclick='dblClick' @click.left="leftClickPage">
     <!-- slot注入分为两部分。一部分是说明部分，另一部分是效果展示部分 -->
     <div class="pageAnchor">
       <h2 class="title">
@@ -12,10 +12,8 @@
     <!-- 组件展示由这里注入 -->
     <slot name="components"></slot>
     <!-- 组件右单击菜单》记录组件   -->
-    <Drawer title="Basic Drawer" placement="left" :closable="false" v-model="componentDrawer">
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-      <p>Some contents...</p>
+    <Drawer title="Basic Drawer" placement="left" :width='50' :closable="false" v-model="componentDrawer">
+      <component :is='drawerChild'></component>
     </Drawer>
     <!-- 右键菜单组件 -->
     <transition name="slide-fade">
@@ -36,12 +34,15 @@
     props: ['componentsFrameName'],
     components: {
       rightMenu: () =>
-        import ('./compsRightClickMenu.vue')
+        import ('./compsRightClickMenu.vue'),
+      updateTipContent: () =>
+        import ('./Form/updateTipContent.vue'), //该组件用于Drawer组建中的动态组建，由右键菜单触发替换
     },
     data() {
       return {
         showIviewModel: true, //是否展示全部组件:
-        componentDrawer: false //middleware/contextmenuitemRunner中通过$parent.$parent.componentDrawer修改
+        componentDrawer: false, //middleware/contextmenuitemRunner中通过$parent.$parent.componentDrawer修改
+        drawerChild: 'updateTipContent'
       }
     },
     watch: {
@@ -65,13 +66,21 @@
         setCompDrawer: 'setCompDrawer',
         deleteTip: 'deleteComponentTips',
         addTip: 'newAddComponentTips',
-        updateTip: 'updateComponentTips'
+        updateTipContent: 'updateComponentTips',
+        willUpdateComponentId: 'willUpdateComponentId'
       }),
       leftClickPage(e) {
         this.hideContextMenu() //隐藏右键菜单
         if (e.target.dataset.menuitemid) {
-          //如果点击的是右键菜单的选项
+          //如果点击的是右键菜单的选项 
           contextMenuItemRunner.call(this, e.target.dataset.menuitemid) //处理菜单命令
+        }
+      },
+      dblClick(e) {
+        
+        if (e.target.dataset.tipid) {
+          //如果点击的是右键菜单的选项
+          contextMenuItemRunner.call(this, 'updateTip') //处理菜单命令
         }
       },
       drawerController() {

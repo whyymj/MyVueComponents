@@ -4,7 +4,8 @@
             <!-- 组件tips -->
             <Poptip trigger="hover" title="Title" content="content">
                 <p class='componentsTip' :data-tipId='tipsItem.tipId' :style='{background:bgColor}'></p>
-                <div class="tipBody" slot='content' v-html='tipsItem.tipBody'></div>
+                <div class="tipBody" slot='content' v-html='tipsItem.tipSummary'></div>
+                
             </Poptip>
         </Dropdown>
     </div>
@@ -17,15 +18,15 @@
             bgColor() {
                 let color = '';
                 let bg = {
-                    info: 'rgba(45,183,245,0.8)',
-                    success: 'rgba(25,190,107,0.8)',
-                    warn: "rgba(255,153,0,0.8)",
-                    error: "rgba(237,64,20,0.8)"
+                    info: 'rgba(45,183,245,0.9)',
+                    success: 'rgba(25,190,107,0.9)',
+                    warn: "rgba(255,153,0,0.9)",
+                    error: "rgba(237,64,20,0.9)"
                 }
                 if (this.tipsItem.type) {
                     color = bg[this.tipsItem.type]
                 }
-                return color||'rgba(45,183,245,0.8)';
+                return color || 'rgba(45,183,245,0.9)';
             }
         },
         watch: {
@@ -45,19 +46,24 @@
             }
         },
         mounted() {
-            this.X = (this.tipsItem && this.tipsItem.X) || 0;
-            this.Y = (this.tipsItem && this.tipsItem.Y) || 0;
+            this.X = (this.tipsItem && this.tipsItem.X) || '5%';
+            this.Y = (this.tipsItem && this.tipsItem.Y) || '5%';
         },
         methods: {
             dragTip(e) { //拖拽tip
+                let position = this.$parent.$refs.dropmenu.getBoundingClientRect(); //获取组件容器的坐标，尺寸等
                 if (e.type == 'dragstart') {
                     this.startX = e.pageX;
                     this.startY = e.pageY;
                 } else if (e.type == 'dragend') {
                     this.dragX = e.pageX - this.startX;
                     this.dragY = e.pageY - this.startY;
-                    this.X = parseInt(this.X) + this.dragX + 'px';
-                    this.Y = parseInt(this.Y) + this.dragY + 'px';
+                    this.X = (parseFloat(this.X) + this.dragX / position.width * 100);
+                    this.Y = (parseFloat(this.Y) + this.dragY / position.height * 100);
+                    this.X = this.X < 95 ? this.X : 95;
+                    this.Y = this.Y < 95 ? this.Y : 95;
+                    this.X = (this.X > 5 ? this.X : 5) + '%';
+                    this.Y = (this.Y > 5 ? this.Y : 5) + '%';
                     this.$parent.dragTip(this.tipsItem, {
                         X: this.X,
                         Y: this.Y
@@ -71,12 +77,12 @@
 <style scoped lang='scss'>
     .componentsTips {
         position: absolute;
-        width: 10px;
-        height: 10px;
-        top: 10px;
-        cursor: pointer;
-        left: 10px;
-        p {
+        width: 15px;
+        height: 15px;
+        cursor: pointer; 
+       
+        p { border:1px solid #ccc;
+        box-sizing: border-box;
             width: 15px;
             height: 15px;
             box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.7);

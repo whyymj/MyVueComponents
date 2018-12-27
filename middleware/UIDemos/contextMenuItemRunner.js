@@ -10,8 +10,8 @@ function createNewTip(data, type) {
   this.addTip({
     // 组件内的tips数据结构
 
-    tipTitle: '标题', // title
-    tipSummary: '双击查看',
+    tipTitle: '', // title
+    tipSummary: '',
     tipBody: 'tipBody', // body
     tipId: this.$store.state.UIDemos.rightClickComponentId + '/tip' + createTipId, // tip的id，等于页面id/tip的index
     index: 'tip' + createTipId, // 组件内部的标识

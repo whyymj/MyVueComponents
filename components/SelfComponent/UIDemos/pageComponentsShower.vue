@@ -12,7 +12,7 @@
     <!-- 组件展示由这里注入 -->
     <slot name="components"></slot>
     <!-- 组件右单击菜单》记录组件   -->
-    <Drawer title="Basic Drawer" placement="left" :width='50' :closable="false" v-model="componentDrawer">
+    <Drawer title="Basic Drawer" placement="left" :width='50' :closable="false" v-model="componentDrawer" style='overflow:hidden;'>
       <component :is='drawerChild'></component>
     </Drawer>
     <!-- 右键菜单组件 -->
@@ -45,25 +45,15 @@
         drawerChild: 'updateTipContent'
       }
     },
-    watch: {
-      componentDrawer() {
-        this.setCompDrawer(this.componentDrawer)
-      },
-      toggleDrawer() {
-        this.componentDrawer = this.toggleDrawer
-      }
-    },
     computed: {
       ...mapState('UIDemos', {
         visibleContextMenu: 'visibleDropMenu',
-        toggleDrawer: 'componentDrawer',
         contextMenuXY: 'contextMenuXY'
       })
     },
     methods: {
       ...mapMutations('UIDemos', {
         hideContextMenu: 'hideContextMenu',
-        setCompDrawer: 'setCompDrawer',
         deleteTip: 'deleteComponentTips',
         addTip: 'newAddComponentTips',
         updateTipContent: 'updateComponentTips',
@@ -76,10 +66,9 @@
           contextMenuItemRunner.call(this, e.target.dataset.menuitemid) //处理菜单命令
         }
       },
-      dblClick(e) {
+      dblClick(e) {//简化部分右键菜单命令
         
         if (e.target.dataset.tipid) {
-          //如果点击的是右键菜单的选项
           contextMenuItemRunner.call(this, 'updateTip') //处理菜单命令
         }
       },

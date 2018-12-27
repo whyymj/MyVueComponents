@@ -7,6 +7,7 @@ export const state = () => ({
   rightClickComponentId: '', // 右键单击组件的id
   leftClickComponentId: '', // 左键单击的组件的id
   updateComponentId: "", //要更新的组建的tipId 
+  updateComponentData: {}, //将更新的组建的数据
   rightClickMenu: [], // 右键菜单contextMenu的内容
   contextMenuXY: {
     X: 0,
@@ -15,10 +16,8 @@ export const state = () => ({
     relY: 0
   }, // 右键菜单坐标
   visibleDropMenu: false, // 是否显示右键菜单
-  componentDrawer: false, // 是否显示抽屉组件
   cacheAllTips: [], // 暂存全部tips
   componentTips: {},
-
   componentsBoxDropDownMenu: [
     // 右键单击componentsBox组件模块弹出的菜单列表内容
     {
@@ -95,10 +94,12 @@ export const mutations = {
     })
     state.componentTips = classifyTipsData(state.cacheAllTips);
   },
+
   willUpdateComponentId(state) { //记录将要修改的tip的tipId，防止修改中右键单击其他组件出bug
     state.updateComponentId = state.rightClickComponentId;
+
   },
-  
+
   deleteComponentTips(state) { //删除tip
 
     state.cacheAllTips = state.cacheAllTips.filter(item => {
@@ -112,9 +113,6 @@ export const mutations = {
     state.componentTips = classifyTipsData(state.cacheAllTips);
   },
 
-  setCompDrawer(state, bool) {
-    this.componentDrawer = bool;
-  },
   hideContextMenu(state) {
     // 隐藏右键菜单
     state.visibleDropMenu = false;
@@ -162,4 +160,16 @@ export const mutations = {
 }
 export const actions = {}
 
-export const getters = {}
+export const getters = {
+  getUpdateComponentData(state) {//获取tipId对应的tip
+    let len = state.cacheAllTips.length;
+    let tmp = null;
+    for (let i = 0; i < len; i++) {
+      tmp = state.cacheAllTips[i];
+      if (tmp.tipId == state.updateComponentId) {
+        break;
+      }
+    }
+    return tmp;
+  },
+}

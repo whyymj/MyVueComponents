@@ -6,8 +6,9 @@
       <h2 class="title">
         <a target="_blank" href="https://www.iviewui.com/components/font" class="linkOrigin">{{componentsFrameName}}</a>
         <Icon type="ios-link" />
-        <span class="closeModel button" @click="showIviewModel=!showIviewModel">{{showIviewModel?'close model':'show model'}}</span>
+        
       </h2>
+      <toolBar></toolBar>
     </div>
     <!-- 组件展示由这里注入 -->
     <slot name="components"></slot>
@@ -33,6 +34,8 @@
   export default {
     props: ['componentsFrameName'],
     components: {
+      toolBar: () =>
+        import ('./pageShowerTools.vue'),
       rightMenu: () =>
         import ('./compsRightClickMenu.vue'),
       updateTipContent: () =>
@@ -66,8 +69,7 @@
           contextMenuItemRunner.call(this, e.target.dataset.menuitemid) //处理菜单命令
         }
       },
-      dblClick(e) {//简化部分右键菜单命令
-        
+      dblClick(e) { //简化部分右键菜单命令
         if (e.target.dataset.tipid) {
           contextMenuItemRunner.call(this, 'updateTip') //处理菜单命令
         }
@@ -82,6 +84,12 @@
 <style lang='scss'>
   .componentsShower {
     position: relative;
+    .pageAnchor{
+      display: flex;
+      justify-content: space-between;
+      box-sizing: border-box;
+      padding:10px 20px 0 0;
+    }
     h2 {
       text-align: left;
       padding: 0 20px 0 20px;

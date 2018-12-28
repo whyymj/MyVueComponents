@@ -135,7 +135,7 @@ export const mutations = {
     }
   },
   rightClickComponentId(state, id) {
-    console.log('::::id', id);
+    
     // 记录右单击的组件id
     state.rightClickComponentId = id;
   },

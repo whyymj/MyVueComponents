@@ -18,8 +18,7 @@ let tmpOfTips = {
     "X": 0,
     "Y": 0
 };
-router.get('/UIDemos/getComponentTips', function (req, res, next) {
-    console.log('get req??', req);
+router.get('/UIDemos/getComponentTips', function (req, res, next) { 
     res.send(Mock.mock(tmpOfTips));
 });
 exports.default = router;

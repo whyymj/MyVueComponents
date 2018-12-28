@@ -1,8 +1,8 @@
 <template>
-    <div @click.right="RClickComponent" @dblclick='dblClick' ref="dropmenu" style="position:relative;height:100%;" class="componentShowerContext">
+    <div @click.right="RClickComponent" v-if='!hideThisComponents' @dblclick='dblClick' ref="dropmenu" style="position:relative;height:100%;" class="componentShowerContext">
         <!-- 下面为效果展示部分 -->
         <Dropdown trigger="custom" placement="top-start" style="height:100%;">
-            <Checkbox v-model="selectHideCheckbox">hide</Checkbox>
+            <toolBar :componentId='componentId'></toolBar>
             <Divider>
                 <span style="color:#2d8cf0;font-size:11px;font-weight:100;">IView Button - Basic Button</span>
             </Divider>
@@ -27,20 +27,35 @@
     export default {
         components: {
             tips: () =>
-                import ('./compsTips.vue')
+                import ('./compsTips.vue'),
+            toolBar: () =>
+                import ('./componentShowerTools.vue')
         },
         data() {
             return {
                 selectHideCheckbox: true,
                 tipsList: [], //接口请求来的tips的数据
+                componentId: ''
             }
+        },
+        beforeMount() {
+            this.componentId = this.$parent.$props.componentId;
         },
         computed: {
             ...mapState('UIDemos', {
-                tipsdata: 'componentTips'
+                tipsdata: 'componentTips',
+                selectedComponent: 'selectedComponent',
+                hideSelectedComponent: "hideSelectedComponent"
             }),
             allTips() { //监控全部tips
-                return this.tipsdata[this.$parent.$props.componentId] ? this.tipsdata[this.$parent.$props.componentId] : [];
+                return this.tipsdata[this.componentId] ? this.tipsdata[this.componentId] : [];
+            },
+            hideThisComponents() { //是否隐藏该组件
+                let res = (this.selectedComponent[this.componentId] === true) && this.hideSelectedComponent; 
+                if (this.$parent.$el) {
+                    this.$parent.$el.style = res ? 'display:none' : "display:block";
+                }
+                return res;
             }
         },
         methods: {
@@ -57,10 +72,9 @@
             },
             RClickComponent(e) {
                 //右键单击事件
-                console.log('target:::', );
                 if (e.target.className !== 'componentsTip') {
                     this.$store.commit('UIDemos/dropDownContextMenu', 'componentShower') //右键菜单的内容
-                    this.rightClick(this.$parent.$props.componentId) //记录右键单击的组件
+                    this.rightClick(this.componentId) //记录右键单击的组件
                 } else if (e.target.className == 'componentsTip') {
                     //右键点击tip组件
                     this.$store.commit('UIDemos/dropDownContextMenu', 'componentTip') //右键菜单的内容
@@ -77,9 +91,8 @@
                     relY: (e.pageY - position.top) / position.height * 100 + '%', //相对组件容器的位置
                 }) //右键菜单的位置
             },
-            dblClick(e) {//简化右键修改tip
+            dblClick(e) { //简化右键修改tip
                 if (e.target.dataset.tipid) {
-                  
                     this.$store.commit('UIDemos/dropDownContextMenu', 'componentTip') //右键菜单的内容
                     this.rightClick(e.target.dataset.tipid) //记录右键单击的组件
                 }

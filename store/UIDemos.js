@@ -17,7 +17,10 @@ export const state = () => ({
   }, // 右键菜单坐标
   visibleDropMenu: false, // 是否显示右键菜单
   cacheAllTips: [], // 暂存全部tips
-  componentTips: {},
+  componentTips: {}, //按照页面分类cacheAllTips
+  hideSelectedComponent: true, //是否隐藏selectedComponent中的组件
+  selectedComponent: {}, //被选中的组件
+
   componentsBoxDropDownMenu: [
     // 右键单击componentsBox组件模块弹出的菜单列表内容
     {
@@ -71,6 +74,14 @@ export const state = () => ({
   ]
 })
 export const mutations = {
+  selectedComponent(state, data) { //compId是选中的组建id，bool是添加或者隐藏
+    
+    state.selectedComponent = Object.assign({}, state.selectedComponent, data);
+
+  },
+  hideSelectedComponent(state, bool) { //是否隐藏全部选中的组件
+    state.hideSelectedComponent = bool;
+  },
   setComponentTips(state, data) {
     // 对请求到的tips数据数组进行预处理,仅供初始化使用
     state.componentTips = classifyTipsData(data);
@@ -105,7 +116,7 @@ export const mutations = {
     state.cacheAllTips = state.cacheAllTips.filter(item => {
 
       if (item.tipId == state.rightClickComponentId) {
-        console.log(item.tipId, '======', state.rightClickComponentId)
+
         return false;
       }
       return true;
@@ -135,7 +146,7 @@ export const mutations = {
     }
   },
   rightClickComponentId(state, id) {
-    
+
     // 记录右单击的组件id
     state.rightClickComponentId = id;
   },
@@ -161,7 +172,7 @@ export const mutations = {
 export const actions = {}
 
 export const getters = {
-  getUpdateComponentData(state) {//获取tipId对应的tip
+  getUpdateComponentData(state) { //获取tipId对应的tip
     let len = state.cacheAllTips.length;
     let tmp = null;
     for (let i = 0; i < len; i++) {

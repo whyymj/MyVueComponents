@@ -82,6 +82,7 @@
         width: 15px;
         height: 15px;
         cursor: pointer;
+        z-index:100000;
         p {
             border: 1px solid #ccc;
             box-sizing: border-box;

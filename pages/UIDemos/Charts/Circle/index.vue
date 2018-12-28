@@ -3,9 +3,9 @@
     <!-- 框架组件展示 -->
     <h1>Button 按钮</h1>
     <!-- 这是全部示例组件的展示区 -->
-    <componentsShower v-for='(item,index) in frames' :key='index' componentsFrameName='IView Button5'>
+    <componentsShower v-for='(item,index) in frames' :key='index' :frameId='item' componentsFrameName='IView Button5'>
       <div class="componentsBox" slot='components'>
-        <component :is="item"  v-for="(item,index) in compNames" :componentId='"/UIDemos/"+item+composPaths[index].replace(".vue","")' :key="item"></component>
+        <component :is="item" v-for="(item,index) in compNames" :componentId='"/UIDemos/"+item+composPaths[index].replace(".vue","")' :key="item"></component>
       </div>
     </componentsShower>
   </div>
@@ -30,7 +30,6 @@
         compNames: compoNames, //全部组件名
         frames: framesNames, //组件所属框架名称
         composPaths, //组件的引用路径
-        
       }
     },
   }

@@ -12,7 +12,6 @@ let tmpOfTips = {
 }
 
 router.get('/UIDemos/getComponentTips', function(req, res, next) {
-    console.log('get req??',req)
   res.send(Mock.mock(tmpOfTips))
 })
 export default router

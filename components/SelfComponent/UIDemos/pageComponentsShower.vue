@@ -32,7 +32,7 @@
   } from 'vuex'
   import contextMenuItemRunner from '@/middleware/UIDemos/contextMenuItemRunner.js' //右键菜单功能
   export default {
-    props: ['componentsFrameName'],
+    props: ['componentsFrameName','frameId'],
     components: {
       toolBar: () =>
         import ('./pageShowerTools.vue'),
@@ -54,6 +54,7 @@
         contextMenuXY: 'contextMenuXY'
       })
     },
+    
     methods: {
       ...mapMutations('UIDemos', {
         hideContextMenu: 'hideContextMenu',

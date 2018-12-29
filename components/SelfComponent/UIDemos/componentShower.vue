@@ -35,23 +35,26 @@
             return {
                 selectHideCheckbox: true,
                 tipsList: [], //接口请求来的tips的数据
-                componentId: ''
+                componentId: '', //组建的id
+                pageModuleId: '', //组建所在模块i的id
             }
         },
         beforeMount() {
+            this.pageModuleId = this.$route.path + '/' + this.$parent.$parent.$props.frameId;
+          
             this.componentId = this.$parent.$props.componentId;
         },
         computed: {
             ...mapState('UIDemos', {
                 tipsdata: 'componentTips',
                 selectedComponent: 'selectedComponent',
-                hideSelectedComponent: "hideSelectedComponent"
+                hideSelectedComponent: "hideSelectedComponent",
             }),
             allTips() { //监控全部tips
                 return this.tipsdata[this.componentId] ? this.tipsdata[this.componentId] : [];
             },
             hideThisComponents() { //是否隐藏该组件
-                let res = (this.selectedComponent[this.componentId] === true) && this.hideSelectedComponent; 
+                let res = (this.selectedComponent[this.componentId] === true) && this.hideSelectedComponent[this.pageModuleId];
                 if (this.$parent.$el) {
                     this.$parent.$el.style = res ? 'display:none' : "display:block";
                 }
@@ -64,6 +67,7 @@
                 rightClick: 'rightClickComponentId', //记录右键点击的组件
                 showContextMenu: 'showContextMenu', //隐藏右键菜单
                 updateTip: 'updateComponentTips', //更新tip
+                
             }),
             dragTip(data, newXY) {
                 //拖拽tip时，修改数据;由子组件tips，dragOver事件触发

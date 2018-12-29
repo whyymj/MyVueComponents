@@ -48,7 +48,7 @@
 </template>
 
 <script>
-   
+    import timeFormater from '@/middleware/getFormateDate.js';
     export default {
         components: {
             LeftMenu: () =>
@@ -60,7 +60,11 @@
                 MenuTreeData: [],
             }
         },
-        beforeMount() { 
+        beforeMount() {
+            Date.prototype.getFormateDate=function(){
+               return timeFormater.call(this);
+            } 
+            
             this.$axios.get('http://localhost:8080/UIindex/UIDemosMenu/menu').then(res => {
                 this.MenuTreeData = res.data;
             })

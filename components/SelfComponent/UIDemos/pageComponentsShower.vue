@@ -6,15 +6,17 @@
       <h2 class="title">
         <a target="_blank" href="https://www.iviewui.com/components/font" class="linkOrigin">{{componentsFrameName}}</a>
         <Icon type="ios-link" />
-        
       </h2>
-      <toolBar></toolBar>
+      <toolBar :frameId='frameId'></toolBar>
     </div>
     <!-- 组件展示由这里注入 -->
-    <slot name="components"></slot>
+    
+    <transition name="shrink">
+        <slot name="components" v-if='shrink'></slot>
+    </transition>
     <!-- 组件右单击菜单》记录组件   -->
     <Drawer title="Basic Drawer" placement="left" :width='50' :closable="false" v-model="componentDrawer" style='overflow:hidden;'>
-      <component :is='drawerChild'></component>
+      <updateRecordContent :recordType='recordType'></updateRecordContent>
     </Drawer>
     <!-- 右键菜单组件 -->
     <transition name="slide-fade">
@@ -32,41 +34,59 @@
   } from 'vuex'
   import contextMenuItemRunner from '@/middleware/UIDemos/contextMenuItemRunner.js' //右键菜单功能
   export default {
-    props: ['componentsFrameName','frameId'],
+    props: ['componentsFrameName', 'frameId'],
     components: {
       toolBar: () =>
         import ('./pageShowerTools.vue'),
       rightMenu: () =>
         import ('./compsRightClickMenu.vue'),
-      updateTipContent: () =>
-        import ('./Form/updateTipContent.vue'), //该组件用于Drawer组建中的动态组建，由右键菜单触发替换
+      updateRecordContent: () =>
+        import ('./Form/updateRecordContent.vue'), //该组件用于Drawer组建中的动态组建，由右键菜单触发替换
+        
+    },
+    beforeMount() {
+      this.moduleId = this.$route.path + '/' + this.frameId;
+      this.hideSelectedComponent({ //初始化隐藏全部组件的data
+        [this.moduleId]: true
+      });
+      this.shrinkModule({
+        [this.moduleId]: true
+      });
+      this.beforeMounted = false;
     },
     data() {
       return {
         showIviewModel: true, //是否展示全部组件:
         componentDrawer: false, //middleware/contextmenuitemRunner中通过$parent.$parent.componentDrawer修改
-        drawerChild: 'updateTipContent'
+        moduleId: '',
+        recordType:'tips',//记录的是tips，components或者frames
+        beforeMounted: true, //为了阻止后端渲染bug，前后端不一样效果
       }
     },
     computed: {
       ...mapState('UIDemos', {
         visibleContextMenu: 'visibleDropMenu',
-        contextMenuXY: 'contextMenuXY'
+        contextMenuXY: 'contextMenuXY',
+        shrink: function(state) {
+          return this.beforeMounted || state['shrinkModule'][this.moduleId]
+        }
       })
     },
-    
     methods: {
       ...mapMutations('UIDemos', {
+        hideSelectedComponent: 'hideSelectedComponent',
         hideContextMenu: 'hideContextMenu',
         deleteTip: 'deleteComponentTips',
         addTip: 'newAddComponentTips',
         updateTipContent: 'updateComponentTips',
-        willUpdateComponentId: 'willUpdateComponentId'
+        willUpdateComponentId: 'willUpdateComponentId',
+        shrinkModule: 'shrinkModule'
       }),
       leftClickPage(e) {
         this.hideContextMenu() //隐藏右键菜单
         if (e.target.dataset.menuitemid) {
           //如果点击的是右键菜单的选项 
+          
           contextMenuItemRunner.call(this, e.target.dataset.menuitemid) //处理菜单命令
         }
       },
@@ -85,11 +105,20 @@
 <style lang='scss'>
   .componentsShower {
     position: relative;
-    .pageAnchor{
+    .shrink-enter-active,
+    .shrink-leave-active {
+      transition: all .5s;
+    }
+    .shrink-enter,
+    .shrink-leave-to/* .fade-leave-active below version 2.1.8 */
+    {
+     opacity: 0;
+    }
+    .pageAnchor {
       display: flex;
       justify-content: space-between;
       box-sizing: border-box;
-      padding:10px 20px 0 0;
+      padding: 10px 20px 0 0;
     }
     h2 {
       text-align: left;

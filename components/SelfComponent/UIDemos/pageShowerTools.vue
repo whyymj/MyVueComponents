@@ -15,6 +15,7 @@
 
 <script>
     export default {
+        props: ['frameId'],
         data() {
             return {
                 tools: [{
@@ -25,9 +26,9 @@
                 }, {
                     icon: 'md-eye',
                     value: 'showThisModule',
-                    label: '显示模块',
+                    label: '收起模块',
                     active: false,
-                    closeLabel: '隐藏模块',
+                    closeLabel: '展开模块',
                     closeValue: 'hideThisModule',
                 }, {
                     icon: 'md-clipboard',
@@ -41,7 +42,16 @@
                     active: false,
                     closeLabel: '隐藏选中组件',
                     closeValue: 'hideSelectedComponents'
-                }]
+                }],
+                pageModuleId: '', //生成该模块的id
+            }
+        },
+        beforeMount() {
+            this.pageModuleId = this.$route.path + '/' + this.frameId;
+        },
+        watch: {
+            '$parent.$data.componentDrawer' () {
+                this.tools[2].active = this.$parent.$data.componentDrawer;
             }
         },
         methods: {
@@ -49,6 +59,25 @@
                 let obj = this.tools[index];
                 obj.active = !obj.active;
                 this.$set(this.tools, index, obj);
+                if (index == 1) {
+                    this.$store.commit('UIDemos/shrinkModule', {
+                        [this.pageModuleId]: !obj.active
+                    })
+                } else if (index == 2) { //模拟右键点击
+                    this.$parent.leftClickPage({
+                        'target': {
+                            dataset: {
+                                menuitemid: "recordFrame"
+                            }
+                        }
+                    });
+                    this.$store.commit('UIDemos/leftClickComponentId',this.pageModuleId);
+                 
+                } else if (index == 3) {
+                    this.$store.commit('UIDemos/hideSelectedComponent', {
+                        [this.pageModuleId]: !obj.active
+                    })
+                }
             }
         }
     }

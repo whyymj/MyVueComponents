@@ -18,9 +18,12 @@ export const state = () => ({
   visibleDropMenu: false, // 是否显示右键菜单
   cacheAllTips: [], // 暂存全部tips
   componentTips: {}, //按照页面分类cacheAllTips
-  hideSelectedComponent: true, //是否隐藏selectedComponent中的组件
-  selectedComponent: {}, //被选中的组件
+  hideSelectedComponent: {}, //是否隐藏selectedComponent中的组件
+  frameRecord: { //所属框架的记录
 
+  },
+  selectedComponent: {}, //被选中的组件
+  shrinkModule: {}, //收起某个模块
   componentsBoxDropDownMenu: [
     // 右键单击componentsBox组件模块弹出的菜单列表内容
     {
@@ -74,13 +77,25 @@ export const state = () => ({
   ]
 })
 export const mutations = {
-  selectedComponent(state, data) { //compId是选中的组建id，bool是添加或者隐藏
-    
-    state.selectedComponent = Object.assign({}, state.selectedComponent, data);
+  recordFrame(state, data) { //写框架记录
+    if (state.frameRecord[state.leftClickComponentId]) {
+      state.frameRecord[state.leftClickComponentId].push(data)
+    } else {
+      state.frameRecord[state.leftClickComponentId] = [data];
+    }
 
   },
-  hideSelectedComponent(state, bool) { //是否隐藏全部选中的组件
-    state.hideSelectedComponent = bool;
+  delFrameRecord(state, recordId) { //删除框架记录
+  
+  },
+  selectedComponent(state, data) { //compId是选中的组建id，bool是添加或者隐藏
+    state.selectedComponent = Object.assign({}, state.selectedComponent, data);
+  },
+  hideSelectedComponent(state, data) { //是否隐藏全部选中的组件
+    state.hideSelectedComponent = Object.assign({}, state.hideSelectedComponent, data);
+  },
+  shrinkModule(state, data) { //收起某个模块
+    state.shrinkModule = Object.assign({}, state.shrinkModule, data);
   },
   setComponentTips(state, data) {
     // 对请求到的tips数据数组进行预处理,仅供初始化使用

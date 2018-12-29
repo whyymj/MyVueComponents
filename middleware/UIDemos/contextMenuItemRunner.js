@@ -24,22 +24,29 @@ commandObj.recordComponent = function (itemId) {
   this.componentDrawer = true;
 
 }
+commandObj.recordFrame = function (itemId) {
+  // recordComponent:开关抽屉组件
+  this.componentDrawer = true;
+  this.recordType='components'
+}
 commandObj.dealComponents = function (itemId) {
   // dealComponents:批量处理
-  this.componentDrawer = true
 }
 commandObj.hideComponent = function (itemId) {
   // hideComponent:隐藏当前组件
-  this.componentDrawer = true
+
+  this.$store.commit('UIDemos/selectedComponent', {
+    [this.$store.state.UIDemos.rightClickComponentId]: true
+  });
 }
 commandObj.deleteTip = function (itemId) {
   // deleteTip:删除当前气泡
   this.deleteTip();
 }
 commandObj.updateTip = function (itemId) { //更新tip
-  this.willUpdateComponentId();//记录将要修改的tip的tipId
-  this.componentDrawer=true;//打开抽组件
-  this.drawerChild="updateTipContent";//抽屉中的子组件名
+  this.willUpdateComponentId(); //记录将要修改的tip的tipId
+  this.componentDrawer = true; //打开抽组件
+  this.drawerChild = "updateTipContent"; //抽屉中的子组件名
 }
 commandObj.infoTip = function (itemId, data) {
   createNewTip.call(this, data, 'info')

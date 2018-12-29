@@ -1,5 +1,4 @@
 <template>
-<!-- 这里记录页面 -->
     <Form :model="formLeft" label-position="left" :label-width="100">
         <FormItem label="标题">
             <Input v-model="tipTitle"></Input>
@@ -25,6 +24,7 @@
             richTextEditor: () =>
                 import ('../../richTextEditor.vue')
         },
+        props: ['recordType'],
         data() {
             return {
                 formLeft: {
@@ -34,7 +34,11 @@
                 getCommand: '', //通知 富文本编辑器把输入值传回，》》》'getValue':获取输入值；'clearValue':清空编辑器；'setValue'：将defaultContent的值赋值给编辑器
                 tipSummary: '', //富文本编辑器的默认值
                 tipTitle: '',
+                moduleId: ''
             }
+        },
+        beforeMount() {
+            this.moduleId = this.$parent.$parent.moduleId;
         },
         computed: {
             ...mapState('UIDemos', {
@@ -65,12 +69,23 @@
                     tipSummary: data
                 };
                 this.tipSummary = data;
-                this.updateContent(Object.assign({
-                    tipId: that.tipId
-                }, that.formLeft));
+                if (this.recordType == 'tips') {
+                    this.updateContent(Object.assign({
+                        tipId: that.tipId,
+                        createTime: new Date().getFormateDate(),
+                    }, that.formLeft));
+                } else if (this.recordType == 'components') {
+                    let time = new Date().getTime() + '' + Math.round(Math.random() * 1000000);
+                    this.recordFrame(Object.assign({
+                        recordId: that.moduleId + '/frameRecord' + time,
+                        createTime: new Date().getFormateDate(),
+                    }, that.formLeft));
+                 
+                }
             },
             ...mapMutations('UIDemos', {
                 updateContent: 'updateComponentTips',
+                recordFrame: 'recordFrame'
             }),
             cancel() {
                 this.getCommand = 'clearValue'; //清空富文本编辑器

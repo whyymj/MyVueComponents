@@ -55,6 +55,7 @@
             },
             hideThisComponents() { //是否隐藏该组件
                 let res = (this.selectedComponent[this.componentId] === true) && this.hideSelectedComponent[this.pageModuleId];
+                
                 if (this.$parent.$el) {
                     this.$parent.$el.style = res ? 'display:none' : "display:block";
                 }

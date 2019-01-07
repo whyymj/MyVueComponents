@@ -1,15 +1,24 @@
 <template>
     <ButtonGroup class='pageToolsBar'>
         <Button :type="item.active?'primary':'default'" class='pageToolItem' v-for='(item,index) in tools' :key='index' @click='clickToolItem(index)'>
-            <Poptip trigger="hover" placement="top-end">
-                <span style='display:inline-block;width:30px;height:22px;'>
-                    <Icon :type="item.icon"></Icon>
-                </span>
-                <span slot='content' style='color:#2d8cf0;'>
-                    {{(item.active&&item.closeLabel)?item.closeLabel:item.label}}
-                </span>
-            </Poptip>
-        </Button>
+                 
+                 <Poptip trigger="hover" placement="top-end">
+                     <!-- 这是带徽标数的 -->
+                        <Badge :count="item.num" v-if='item.num'>
+                            <span style='display:inline-block;width:30px;height:22px;'>
+                                <Icon :type="item.icon"></Icon>
+                            </span>
+                        </Badge>
+                        <!-- 这是不带徽标数的 -->
+                        <span style='display:inline-block;width:30px;height:22px;' v-else>
+                                <Icon :type="item.icon"></Icon>
+                            </span>
+                            <!-- 这是poptips的弹窗内容 -->
+                        <span slot='content' style='color:#2d8cf0;'>
+                            {{(item.active&&item.closeLabel)?item.closeLabel:item.label}}
+                        </span>
+                </Poptip>
+            </Button>
     </ButtonGroup>
 </template>
 
@@ -35,6 +44,7 @@
                     value: 'recordSomething',
                     label: '写点什么',
                     active: false,
+                    num:1
                 }, {
                     icon: 'ios-apps',
                     value: 'showAllComponents',
@@ -71,8 +81,7 @@
                             }
                         }
                     });
-                    this.$store.commit('UIDemos/leftClickComponentId',this.pageModuleId);
-                 
+                    this.$store.commit('UIDemos/leftClickComponentId', this.pageModuleId);
                 } else if (index == 3) {
                     this.$store.commit('UIDemos/hideSelectedComponent', {
                         [this.pageModuleId]: !obj.active

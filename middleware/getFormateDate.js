@@ -1,3 +1,7 @@
+/**
+ * UIDemos主页上用来给Date对象添加格式化时间的方法
+ * @param {*} num 
+ */
 function formate(num) {
   let tmp = num * 1;
   return tmp > 9 ? tmp : ('0' + tmp)
@@ -7,7 +11,7 @@ export default function () {
   let year = date.getFullYear();
   let month = date.getMonth() + 1;
   let day = date.getDate();
-  let hour = date.getHours;
+  let hour =date.getHours();
   let minute = new Date().getMinutes();
   let second = new Date().getSeconds();
   return year + '/' + formate(month) + '/' + formate(day) + ' ' + formate(hour) + ':' + formate(minute) + ':' + formate(second);

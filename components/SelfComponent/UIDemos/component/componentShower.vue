@@ -2,7 +2,7 @@
     <div @click.right="RClickComponent" v-if='!hideThisComponents' @dblclick='dblClick' ref="dropmenu" style="position:relative;height:100%;" class="componentShowerContext">
         <!-- 下面为效果展示部分 -->
         <Dropdown trigger="custom" placement="top-start" style="height:100%;">
-            <toolBar :componentId='componentId'></toolBar>
+            <toolBar :componentId='componentId' :moduleId='pageModuleId'></toolBar>
             <Divider>
                 <span style="color:#2d8cf0;font-size:11px;font-weight:100;">IView Button - Basic Button</span>
             </Divider>
@@ -11,14 +11,15 @@
             <slot></slot>
         </Dropdown>
         <!-- 气泡提示组件 -->
-        <tips v-for="(item,index) in allTips" :key="index" :tipsItem="item"></tips>
+        <tips v-for="(item,index) in allTips" :key="index" :tipsItem="item" @drag='dragTip'></tips>
     </div>
 </template>
 
 <script>
     import {
         mapMutations,
-        mapState
+        mapState,
+        mapGetters
     } from 'vuex'
     import {
         clearTimeout
@@ -41,12 +42,13 @@
         },
         beforeMount() {
             this.pageModuleId = this.$route.path + '/' + this.$parent.$parent.$props.frameId;
-          
             this.componentId = this.$parent.$props.componentId;
         },
         computed: {
+            ...mapGetters('UIDemos', {
+                tipsdata: 'getAllClassifiedTips',//获取分类整理后的tips信息
+            }),
             ...mapState('UIDemos', {
-                tipsdata: 'componentTips',
                 selectedComponent: 'selectedComponent',
                 hideSelectedComponent: "hideSelectedComponent",
             }),
@@ -55,7 +57,6 @@
             },
             hideThisComponents() { //是否隐藏该组件
                 let res = (this.selectedComponent[this.componentId] === true) && this.hideSelectedComponent[this.pageModuleId];
-                
                 if (this.$parent.$el) {
                     this.$parent.$el.style = res ? 'display:none' : "display:block";
                 }
@@ -64,18 +65,17 @@
         },
         methods: {
             ...mapMutations('UIDemos', {
-                hideContextMenu: 'hideContextMenu', //显示右键菜单
+                hideContextMenu: 'hideContextMenu', //隐藏右键菜单
+                showContextMenu: 'showContextMenu', //显示右键菜单
                 rightClick: 'rightClickComponentId', //记录右键点击的组件
-                showContextMenu: 'showContextMenu', //隐藏右键菜单
                 updateTip: 'updateComponentTips', //更新tip
-                
             }),
             dragTip(data, newXY) {
                 //拖拽tip时，修改数据;由子组件tips，dragOver事件触发
                 //这里应该接口更新tip坐标
                 this.updateTip(Object.assign({}, data, newXY))
             },
-            RClickComponent(e) {
+            RClickComponent(e) { //右键单击组件
                 //右键单击事件
                 if (e.target.className !== 'componentsTip') {
                     this.$store.commit('UIDemos/dropDownContextMenu', 'componentShower') //右键菜单的内容
@@ -89,14 +89,14 @@
                  * 下面这一部分代码控制右键菜单的位置与显示
                  */
                 let position = this.$refs.dropmenu.getBoundingClientRect();
-                this.showContextMenu({
+                this.showContextMenu({ //右键菜单的位置
                     X: e.pageX + 'px',
                     Y: e.pageY + 'px',
                     relX: (e.pageX - position.left) / position.width * 100 + '%', //相对组件容器的位置
                     relY: (e.pageY - position.top) / position.height * 100 + '%', //相对组件容器的位置
-                }) //右键菜单的位置
+                })
             },
-            dblClick(e) { //简化右键修改tip
+            dblClick(e) { //简化右键修改tip；双击tip直接修改
                 if (e.target.dataset.tipid) {
                     this.$store.commit('UIDemos/dropDownContextMenu', 'componentTip') //右键菜单的内容
                     this.rightClick(e.target.dataset.tipid) //记录右键单击的组件

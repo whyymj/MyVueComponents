@@ -7,7 +7,7 @@ function createNewTip(data, type) {
     '' + new Date().getTime() + Math.round(Math.random() * 10000000) // 生成tipid
 
   // :创建淡蓝色气泡
-  this.addTip({
+  this.$store.commit('UIDemos/newAddComponentTips', {
     // 组件内的tips数据结构
 
     tipTitle: '标题', // title
@@ -18,33 +18,29 @@ function createNewTip(data, type) {
     pageId: this.$store.state.UIDemos.rightClickComponentId,
     type: type
   })
+  // this.addTip()
 }
-commandObj.recordComponent = function (itemId) {
-  // recordComponent:开关抽屉组件
-  this.componentDrawer = true;
 
-}
 commandObj.recordFrame = function (itemId) {
   // recordComponent:开关抽屉组件
-  this.componentDrawer = true;
-  this.recordType='components'
+  this.showRecords = true;
+  this.recordType = 'components'
 }
-commandObj.dealComponents = function (itemId) {
-  // dealComponents:批量处理
-}
+
 commandObj.hideComponent = function (itemId) {
   // hideComponent:隐藏当前组件
-
   this.$store.commit('UIDemos/selectedComponent', {
     [this.$store.state.UIDemos.rightClickComponentId]: true
   });
 }
 commandObj.deleteTip = function (itemId) {
   // deleteTip:删除当前气泡
-  this.deleteTip();
+  this.$store.commit('UIDemos/deleteComponentTips')
+  // this.deleteTip();
 }
 commandObj.updateTip = function (itemId) { //更新tip
-  this.willUpdateComponentId(); //记录将要修改的tip的tipId
+  // this.willUpdateComponentId(); //记录将要修改的tip的tipId
+  this.$store.commit('UIDemos/willUpdateComponentId')
   this.componentDrawer = true; //打开抽组件
   this.drawerChild = "updateTipContent"; //抽屉中的子组件名
 }

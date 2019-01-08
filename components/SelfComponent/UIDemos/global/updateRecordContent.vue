@@ -22,7 +22,7 @@
     export default {
         components: {
             richTextEditor: () =>
-                import ('../../richTextEditor.vue')
+                import ('../../Global/RichTextEditor.vue')
         },
         props: ['recordType'],
         data() {
@@ -80,7 +80,8 @@
                         recordId: that.moduleId + '/frameRecord' + time,
                         createTime: new Date().getFormateDate(),
                     }, that.formLeft));
-                 
+          
+          
                 }
             },
             ...mapMutations('UIDemos', {

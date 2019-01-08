@@ -1,28 +1,23 @@
 <template>
     <!-- 菜单的点击事件是在page/UIDemos页面clickRightClickMenuItem事件统一监听的 -->
     <Card :padding='0' v-if='menuList.length'>
-        <p slot="title">组件记录</p>
+        <p slot="title">操作列表</p>
         <rightClickMenu :menuItems='menuList'></rightClickMenu>
     </Card>
 </template>
 
 <script>
     export default {
+        
         components: {
             rightClickMenu: () =>
                 import ('./customRightClickMenu.vue')
         },
-          computed:{
-            menuList(){
+        computed: {
+            menuList() {
                 return this.$store.state.UIDemos.rightClickMenu;
             }
         },
-        methods: {
-            handleChange() {},
-            RunCommand(e) {
-                console.log('????????????????', e.target.dataset.index)
-            }
-        }
     }
 </script>
 

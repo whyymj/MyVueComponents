@@ -2,10 +2,9 @@
     <div class='componentsTips' draggable="true" @dragend='dragTip' @dragstart="dragTip" :style='{top:Y,left:X}'>
         <Dropdown trigger="custom" placement='top-start'>
             <!-- 组件tips -->
-            <Poptip trigger="hover" :title="tipsItem.tipTitle" word-wrap width='350'  placement="top" content="content">
+            <Poptip trigger="hover" :title="tipsItem.tipTitle" word-wrap width='350' placement="top" content="content">
                 <p class='componentsTip' :data-tipId='tipsItem.tipId' :style='{background:bgColor}'></p>
                 <div class="tipBody" slot='content' style='max-height:300px;width:100%;overflow:auto;  word-wrap: break-word; word-break: normal;' v-html='tipsItem.tipSummary'>
-                   
                 </div>
             </Poptip>
         </Dropdown>
@@ -32,7 +31,6 @@
         },
         watch: {
             tipsItem() {
-                
                 this.X = (this.tipsItem && this.tipsItem.X) || 0;
                 this.Y = (this.tipsItem && this.tipsItem.Y) || 0;
             }
@@ -66,10 +64,10 @@
                     this.Y = this.Y < 95 ? this.Y : 95;
                     this.X = (this.X > 5 ? this.X : 5) + '%';
                     this.Y = (this.Y > 5 ? this.Y : 5) + '%';
-                    this.$parent.dragTip(this.tipsItem, {
+                    this.$emit('drag', this.tipsItem, { //父组件中的方法，用来修改坐标数据
                         X: this.X,
                         Y: this.Y
-                    }); //父组件中的方法，用来修改坐标数据
+                    }); 
                 }
             },
         }
@@ -82,7 +80,7 @@
         width: 15px;
         height: 15px;
         cursor: pointer;
-        z-index:100000;
+        z-index: 100000;
         p {
             border: 1px solid #ccc;
             box-sizing: border-box;

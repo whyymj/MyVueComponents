@@ -14,7 +14,7 @@
         mixins: [componentShower],
         components: {
             expandRow: () =>
-                import ('../../../../../../components/SelfComponent/UIDemos/Form/table_expand.vue')
+                import ('@/components/SelfComponent/UIDemos/global/table_expand.vue')
         },
         data() {
             return {

@@ -10,14 +10,17 @@
       <toolBar :frameId='frameId'></toolBar>
     </div>
     <!-- 组件展示由这里注入 -->
-    <transition name="shrink">
-      <div class="componentsBox">
-        <slot></slot>
-      </div>
-    </transition>
+    <!-- <transition name="shrink"> -->
+    <div class="componentsBox" v-show='shrink'>
+      <slot></slot>
+    </div>
+    <!-- </transition> -->
     <!-- 组件右单击菜单》记录组件   -->
     <Drawer title="Basic Drawer" placement="left" :width='50' :closable="false" v-model="componentDrawer" style='overflow:hidden;'>
       <updateRecordContent :recordType='recordType'></updateRecordContent>
+    </Drawer>
+    <Drawer title="Basic Drawer" placement="left" :width='50' :closable="false" v-model="showRecords" style='overflow:hidden;'>
+      <showAllRecords :moduleId='moduleId'></showAllRecords>
     </Drawer>
     <!-- 右键菜单组件 -->
     <transition name="slide-fade">
@@ -33,16 +36,18 @@
     mapMutations,
     mapState
   } from 'vuex'
-  import contextMenuItemRunner from '@/middleware/UIDemos/contextMenuItemRunner.js' //右键菜单功能
+  import commandRunner from '@/middleware/UIDemos/commandRunner.js' //功能集合
   export default {
     props: ['componentsFrameName', 'frameId'],
     components: {
+      showAllRecords: () =>
+        import ('../global/showAllRecords.vue'),
       toolBar: () =>
         import ('./pageShowerTools.vue'),
       rightMenu: () =>
         import ('./compsRightClickMenu.vue'),
       updateRecordContent: () =>
-        import ('./Form/updateRecordContent.vue'), //该组件用于Drawer组建中的动态组建，由右键菜单触发替换
+        import ('../global/updateRecordContent.vue'), //该组件用于Drawer组建中的动态组建，由右键菜单触发替换
     },
     beforeMount() {
       this.moduleId = this.$route.path + '/' + this.frameId;
@@ -52,43 +57,48 @@
       this.shrinkModule({
         [this.moduleId]: true
       });
-      this.beforeMounted = false;
+      this.beforeMountStatus = false;
     },
     data() {
       return {
         showIviewModel: true, //是否展示全部组件:
-        componentDrawer: false, //middleware/contextmenuitemRunner中通过$parent.$parent.componentDrawer修改
+        componentDrawer: false, //middleware/commandRunner中通过$parent.$parent.componentDrawer修改
         moduleId: '',
+        showRecords: false,
         recordType: 'tips', //记录的是tips，components或者frames
-        beforeMounted: true, //为了阻止后端渲染bug，前后端不一样效果
+        beforeMountStatus: true
       }
     },
     computed: {
       ...mapState('UIDemos', {
         visibleContextMenu: 'visibleDropMenu',
         contextMenuXY: 'contextMenuXY',
-      })
+        shrinkThisModule: 'shrinkModule'
+      }),
+      shrink() {
+        return (!this.beforeMountStatus) && (this.shrinkThisModule[this.moduleId] === true);
+      }
     },
     methods: {
       ...mapMutations('UIDemos', {
         hideSelectedComponent: 'hideSelectedComponent',
         hideContextMenu: 'hideContextMenu',
-        deleteTip: 'deleteComponentTips',
-        addTip: 'newAddComponentTips',
+        // deleteTip: 'deleteComponentTips',
+        // addTip: 'newAddComponentTips',
         updateTipContent: 'updateComponentTips',
-        willUpdateComponentId: 'willUpdateComponentId',
+        // willUpdateComponentId: 'willUpdateComponentId',
         shrinkModule: 'shrinkModule'
       }),
       leftClickPage(e) {
         this.hideContextMenu() //隐藏右键菜单
         if (e.target.dataset.menuitemid) {
           //如果点击的是右键菜单的选项 
-          contextMenuItemRunner.call(this, e.target.dataset.menuitemid) //处理菜单命令
+          commandRunner.call(this, e.target.dataset.menuitemid) //处理菜单命令
         }
       },
       dblClick(e) { //简化部分右键菜单命令
         if (e.target.dataset.tipid) {
-          contextMenuItemRunner.call(this, 'updateTip') //处理菜单命令
+          commandRunner.call(this, 'updateTip') //处理菜单命令
         }
       },
       drawerController() {
@@ -101,15 +111,6 @@
 <style lang='scss'>
   .componentsShower {
     position: relative;
-    .shrink-enter-active,
-    .shrink-leave-active {
-      transition: all .5s;
-    }
-    .shrink-enter,
-    .shrink-leave-to/* .fade-leave-active below version 2.1.8 */
-    {
-      opacity: 0;
-    }
     .pageAnchor {
       display: flex;
       justify-content: space-between;

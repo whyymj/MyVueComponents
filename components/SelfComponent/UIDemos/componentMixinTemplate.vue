@@ -1,7 +1,7 @@
 
 
 <script>
-    import componentShower from './componentShower.vue';
+    import componentShower from './component/componentShower.vue';
     export default {
         components: {
             componentShower

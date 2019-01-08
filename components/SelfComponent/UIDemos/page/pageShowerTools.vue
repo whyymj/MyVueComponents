@@ -73,7 +73,7 @@
                     this.$store.commit('UIDemos/shrinkModule', {
                         [this.pageModuleId]: !obj.active
                     })
-                } else if (index == 2) { //模拟右键点击
+                } else if (index == 2) { //模拟右键点击,记录组件框架
                     this.$parent.leftClickPage({
                         'target': {
                             dataset: {

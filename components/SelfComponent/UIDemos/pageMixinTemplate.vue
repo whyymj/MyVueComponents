@@ -1,7 +1,7 @@
 
 
 <script>
-    import componentsShower from '@/components/SelfComponent/UIDemos/pageComponentsShower.vue';
+    import componentsShower from '@/components/SelfComponent/UIDemos/page/pageComponentsShower.vue';
    
     export default {
         components: {

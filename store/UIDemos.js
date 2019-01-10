@@ -1,4 +1,3 @@
-
 import {
   CacheState,
   CacheMutations,
@@ -26,28 +25,38 @@ import {
   FrameActions,
   FrameGetters
 } from './UIDemos/UIDemosFrameRecords.js'
+import {
+  BubbleState,
+  BubbleMutations,
+  BubbleActions,
+  BubbleGetters
+} from './UIDemos/UIDemosEventBubble.js'
 export const state = () => ({
   ...CacheState(),
   ...TipsState(),
   ...MenuState(),
   ...FrameState(),
+  ...BubbleState(),
 })
 export const mutations = {
   ...CacheMutations,
   ...TipsMutations,
   ...MenuMutations,
-  ...FrameMutations
+  ...FrameMutations,
+  ...BubbleMutations
 }
 export const actions = {
   ...CacheActions,
   ...TipsActions,
   ...MenuActions,
-  ...FrameActions
+  ...FrameActions,
+  ...BubbleActions
 }
 
 export const getters = {
   ...CacheGetters,
   ...TipsGetters,
   ...MenuGetters,
-  ...FrameActions
+  ...FrameGetters,
+  ...BubbleGetters
 }

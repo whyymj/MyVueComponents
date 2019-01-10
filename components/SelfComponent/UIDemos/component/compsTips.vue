@@ -67,9 +67,9 @@
                     this.$emit('drag', this.tipsItem, { //父组件中的方法，用来修改坐标数据
                         X: this.X,
                         Y: this.Y
-                    }); 
+                    });
                 }
-            },
+            }
         }
     }
 </script>

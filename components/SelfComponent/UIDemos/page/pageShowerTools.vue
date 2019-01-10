@@ -1,101 +1,100 @@
 <template>
-    <ButtonGroup class='pageToolsBar'>
-        <Button :type="item.active?'primary':'default'" class='pageToolItem' v-for='(item,index) in tools' :key='index' @click='clickToolItem(index)'>
-                 
-                 <Poptip trigger="hover" placement="top-end">
-                     <!-- 这是带徽标数的 -->
-                        <Badge :count="item.num" v-if='item.num'>
-                            <span style='display:inline-block;width:30px;height:22px;'>
-                                <Icon :type="item.icon"></Icon>
-                            </span>
-                        </Badge>
-                        <!-- 这是不带徽标数的 -->
-                        <span style='display:inline-block;width:30px;height:22px;' v-else>
-                                <Icon :type="item.icon"></Icon>
-                            </span>
-                            <!-- 这是poptips的弹窗内容 -->
-                        <span slot='content' style='color:#2d8cf0;'>
-                            {{(item.active&&item.closeLabel)?item.closeLabel:item.label}}
-                        </span>
-                </Poptip>
-            </Button>
-    </ButtonGroup>
+  <ButtonGroup class="pageToolsBar">
+    <Button :type="item.active?'primary':'default'" class="pageToolItem" v-for="(item,index) in tools" :key="index" @click="clickToolItem(index)">
+            <Poptip trigger="hover" placement="top-end">
+              <!-- 这是带徽标数的 -->
+              <Badge :count="item.num" v-if="item.num">
+                <span style="display:inline-block;width:30px;height:22px;">
+                  <Icon :type="item.icon"></Icon>
+                </span>
+              </Badge>
+              <!-- 这是不带徽标数的 -->
+              <span style="display:inline-block;width:30px;height:22px;" v-else>
+                <Icon :type="item.icon"></Icon>
+              </span>
+              <!-- 这是poptips的弹窗内容 -->
+              <span
+                slot="content"
+                style="color:#2d8cf0;"
+              >{{(item.active&&item.closeLabel)?item.closeLabel:item.label}}</span>
+            </Poptip>
+          </Button>
+  </ButtonGroup>
 </template>
 
 <script>
-    export default {
-        props: ['frameId'],
-        data() {
-            return {
-                tools: [{
-                    icon: 'md-add',
-                    value: 'addSelfComponents',
-                    label: '添加自己的组件',
-                    active: false,
-                }, {
-                    icon: 'md-eye',
-                    value: 'showThisModule',
-                    label: '收起模块',
-                    active: false,
-                    closeLabel: '展开模块',
-                    closeValue: 'hideThisModule',
-                }, {
-                    icon: 'md-clipboard',
-                    value: 'recordSomething',
-                    label: '写点什么',
-                    active: false,
-                    num:1
-                }, {
-                    icon: 'ios-apps',
-                    value: 'showAllComponents',
-                    label: '显示全部组件',
-                    active: false,
-                    closeLabel: '隐藏选中组件',
-                    closeValue: 'hideSelectedComponents'
-                }],
-                pageModuleId: '', //生成该模块的id
-            }
-        },
-        beforeMount() {
-            this.pageModuleId = this.$route.path + '/' + this.frameId;
-        },
-        watch: {
-            '$parent.$data.componentDrawer' () {
-                this.tools[2].active = this.$parent.$data.componentDrawer;
-            }
-        },
-        methods: {
-            clickToolItem(index) {
-                let obj = this.tools[index];
-                obj.active = !obj.active;
-                this.$set(this.tools, index, obj);
-                if (index == 1) {
-                    this.$store.commit('UIDemos/shrinkModule', {
-                        [this.pageModuleId]: !obj.active
-                    })
-                } else if (index == 2) { //模拟右键点击,记录组件框架
-                    this.$parent.leftClickPage({
-                        'target': {
-                            dataset: {
-                                menuitemid: "recordFrame"
-                            }
-                        }
-                    });
-                    this.$store.commit('UIDemos/leftClickComponentId', this.pageModuleId);
-                } else if (index == 3) {
-                    this.$store.commit('UIDemos/hideSelectedComponent', {
-                        [this.pageModuleId]: !obj.active
-                    })
-                }
-            }
+  import commandRunner from '@/middleware/UIDemos/commandRunner.js' //功能集合
+  import {
+    getEvent
+  } from '@/middleware/UIDemos/eventFactory.js'
+  export default {
+    props: ['recordsNum'],
+    computed: {
+      tools() {
+        let tools = [{
+            icon: 'md-add',
+            value: 'addSelfComponents',
+            label: '添加自己的组件',
+            active: false,
+            index: 0
+          },
+          {
+            icon: 'md-eye',
+            value: 'showThisModule',
+            label: '收起模块',
+            active: false,
+            closeLabel: '展开模块',
+            closeValue: 'hideThisModule',
+            index: 1
+          },
+          {
+            icon: 'md-clipboard',
+            value: 'recordSomething',
+            label: '写点什么',
+            active: false,
+            num: 1,
+            index: 2
+          },
+          {
+            icon: 'ios-apps',
+            value: 'showAllComponents',
+            label: '显示全部组件',
+            active: false,
+            closeLabel: '隐藏选中组件',
+            closeValue: 'hideSelectedComponents',
+            index: 3
+          }
+        ]
+        if (this.recordsNum) {
+          //记录数
+          tools[2].num = this.recordsNum
         }
+        return tools
+      }
+    },
+    methods: {
+      clickToolItem(index) {
+        let obj = this.tools[index]
+        obj.active = !obj.active
+        this.$set(this.tools, index, obj)
+        this.$emit('onClick', getEvent({
+          //模仿事件冒泡
+          target: obj.active ? obj.value : obj.closeValue, //事件源
+          meta: {
+            item: obj
+          }, //携带的数据
+          targettype: 'pageShowerTools',
+          eventtype: 'click'
+        }))
+      }
     }
+  }
 </script>
 
 <style scoped lang='scss'>
-    .pageToolsBar {
-        .pageToolItem {
-            padding: 0;
-        }
+  .pageToolsBar {
+    .pageToolItem {
+      padding: 0;
     }
+  }
 </style>

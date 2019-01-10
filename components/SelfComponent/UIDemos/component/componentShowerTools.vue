@@ -1,39 +1,42 @@
 <template>
-    <div class='componentShowerTools' v-if='hideAll'>
-        <Checkbox v-for='(item,index) in toolItems' :key='index' v-model="item.choose">{{item.label}}</Checkbox>
+    <div class='componentShowerTools'>
+        <Checkbox v-model="choose" v-if='item'>{{item.label}}</Checkbox>
     </div>
 </template>
 
 <script>
+    import {
+        getEvent
+    } from '@/middleware/UIDemos/eventFactory.js'
     export default {
-        data() {
-            return {
-                toolItems: [{
-                    choose: false,
-                    value: 'selectHideCheckbox',
-                    label: "隐藏",
-                }],
-                addAll: false,
+        props: ['moduleId', 'componentId', 'item'],
+        beforeMount() {
+            if (this.item) {
+                this.choose = this.item.choose;
             }
         },
-        props: ['moduleId','componentId'],
-        beforeMount() {
-
-        },
-        computed: {
-            hideAll() {
-                return this.$store.state.UIDemos.hideSelectedComponent[this.moduleId] !== undefined && !this.$store.state.UIDemos.hideSelectedComponent[this.moduleId];
+        data() {
+            return {
+                choose: false
             }
         },
         watch: {
-            
-            toolItems: {
-                deep: true,
-                handler() {
-                    this.$store.commit('UIDemos/selectedComponent', {
-                        [this.componentId]: this.toolItems[0].choose
-                    });
+            item() {
+                if (this.item) {
+                    this.choose = this.item.choose;
                 }
+            },
+            choose() {
+                this.$emit('onChoose', getEvent({
+                    target: this.item.id,
+                    meta: {
+                        item: Object.assign(this.item, {
+                            choose: this.choose
+                        })
+                    },
+                    eventtype: 'checkbox',
+                    targettype: "componentShowerTools",
+                }))
             },
         }
     }

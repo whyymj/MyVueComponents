@@ -44,6 +44,8 @@
                 </Layout>
             </Layout>
         </Layout>
+        <!-- 各种页面通用操作功能 -->
+        <PageOperaters></PageOperaters>
     </div>
 </template>
 
@@ -52,7 +54,9 @@
     export default {
         components: {
             LeftMenu: () =>
-                import ('../components/SelfComponent/IviewMenu/IviewMenu.vue')
+                import ('../components/SelfComponent/IviewMenu/IviewMenu.vue'),
+            PageOperaters: () =>
+                import ('../components/SelfComponent/UIDemos/global/pageOperateSystem')
         },
         data() {
             return {
@@ -61,10 +65,9 @@
             }
         },
         beforeMount() {
-            Date.prototype.getFormateDate=function(){
-               return timeFormater.call(this);
-            } 
-            
+            Date.prototype.getFormateDate = function() {
+                return timeFormater.call(this);
+            }
             this.$axios.get('http://localhost:8080/UIindex/UIDemosMenu/menu').then(res => {
                 this.MenuTreeData = res.data;
             })

@@ -21,24 +21,24 @@ function createNewTip(data, type) {
   // this.addTip()
 }
 
-commandObj.recordFrame = function (itemId) {
+commandObj.recordFrame = function (itemId, data) {
   // recordComponent:开关抽屉组件
   this.showRecords = true;
-  this.recordType = 'components'
+  this.$store.commit('UIDemos/leftClickComponentId',data);
 }
 
-commandObj.hideComponent = function (itemId) {
+commandObj.hideComponent = function (itemId, data) {
   // hideComponent:隐藏当前组件
   this.$store.commit('UIDemos/selectedComponent', {
     [this.$store.state.UIDemos.rightClickComponentId]: true
   });
 }
-commandObj.deleteTip = function (itemId) {
+commandObj.deleteTip = function (itemId, data) {
   // deleteTip:删除当前气泡
   this.$store.commit('UIDemos/deleteComponentTips')
   // this.deleteTip();
 }
-commandObj.updateTip = function (itemId) { //更新tip
+commandObj.updateTip = function (itemId, data) { //更新tip
   // this.willUpdateComponentId(); //记录将要修改的tip的tipId
   this.$store.commit('UIDemos/willUpdateComponentId')
   this.componentDrawer = true; //打开抽组件

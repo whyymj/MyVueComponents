@@ -2,13 +2,15 @@ export const CacheState = () => ({
   hideSelectedComponent: {}, //是否隐藏selectedComponent中的组件
   selectedComponent: {}, //被选中的组件，点击组件左上角隐藏checkbox
   shrinkModule: {}, //收起某个模块
-  rightClickComponentId: '', // 右键单击的组件的id
-  leftClickComponentId: '', // 左键单击的组件的id
   updateComponentId: "", //要更新的组建的tipId 
   updateRecordContent: {}, //将更新的组建的数据
-
+  currentModuleId: '', //记录当前模块
 })
 export const CacheMutations = {
+  
+  currentModuleId(state, moduleId) {
+    state.currentModuleId = moduleId;
+  },
   hideSelectedComponent(state, data) { //是否隐藏全部选中的组件
     state.hideSelectedComponent = Object.assign({}, state.hideSelectedComponent, data);
   },
@@ -24,15 +26,7 @@ export const CacheMutations = {
     state.updateComponentId = state.rightClickComponentId;
 
   },
-  rightClickComponentId(state, id) {
 
-    // 记录右单击的组件id
-    state.rightClickComponentId = id;
-  },
-  leftClickComponentId(state, id) {
-    // 记录左键单击的组件id
-    state.leftClickComponentId = id;
-  },
 
 }
 export const CacheActions = {}

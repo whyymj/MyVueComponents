@@ -4,7 +4,7 @@
 import {
   componentsBoxDropDownMenu,
   componentTipDropMenu
-} from './ContextMenuList'//导入右键菜单的内容
+} from './ContextMenuList' //导入右键菜单的内容
 
 export const MenuState = () => ({
   rightClickMenu: [], // 右键菜单contextMenu的内容，当右键点击对应的区域时，给此状态赋值，就会显示对应的自定义右键菜单

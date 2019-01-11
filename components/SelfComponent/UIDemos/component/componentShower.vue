@@ -86,17 +86,17 @@
         },
         methods: {
             clickTools(e) {
-                e.meta[this.componentId] = {}
-                e.path.unshift({
-                    type: 'component',
-                    id: this.componentId
-                })
+                // e.meta[this.componentId] = {}
+                // e.path.unshift({
+                //     type: 'component',
+                //     id: this.componentId
+                // })
                 this.bubbleEvent(e.add({
-                    target:this.componentId,
-                    meta:{
-
+                    target: this.componentId,
+                    meta: {
+                        item: ''
                     },
-                    targettype:"componentShower"
+                    targettype: "componentShower"
                 }));
                 // this.$store.commit('UIDemos/selectedComponent', {
                 //     [this.componentId]: e.target.choose
@@ -109,36 +109,64 @@
                 updateTip: 'updateComponentTips', //更新tip
                 bubbleEvent: 'bubbleEventToModule' //向上冒泡至pageShower
             }),
-            dragTip(data, newXY) {
+            dragTip(event) {
                 //拖拽tip时，修改数据;由子组件tips，dragOver事件触发
                 //这里应该接口更新tip坐标
-                this.updateTip(Object.assign({}, data, newXY))
+                // this.updateTip(Object.assign({}, data, newXY))
+                this.bubbleEvent(event.add({
+                    target: this.componentId,
+                    meta: {
+                        item: ''
+                    },
+                    targettype: 'componentShower'
+                }))
             },
             RClickComponent(e) {
+                let position = this.$refs.dropmenu.getBoundingClientRect()
                 //右键单击组件
                 //右键单击事件
                 if (e.target.className !== 'componentsTip') {
-                    this.$store.commit('UIDemos/dropDownContextMenu', 'componentShower') //右键菜单的内容
-                    this.rightClick(this.componentId) //记录右键单击的组件
+                    this.bubbleEvent(getEvent({
+                        target: this.componentId, //事件源id
+                        meta: {
+                            item: ''
+                        }, //冒泡携带参数
+                        targettype: "componentShower", //事件源类型
+                        eventtype: "rightclick", //事件类型
+                    }))
+                    // this.$store.commit('UIDemos/dropDownContextMenu', 'componentShower') //右键菜单的内容
+                    // this.rightClick(this.componentId) //记录右键单击的组件
                 } else if (e.target.className == 'componentsTip') {
                     //右键点击tip组件
-                    this.$store.commit('UIDemos/dropDownContextMenu', 'componentTip') //右键菜单的内容
-                    this.rightClick(e.target.dataset.tipid) //记录右键单击的组件
+                    this.bubbleEvent(getEvent({
+                        target: e.target.dataset.tipid, //事件源id
+                        meta: {
+                            item: {
+                                //右键菜单的位置
+                                X: e.pageX + 'px',
+                                Y: e.pageY + 'px',
+                                relX: ((e.pageX - position.left) / position.width) * 100 + '%', //相对组件容器的位置
+                                relY: ((e.pageY - position.top) / position.height) * 100 + '%' //相对组件容器的位置
+                            }
+                        }, //冒泡携带参数
+                        targettype: "compsTips", //事件源类型
+                        eventtype: "rightclick", //事件类型
+                    }))
+                    // this.$store.commit('UIDemos/dropDownContextMenu', 'componentTip') //右键菜单的内容
+                    // this.rightClick(e.target.dataset.tipid) //记录右键单击的组件
                 }
                 /**
                  * 下面这一部分代码控制右键菜单的位置与显示
                  */
-                let position = this.$refs.dropmenu.getBoundingClientRect()
-                this.showContextMenu({
-                    //右键菜单的位置
-                    X: e.pageX + 'px',
-                    Y: e.pageY + 'px',
-                    relX: ((e.pageX - position.left) / position.width) * 100 + '%', //相对组件容器的位置
-                    relY: ((e.pageY - position.top) / position.height) * 100 + '%' //相对组件容器的位置
-                })
+                // this.showContextMenu({
+                //     //右键菜单的位置
+                //     X: e.pageX + 'px',
+                //     Y: e.pageY + 'px',
+                //     relX: ((e.pageX - position.left) / position.width) * 100 + '%', //相对组件容器的位置
+                //     relY: ((e.pageY - position.top) / position.height) * 100 + '%' //相对组件容器的位置
+                // })
             },
-            dblClick(e) {
-                //简化右键修改tip；双击tip直接修改
+            dblClick(e) { //简化右键修改tip；双击tip直接修改
                 if (e.target.dataset.tipid) {
                     // this.$store.commit('UIDemos/dropDownContextMenu', 'componentTip') //右键菜单的内容
                     // this.rightClick(e.target.dataset.tipid) //记录右键单击的组件
@@ -151,14 +179,14 @@
                     this.bubbleEvent(getEvent({ //事件冒泡,模拟从tips冒泡
                         target: e.target.dataset.tipid, //事件源id
                         meta: {
-                           item
+                            item
                         }, //冒泡携带参数
                         targettype: "compsTips", //事件源类型
                         eventtype: "dblclick", //事件类型
-                    }).add({//通过本组件继续冒泡
+                    }).add({ //通过本组件继续冒泡
                         target: this.componentId,
                         meta: {
-                           item:''
+                            item: ''
                         },
                         targettype: 'componentShower'
                     }))

@@ -1,29 +1,24 @@
 <template>
     <div class="layout">
-        <div class='anchor'>
-        </div>
+        <div class="anchor"></div>
         <Layout>
             <Header>
                 <Menu mode="horizontal" theme="dark" active-name="1">
-                    <div class="layout-logo ">
+                    <div class="layout-logo">
                         <Icon type="logo-vimeo" />
                     </div>
                     <div class="layout-nav">
                         <MenuItem name="1">
-                        <Icon type="ios-navigate"></Icon>
-                        Item 1
+                        <Icon type="ios-navigate"></Icon>Item 1
                         </MenuItem>
                         <MenuItem name="2">
-                        <Icon type="ios-keypad"></Icon>
-                        Item 2
+                        <Icon type="ios-keypad"></Icon>Item 2
                         </MenuItem>
                         <MenuItem name="3">
-                        <Icon type="ios-analytics"></Icon>
-                        Item 3
+                        <Icon type="ios-analytics"></Icon>Item 3
                         </MenuItem>
                         <MenuItem name="4">
-                        <Icon type="ios-paper"></Icon>
-                        Item 4
+                        <Icon type="ios-paper"></Icon>Item 4
                         </MenuItem>
                     </div>
                 </Menu>
@@ -38,7 +33,7 @@
                         <BreadcrumbItem>Components</BreadcrumbItem>
                         <BreadcrumbItem>Layout</BreadcrumbItem>
                     </Breadcrumb>
-                    <Content :style="{padding: '0',background: '#fff',position:'fixed',top:'130px',bottom:'24px',left:'294px',right:'224px',overflow:'auto',boxSizing:'border-box'}" @scroll.native='scrollPosition'>
+                    <Content :style="{padding: '0',background: '#fff',position:'fixed',top:'130px',bottom:'24px',left:'294px',right:'224px',overflow:'auto',boxSizing:'border-box'}" @scroll.native="scrollPosition">
                         <nuxt-child/>
                     </Content>
                 </Layout>
@@ -50,7 +45,12 @@
 </template>
 
 <script>
-    import timeFormater from '@/middleware/getFormateDate.js';
+    import timeFormater from '@/middleware/getFormateDate.js'
+    import {
+        mapState,
+        mapMutations
+    } from 'vuex'
+    import commandRunner from '@/middleware/UIDemos/commandRunner.js' //功能集合
     export default {
         components: {
             LeftMenu: () =>
@@ -61,22 +61,39 @@
         data() {
             return {
                 offset: 10,
-                MenuTreeData: [],
+                MenuTreeData: []
+            }
+        },
+        computed: {
+            ...mapState('UIDemos', {
+                bubbleEventToPage: 'bubbleEventToPage'
+            })
+        },
+        watch: {
+            bubbleEventToPage() { //这里监听全部子组件冒泡上来的自定义事件
+                commandRunner.call(this, this.bubbleEventToPage) //监听事件，并处理
             }
         },
         beforeMount() {
             Date.prototype.getFormateDate = function() {
-                return timeFormater.call(this);
+                return timeFormater.call(this)
             }
-            this.$axios.get('http://localhost:8080/UIindex/UIDemosMenu/menu').then(res => {
-                this.MenuTreeData = res.data;
-            })
-            this.$axios.get('http://localhost:8080/UIindex/UIDemosRecords/UIDemos/getComponentTips').then(res => {
-                console.log('get compos>>', res.data)
-            })
+            this.$axios
+                .get('http://localhost:8080/UIindex/UIDemosMenu/menu')
+                .then(res => {
+                    this.MenuTreeData = res.data
+                })
+            this.$axios
+                .get(
+                    'http://localhost:8080/UIindex/UIDemosRecords/UIDemos/getComponentTips'
+                )
+                .then(res => {
+                    console.log('get compos>>', res.data)
+                })
         },
         methods: {
-            scrollPosition(e) { //滚动
+            scrollPosition(e) {
+                //滚动
                 //    var top= e.target.scrollTop
                 //     Array.prototype.forEach.call(document.getElementsByClassName('UIComponentsShower'), function(e) {
                 //         console.log(e.offsetTop,'>>>>>>>>',top)

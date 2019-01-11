@@ -17,3 +17,12 @@ export function pageToolBar(event) {
     })
   }
 }
+
+
+let commandObj = {};
+commandObj.recordFrame = function (event) {
+  // recordComponent:开关抽屉组件
+  this.showRecords = true;
+  this.$store.commit('UIDemos/leftClickComponentId',data);
+}
+export default commandObj;

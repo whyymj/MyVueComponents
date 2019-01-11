@@ -19,6 +19,9 @@
         mapState,
         mapGetters
     } from 'vuex';
+    import {
+        getEvent
+    } from '@/middleware/UIDemos/eventFactory.js'
     export default {
         components: {
             richTextEditor: () =>
@@ -70,23 +73,26 @@
                 };
                 this.tipSummary = data;
                 if (this.recordType == 'tips') {
-                    this.updateContent(Object.assign({
+                    this.$emit('getVal', Object.assign({
                         tipId: that.tipId,
                         createTime: new Date().getFormateDate(),
-                    }, that.formLeft));
+                    }, that.formLeft))
+                    // this.updateContent();
                 } else if (this.recordType == 'components') {
                     let time = new Date().getTime() + '' + Math.round(Math.random() * 1000000);
-                    this.recordFrame(Object.assign({
+                    this.$emit('getVal', Object.assign({
                         recordId: that.moduleId + '/frameRecord' + time,
                         createTime: new Date().getFormateDate(),
-                    }, that.formLeft));
-          
-          
+                    }, that.formLeft))
+                    // this.recordFrame(Object.assign({
+                    //     recordId: that.moduleId + '/frameRecord' + time,
+                    //     createTime: new Date().getFormateDate(),
+                    // }, that.formLeft));
                 }
             },
             ...mapMutations('UIDemos', {
                 updateContent: 'updateComponentTips',
-                recordFrame: 'recordFrame'
+                recordFrame: 'recordFrame',
             }),
             cancel() {
                 this.getCommand = 'clearValue'; //清空富文本编辑器

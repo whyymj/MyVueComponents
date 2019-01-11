@@ -22,6 +22,9 @@
     mapState
   } from 'vuex'
   import commandRunner from '@/middleware/UIDemos/commandRunner.js' //功能集合
+  import {
+    getEvent
+  } from '@/middleware/UIDemos/eventFactory.js'
   export default {
     props: ['componentsFrameName', 'frameId'],
     components: {
@@ -55,11 +58,17 @@
         return (!this.beforeMountStatus && this.shrinkThisModule[this.moduleId] === true)
       }
     },
-    // watch: {
-    //   bubbleEventToModule() {
-    //     console.log('this.bubbleEventToModule', this.bubbleEventToModule)
-    //   }
-    // },
+    watch: {
+      bubbleEventToModule() {
+        this.bubbleEvent({
+          target: this.moduleId,
+          meta: {
+            item: ''
+          },
+          type: 'dblclick',
+        });
+      }
+    },
     methods: {
       ...mapMutations('UIDemos', {
         currentModuleId: 'currentModuleId',
@@ -79,25 +88,26 @@
       dblClick(e) {
         //简化部分右键菜单命令
         // this.currentModuleId(this.moduleId) //当前操作的模块id
-        this.bubbleEvent({
+        this.bubbleEvent(getEvent({
           target: this.moduleId,
           meta: {
-            item:''
+            item: ''
           },
-          type: 'dblclick',
-        }); //继续向上冒泡至UIDemos页面接受
+          eventtype: 'dblclick',
+          targettype: 'pageComponentShower',
+        }));
+        //继续向上冒泡至UIDemos页面接受
         // if (e.target.dataset.tipid) {
         //   commandRunner.call(this, 'updateTip') //处理菜单命令
         // }
       },
-      clickToolBar(event) { 
-       
+      clickToolBar(event) {
         this.bubbleEvent(event.add({
           target: this.moduleId,
           meta: {
             item: ''
           },
-          eventtype:'dblclick',
+          eventtype: 'dblclick',
           targettype: 'pageComponentShower',
         }))
         //点击右上角，模块操作按钮

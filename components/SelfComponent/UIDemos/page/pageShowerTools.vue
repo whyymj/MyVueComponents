@@ -81,7 +81,7 @@
           //模仿事件冒泡
           target: obj.active ? obj.value : obj.closeValue, //事件源
           meta: {
-            item: obj
+            item: Object.assign({},obj)
           }, //携带的数据
           targettype: 'pageShowerTools',
           eventtype: 'click'

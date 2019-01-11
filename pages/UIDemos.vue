@@ -71,6 +71,7 @@
         },
         watch: {
             bubbleEventToPage() { //这里监听全部子组件冒泡上来的自定义事件
+            console.log( ';;;;;',this.bubbleEventToPage)
                 commandRunner.call(this, this.bubbleEventToPage) //监听事件，并处理
             }
         },

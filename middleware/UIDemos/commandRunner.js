@@ -21,9 +21,9 @@ let commandObj = {
 
 export default function (event) {
 
-  if (event && event[targettype]) {
-    let targettype = event.targettype;
-    let eventtype = event.targettype;
-    commandObj[targettype][eventtype].call(this, event)
+  if (event.cache && event.cache['targettype']) {
+    let targettype = event.cache.targettype;
+    let eventtype = event.cache.eventtype;
+    commandObj[targettype][eventtype].call(this, event.cache)
   }
 }

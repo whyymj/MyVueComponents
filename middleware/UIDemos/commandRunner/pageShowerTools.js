@@ -1,4 +1,5 @@
-export function pageToolBar(event) {
+
+ function pageToolBar(event) {
   /**
    * pageShowerTools中的按钮命令执行函数
    */
@@ -19,10 +20,13 @@ export function pageToolBar(event) {
 }
 
 
+
+
 let commandObj = {};
-commandObj.recordFrame = function (event) {
+commandObj.click = function (event) {
   // recordComponent:开关抽屉组件
-  this.showRecords = true;
-  this.$store.commit('UIDemos/leftClickComponentId',data);
+  // this.showRecords = true;
+  // this.$store.commit('UIDemos/leftClickComponentId',data);
+  console.log('get event>>>>>>>>',event)
 }
 export default commandObj;

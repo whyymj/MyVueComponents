@@ -1,14 +1,14 @@
-###自定义事件流：
-1. 事件对象生成：
+自定义事件流：
+1.pageComponentShower的事件对象在c：
 {
-    target: id, //如tipId
-    meta: {
-        item：{}， // 携带的参数
-    },
    
-    targettype: 'compsTips',//事件源类型，组件名称（具体参考middleware/UIDemos/commandRunner/ReaadME.md）
-
-    eventtype:'dblclick',//事件类型，（具体参考middleware/UIDemos/commandRunner/ReaadME.md）
-}
-
- 
+    target:'', //事件源的id
+    meta: {
+    [id]: obj，//冒泡路径过程中的携带的参数
+    }, 
+    path: [{
+        type: 'pageShowerTool',//事件源类型
+        id: id,            //事件源id
+    }], 
+    type: 'click'
+})

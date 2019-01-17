@@ -3,7 +3,7 @@
     <h1>Color 色彩</h1>
     <!-- slot注入分为两部分。一部分是说明部分，另一部分是效果展示部分 -->
     <componentsShower v-for='(item,index) in frames' :key='index' :frameId='item' componentsFrameName='IView Button'>
-        <component :is="item" v-for="(item,index) in compNames" :componentId='"/UIDemos/"+item+composPaths[index].replace(".vue","")' :key="item"></component>
+        <component :is="item" v-for="(item,index) in compNames" :componentId='"/UIDemos/Basic/Color"+composPaths[index].replace(".vue","")' :key="item"></component>
     </componentsShower>
   </div>
 </template>

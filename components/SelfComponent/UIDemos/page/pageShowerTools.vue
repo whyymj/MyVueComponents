@@ -51,7 +51,9 @@
             icon: 'md-clipboard',
             value: 'recordSomething',
             label: '写点什么',
-            active: false,
+            active: false, 
+            closeLabel: '写点什么',
+            closeValue: 'recordSomething',
             num: 1,
             index: 2
           },

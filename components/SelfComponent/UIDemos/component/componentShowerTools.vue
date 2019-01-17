@@ -30,7 +30,7 @@
                 this.$emit('onChoose', getEvent({
                     target: this.item.id,
                     meta: {
-                        item: Object.assign(this.item, {
+                        item: Object.assign({},this.item, {
                             choose: this.choose
                         })
                     },

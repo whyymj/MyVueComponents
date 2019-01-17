@@ -1,9 +1,11 @@
 // componentShowerTools的命令执行
 let commandObj = {};
-commandObj.hideComponent = function (itemId, data) {
-  // hideComponent:隐藏当前组件
-  this.$store.commit('UIDemos/selectedComponent', {
-    [this.$store.state.UIDemos.rightClickComponentId]: true
-  });
+commandObj.rightclick = function (event) { 
+  if (event) {
+    let meta=event.metaDict[event.target];
+    meta.menutype=event.targettype;
+    this.$store.commit('UIDemos/showContextMenu',meta);//显示右键菜单，
+  }
+  
 }
 export default commandObj;

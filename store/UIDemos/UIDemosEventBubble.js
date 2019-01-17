@@ -7,6 +7,7 @@ export const BubbleState = () => ({
 export const BubbleMutations = {
   bubbleEventToPage(state, event) {
     state.bubbleEventToPage = event;
+    
   },
   bubbleEventToModule(state, event) {
     state.bubbleEventToModule = event;

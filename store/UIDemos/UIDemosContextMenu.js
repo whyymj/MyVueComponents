@@ -22,23 +22,21 @@ export const MenuMutations = {
     // 隐藏右键菜单
     state.visibleDropMenu = false;
   },
-  showContextMenu(state, XY) {
+  showContextMenu(state, menu) {
     // 显示右键菜单，同时计算其坐标
     state.visibleDropMenu = true;
-    if (XY) {
-      state.contextMenuXY = XY;
-    }
-  },
-  dropDownContextMenu(state, name) {
-    // 根据右键单击的组件id来判断自定义右键菜单的内容
-    if (name == 'componentShower') {
+    if (menu.menutype == 'componentShower') {
       state.rightClickMenu = componentsBoxDropDownMenu;
-    } else if (name == 'componentTip') {
+    } else if (menu.menutype == 'componentTip') {
       state.rightClickMenu = componentTipDropMenu;
     } else {
       state.rightClickMenu = [];
     }
+
+    state.contextMenuXY = menu.item;
+
   },
+
   addSelectedComponents(state, param) {
     // 记录操作组件信息
     if (param.componentId) {

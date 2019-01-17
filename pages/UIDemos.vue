@@ -40,7 +40,7 @@
             </Layout>
         </Layout>
         <!-- 各种页面通用操作功能 -->
-        <PageOperaters></PageOperaters>
+        <PageOperaters :bubbleEventToPage='bubbleEventToPage'></PageOperaters>
     </div>
 </template>
 
@@ -50,7 +50,7 @@
         mapState,
         mapMutations
     } from 'vuex'
-    import commandRunner from '@/middleware/UIDemos/commandRunner.js' //功能集合
+ 
     export default {
         components: {
             LeftMenu: () =>
@@ -69,13 +69,20 @@
                 bubbleEventToPage: 'bubbleEventToPage'
             })
         },
-        watch: {
-            bubbleEventToPage() { //这里监听全部子组件冒泡上来的自定义事件
-            console.log( ';;;;;',this.bubbleEventToPage)
-                commandRunner.call(this, this.bubbleEventToPage) //监听事件，并处理
-            }
-        },
         beforeMount() {
+            if ('serviceWorker' in navigator) {//PWA
+                navigator.serviceWorker.register('/static/pwa/pwa.js', {
+                        scope: '/'
+                    })
+                    .then(function(registration) {
+                        // 注册成功
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    })
+                    .catch(function(err) {
+                        // 注册失败:(
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            }
             Date.prototype.getFormateDate = function() {
                 return timeFormater.call(this)
             }

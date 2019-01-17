@@ -60,13 +60,16 @@
     },
     watch: {
       bubbleEventToModule() {
-        this.bubbleEvent({
+        let origin = getEvent(this.bubbleEventToModule) 
+        let newEvent=origin.add({
           target: this.moduleId,
           meta: {
             item: ''
           },
-          type: 'dblclick',
+          targettype: 'pageComponentsShower'
         });
+        console.log('page get new event :::', newEvent);
+        this.bubbleEvent(newEvent);
       }
     },
     methods: {
@@ -88,14 +91,14 @@
       dblClick(e) {
         //简化部分右键菜单命令
         // this.currentModuleId(this.moduleId) //当前操作的模块id
-        this.bubbleEvent(getEvent({
-          target: this.moduleId,
-          meta: {
-            item: ''
-          },
-          eventtype: 'dblclick',
-          targettype: 'pageComponentShower',
-        }));
+        // this.bubbleEvent(getEvent({
+        //   target: this.moduleId,
+        //   meta: {
+        //     item: ''
+        //   },
+        //   eventtype: 'dblclick',
+        //   targettype: 'pageComponentShower',
+        // }));
         //继续向上冒泡至UIDemos页面接受
         // if (e.target.dataset.tipid) {
         //   commandRunner.call(this, 'updateTip') //处理菜单命令
@@ -107,7 +110,7 @@
           meta: {
             item: ''
           },
-          eventtype: 'dblclick',
+          eventtype: 'click',
           targettype: 'pageComponentShower',
         }))
         //点击右上角，模块操作按钮

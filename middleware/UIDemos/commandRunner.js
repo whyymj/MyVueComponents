@@ -5,8 +5,8 @@ import compsRightClickMenu from './commandRunner/compsRightClickMenu.js'
 import compsTips from './commandRunner/compsTips.js';
 import componentShowerTools from './commandRunner/componentShowerTools.js';
 import updateRecordContent from './commandRunner/updateRecordContent.js';
-import pageComponentShower from './commandRunner/pageComponentShower.js';
-
+import pageComponentsShower from './commandRunner/pageComponentsShower.js';
+import pageOperateSystem from './commandRunner/pageOperateSystem.js'
 
 let commandObj = {
   componentShower,
@@ -14,8 +14,9 @@ let commandObj = {
   componentShowerTools,
   compsRightClickMenu,
   updateRecordContent,
-  pageComponentShower,
-  pageShowerTools
+  pageComponentsShower,
+  pageShowerTools,
+  pageOperateSystem
 }
 
 

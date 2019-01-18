@@ -33,7 +33,11 @@ export const TipsMutations = {
     })
   },
 }
-export const TipsActions = {}
+export const TipsActions = {
+  newAddComponentTips({commit}){
+
+  }
+}
 export const TipsGetters = {
   getUpdateComponentData(state) { //获取tipId对应的tip
     let len = state.cacheAllTips.length;

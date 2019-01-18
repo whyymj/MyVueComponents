@@ -52,5 +52,7 @@ export const MenuMutations = {
     }
   }
 }
-export const MenuActions = {}
+export const MenuActions = {
+  
+}
 export const MenuGetters = {}

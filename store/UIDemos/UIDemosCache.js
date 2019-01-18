@@ -7,7 +7,7 @@ export const CacheState = () => ({
   currentModuleId: '', //记录当前模块
 })
 export const CacheMutations = {
-  
+
   currentModuleId(state, moduleId) {
     state.currentModuleId = moduleId;
   },
@@ -16,6 +16,8 @@ export const CacheMutations = {
   },
 
   selectedComponent(state, data) { //compId是选中的组建id，bool是添加或者隐藏
+    console.log('will hide this>>', data)
+
     state.selectedComponent = Object.assign({}, state.selectedComponent, data);
   },
   shrinkModule(state, data) { //收起某个模块
@@ -29,5 +31,12 @@ export const CacheMutations = {
 
 
 }
-export const CacheActions = {}
+export const CacheActions = {
+  selectedComponent({//选中将要隐藏的组件模块
+    commit
+  }, data) {
+    commit('selectedComponent', data)
+    commit('hideContextMenu')//关闭菜单
+  }
+}
 export const CacheGetters = {}

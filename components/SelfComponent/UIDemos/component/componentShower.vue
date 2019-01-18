@@ -52,8 +52,7 @@
     },
     beforeMount() {
       this.moduleId = this.$route.path + '/' + this.$parent.$parent.$props.frameId
-      this.componentId = this.$parent.$props.componentId 
-      
+      this.componentId = this.$parent.$props.componentId
     },
     computed: {
       ...mapGetters('UIDemos', {
@@ -78,19 +77,21 @@
         //是否隐藏该组件
         let res =
           this.selectedComponent[this.componentId] === true &&
-          this.hideSelectedComponent[this.moduleId]
+          this.hideSelectedComponent[this.moduleId];
+        this.$set(this.tools, 0, {
+          choose: this.selectedComponent[this.componentId],
+          label: '隐藏',
+          id: 'hideModule'
+        });
         if (this.$parent.$el) {
           this.$parent.$el.style = res ? 'display:none' : 'display:block'
         }
-   
-   
         return res
       }
     },
     methods: {
       clickTools(event) {
-        this.tools=[event.cache.metaDict.hideModule.item];
-        
+        this.tools = [event.cache.metaDict.hideModule.item];
         let newEvent = event.add({
           target: this.componentId,
           meta: {
@@ -125,8 +126,7 @@
         )
       },
       RClickComponent(e) {
-        let position = this.$refs.dropmenu.getBoundingClientRect()
-        //右键单击组件
+        let position = this.$refs.dropmenu.getBoundingClientRect();//右键单击组件
         //右键单击事件
         if (e.target.className !== 'componentsTip') {
           this.bubbleEvent(
@@ -145,8 +145,7 @@
               eventtype: 'rightclick' //事件类型
             })
           )
-        } else if (e.target.className == 'componentsTip') {
-          //右键点击tip组件
+        } else if (e.target.className == 'componentsTip') {//右键点击tip组件
           this.bubbleEvent(
             getEvent({
               target: e.target.dataset.tipid, //事件源id

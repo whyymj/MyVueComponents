@@ -62,7 +62,6 @@
         } else {
           commandRunner.call(this, this.bubbleEventToPage) //监听事件，并处理
         }
-        console.log('get ????', this.bubbleEventToPage);
       }
     },
     methods: {

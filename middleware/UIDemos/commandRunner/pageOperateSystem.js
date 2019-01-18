@@ -1,14 +1,14 @@
 let commandObj = {};
 commandObj.contextmenu = function (event) {
-  console.log('contextmenu page>>', {
-
-    [event.metaDict['hideComponent'].item.target]: true
-  });
-  if (event.metaDict.target == "hideComponent" && event.targettype == "pageOperateSystem" && event.eventtype == "contextmenu") {
-    this.$store.commit('UIDemos/selectedComponent', {
-
+  console.log(event, '>>>>>>>', event.targettype, '>>>>>>>>>', event.eventtype);
+  if (event.target == "hideComponent") {
+    
+    this.$store.dispatch('UIDemos/selectedComponent', {//记录
       [event.metaDict['hideComponent'].item.target]: true
     })
+    // this.$store.commit('UIDemos/hideContextMenu')
+  }else if(event.target=='warnTip'){
+this.$store
   }
 }
 commandObj.record = function (event) {

@@ -54,7 +54,7 @@
             active: false, 
             closeLabel: '写点什么',
             closeValue: 'recordSomething',
-            num: 1,
+            num: 0,
             index: 2
           },
           {

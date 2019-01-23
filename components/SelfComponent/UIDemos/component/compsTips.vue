@@ -20,10 +20,10 @@
             bgColor() {
                 let color = ''
                 let bg = {
-                    info: 'rgba(45,183,245,0.9)',
-                    success: 'rgba(25,190,107,0.9)',
-                    warn: 'rgba(255,153,0,0.9)',
-                    error: 'rgba(237,64,20,0.9)'
+                    infoTip: 'rgba(45,183,245,0.9)',
+                    successTip: 'rgba(25,190,107,0.9)',
+                    warnTip: 'rgba(255,153,0,0.9)',
+                    errorTip: 'rgba(237,64,20,0.9)'
                 }
                 if (this.tipsItem.type) {
                     color = bg[this.tipsItem.type]

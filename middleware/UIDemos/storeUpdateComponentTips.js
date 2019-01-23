@@ -3,10 +3,10 @@ export function classifyTipsData (arr) {
   let obj = {};
   if (arr.length) {
     arr.forEach(item => {
-      if (obj[item.pageId]) {
-        obj[item.pageId].push(item);
+      if (obj[item.target]) {
+        obj[item.target].push(item);
       } else {
-        obj[item.pageId] = [item];
+        obj[item.target] = [item];
       }
     })
   }

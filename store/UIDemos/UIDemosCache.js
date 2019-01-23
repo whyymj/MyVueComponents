@@ -5,9 +5,12 @@ export const CacheState = () => ({
   updateComponentId: "", //要更新的组建的tipId 
   updateRecordContent: {}, //将更新的组建的数据
   currentModuleId: '', //记录当前模块
+  cacheUpdateRecordContent:{},//缓存updateRecordContent返回的内容
 })
 export const CacheMutations = {
-
+  cacheUpdateRecordContent(state,data){
+    state.cacheUpdateRecordContent=data;
+  },
   currentModuleId(state, moduleId) {
     state.currentModuleId = moduleId;
   },

@@ -1,10 +1,10 @@
 <template>
     <Form :model="formLeft" label-position="left" :label-width="100">
         <FormItem label="标题">
-            <Input v-model="tipTitle"></Input>
+            <Input v-model="Title"></Input>
         </FormItem>
         <FormItem label="简介">
-            <richTextEditor :getCommand='getCommand' :defaultContent='tipSummary' @getValue='getValue' v-model="formLeft.tipSummary"></richTextEditor>
+            <richTextEditor :getCommand='getCommand' :defaultContent='Summary' @getValue='getValue' v-model="formLeft.Summary"></richTextEditor>
         </FormItem>
         <FormItem label="">
             <Button type="warning" @click='cancel'>取消</Button>
@@ -13,49 +13,33 @@
     </Form>
 </template>
 
-<script>
-    import {
-        mapMutations,
-        mapState,
-        mapGetters
-    } from 'vuex';
-    import {
-        getEvent
-    } from '@/middleware/UIDemos/eventFactory.js'
+<script> 
     export default {
         components: {
             richTextEditor: () =>
                 import ('../../Global/RichTextEditor.vue')
         },
-        props: ['recordType'],
+        props: ['defaultContent'],
         data() {
             return {
                 formLeft: {
-                    tipTitle: '标题', // title
-                    tipSummary: '简介',
+                    Title: '标题', // title
+                    Summary: '简介',
                 },
                 getCommand: '', //通知 富文本编辑器把输入值传回，》》》'getValue':获取输入值；'clearValue':清空编辑器；'setValue'：将defaultContent的值赋值给编辑器
-                tipSummary: '', //富文本编辑器的默认值
-                tipTitle: '',
-                moduleId: ''
+                Summary: '', //富文本编辑器的默认值
+                Title: '',
             }
         },
         beforeMount() {
-            this.moduleId = this.$parent.$parent.moduleId;
-        },
-        computed: {
-            ...mapState('UIDemos', {
-                tipId: 'updateComponentId'
-            }),
-            ...mapGetters('UIDemos', {
-                getData: 'getUpdateComponentData'
-            }),
+            
+
         },
         watch: {
-            getData() {
-                if (this.getData) {
-                    this.tipSummary = this.getData.tipSummary;
-                    this.tipTitle = this.getData.tipTitle;
+            defaultContent() {
+                if (this.defaultContent) {
+                    this.Summary = this.defaultContent.Summary;
+                    this.Title = this.defaultContent.Title;
                     this.getCommand = 'setValue'; //初始化富文本编辑器
                     this.$nextTick(() => {
                         this.getCommand = ''; //命令结束后清空，防止bug
@@ -68,54 +52,30 @@
                 let that = this;
                 this.getCommand = '';
                 this.formLeft = {
-                    tipTitle: this.tipTitle,
-                    tipSummary: data
+                    Title: this.Title,
+                    Summary: data
                 };
-                this.tipSummary = data;
-                if (this.recordType == 'tips') {
-                    this.$emit('getVal', Object.assign({
-                        tipId: that.tipId,
+                this.Summary = data;
+                this.$emit('getVal', Object.assign({
                         createTime: new Date().getFormateDate(),
-                    }, that.formLeft))
-                    // this.updateContent();
-                } else if (this.recordType == 'components') {
-                    let time = new Date().getTime() + '' + Math.round(Math.random() * 1000000);
-                    this.$emit('getVal', Object.assign({
-                        recordId: that.moduleId + '/frameRecord' + time,
-                        createTime: new Date().getFormateDate(),
-                    }, that.formLeft))
-                    // this.recordFrame(Object.assign({
-                    //     recordId: that.moduleId + '/frameRecord' + time,
-                    //     createTime: new Date().getFormateDate(),
-                    // }, that.formLeft));
-                }
+                    }, that.formLeft));
             },
-            ...mapMutations('UIDemos', {
-                updateContent: 'updateComponentTips',
-                recordFrame: 'recordFrame',
-            }),
             cancel() {
                 this.getCommand = 'clearValue'; //清空富文本编辑器
+                this.$emit('cancel')
                 this.$nextTick(() => {
                     this.getCommand = ''; //命令结束后清空，防止bug
                 })
-                this.$parent.$parent.componentDrawer = false; //关闭抽屉
             },
             confirm() {
                 this.getCommand = 'getValue'; //触发getValue()
                 this.$nextTick(() => {
                     this.getCommand = ''; //命令结束后清空，防止bug
                 })
-                this.$parent.$parent.componentDrawer = false; //关闭抽屉
             }
         }
     }
 </script>
 
-<style scoped lang='scss'>
-    .forUpdateTip {
-        width: 100%;
-        height: 100%;
-        position: relative;
-    }
+<style scoped lang='scss'> 
 </style>

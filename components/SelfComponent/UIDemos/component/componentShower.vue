@@ -52,7 +52,8 @@
     },
     beforeMount() {
       this.moduleId = this.$route.path + '/' + this.$parent.$parent.$props.frameId
-      this.componentId = this.$parent.$props.componentId
+      this.componentId = this.$parent.$props.componentId;
+      console.log('current', this.componentId)
     },
     computed: {
       ...mapGetters('UIDemos', {
@@ -70,6 +71,7 @@
       },
       allTips() {
         //监控全部tips
+        console.log('heheheheh',this.tipsdata,this.componentId )
         return this.tipsdata[this.componentId] ?
           this.tipsdata[this.componentId] : []
       },

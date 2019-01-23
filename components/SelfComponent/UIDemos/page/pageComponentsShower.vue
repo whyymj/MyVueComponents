@@ -7,7 +7,7 @@
         <a target="_blank" href="https://www.iviewui.com/components/font" class="linkOrigin">{{componentsFrameName}}</a>
         <Icon type="ios-link" />
       </h2>
-      <toolBar :recordsNum="3" :moduleId="moduleId" @onClick="clickToolBar"></toolBar>
+      <toolBar :recordsNum="recordsNum" @onClick="clickToolBar"></toolBar>
     </div>
     <!-- 组件展示由这里注入 -->
     <div class="componentsBox" v-show="shrink">
@@ -46,25 +46,36 @@
     data() {
       return {
         moduleId: '',
-        beforeMountStatus: true
+        beforeMountStatus: true,
+        recordsNum: 0,
       }
     },
     computed: {
       ...mapState('UIDemos', {
         shrinkThisModule: 'shrinkModule',
-        bubbleEventToModule: 'bubbleEventToModule'
+        bubbleEventToModule: 'bubbleEventToModule',
+        records: 'frameRecord'
       }),
       shrink() {
         return (!this.beforeMountStatus && this.shrinkThisModule[this.moduleId] === true)
       }
     },
     watch: {
+      records() {//监听记录
+        if (this.records[this.moduleId]) {
+          this.recordsNum = this.records[this.moduleId].length;
+        } else {
+          this.recordsNum = 0;
+        }
+      },
       bubbleEventToModule() {
-        let origin = getEvent(this.bubbleEventToModule) 
-        let newEvent=origin.add({
-          target: this.moduleId,
+        let origin = getEvent(this.bubbleEventToModule)
+        let newEvent = origin.add({
+          target: this.moduleId, 
           meta: {
-            item: ''
+            item: {
+                pageId:this.moduleId,
+            }
           },
           targettype: 'pageComponentsShower'
         });
@@ -94,7 +105,9 @@
         // this.bubbleEvent(getEvent({
         //   target: this.moduleId,
         //   meta: {
-        //     item: ''
+        //     item: {
+                // pageId:this.moduleId,
+            // }
         //   },
         //   eventtype: 'dblclick',
         //   targettype: 'pageComponentShower',
@@ -106,9 +119,11 @@
       },
       clickToolBar(event) {
         this.bubbleEvent(event.add({
-          target: this.moduleId,
+          target: this.moduleId, 
           meta: {
-            item: ''
+            item: {
+                pageId:this.moduleId,
+            }
           },
           eventtype: 'click',
           targettype: 'pageComponentShower',

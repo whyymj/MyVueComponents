@@ -2,8 +2,8 @@
   <!-- 页面通用的操作组件 -->
   <div class="pageOperators">
     <!-- 记录组件工具   -->
-    <Drawer title="Basic Drawer" placement="left" :width="50" :closable="false" v-model="componentDrawer" style="overflow:hidden;">
-      <updateRecordContent :recordType="recordType" @getVal="getRecordVal"></updateRecordContent>
+    <Drawer title="Basic updateRecordContentDrawer" placement="left" :width="50" :closable="false" v-model="componentDrawer" style="overflow:hidden;">
+      <updateRecordContent :recordType="recordType" @getVal="getRecordVal" @cancel='cancelRecord'></updateRecordContent>
     </Drawer>
     <!-- 组件记录查看 -->
     <Drawer title="Basic Drawer" placement="left" :width="50" :closable="false" v-model="showRecords" style="overflow:hidden;">
@@ -69,27 +69,30 @@
         bubbleEvent: 'bubbleEventToPage'
       }),
       clickMenu(e) { //点击右键菜单
-      
-        let that=this;
-        let rightClickTarget= this.bubbleEventToPage.cache;
+        let that = this; 
+        let rightClickTarget = this.bubbleEventToPage.cache;
         if (e.target.dataset.menuitemid) {
           commandRunner.call(this, getEvent({
             target: e.target.dataset.menuitemid,
             meta: {
-              item:{
-                target:rightClickTarget.target,
-                targettype:rightClickTarget.targettype,
-                eventtype:rightClickTarget.eventtype
-              }
+              item: Object.assign({
+                pageId:that.bubbleEventToPage.cache.path[0].target,
+                target: rightClickTarget.target,
+                targettype: rightClickTarget.targettype,
+                eventtype: rightClickTarget.eventtype
+              },that.contextMenuXY)
             },
             eventtype: 'contextmenu',
             targettype: 'pageOperateSystem'
           })) //监听事件，并处理
         }
       },
+      cancelRecord() {
+        this.componentDrawer = false;
+      },
       getRecordVal(data) { //获取Basic Drawer中的值
-        commandRunner.call(this, getEvent({
-          target: 'RecordComponentsDrawer',
+        commandRunner.call(this, getEvent(this.bubbleEventToPage).add({
+          target: 'updateRecordContentDrawer',
           meta: data,
           eventtype: 'record',
           targettype: 'pageOperateSystem'

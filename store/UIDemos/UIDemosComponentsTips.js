@@ -15,6 +15,7 @@ export const TipsMutations = {
     item.X = state.contextMenuXY.relX || '5%';
     item.Y = state.contextMenuXY.relY || '5%';
     state.cacheAllTips.push(item);
+    console.log('all tips   ', state.cacheAllTips)
   },
   updateComponentTips(state, val) { //更新tip
     state.cacheAllTips = state.cacheAllTips.map(item => {
@@ -34,8 +35,29 @@ export const TipsMutations = {
   },
 }
 export const TipsActions = {
-  newAddComponentTips({commit}){
+  newAddComponentTips({
+    commit,
+    state
+  }, data) {
+    function createNewTip(type) {
+      // :创建气泡
+      let createTipId = '' + new Date().getTime() + '_' + Math.round(Math.random() * 10000000); // 生成tipid
+      let tmp = data.metaDict[data.target].item;
 
+      return Object.assign({
+        // 组件内的tips数据结构
+        tipTitle: 'tipTitle', // title
+        tipBody: 'tipBody', // body
+        tipId: tmp.pageId+'/Tip' + createTipId, // tip的id，等于页面id/tip的index
+        index: 'tip' + createTipId, // 组件内部的标识
+        pageId: '',
+        type: type
+      }, tmp)
+    }
+   let tipdata=createNewTip(data.target);
+    console.log('datadatat',tipdata);
+    commit('newAddComponentTips', tipdata);
+    commit('hideContextMenu')
   }
 }
 export const TipsGetters = {
@@ -50,7 +72,7 @@ export const TipsGetters = {
     }
     return tmp;
   },
-  getAllClassifiedTips(state){//获取按照pageId分类的tips组件
+  getAllClassifiedTips(state) { //获取按照pageId分类的tips组件
     return classifyTipsData(state.cacheAllTips);
   }
 }
